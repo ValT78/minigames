@@ -1,7 +1,7 @@
 extends Node2D
 
 # Scène réutilisable instanciée une fois pour chaque joueur connecté.
-const PLAYER_CUBE_SCENE := preload("res://features/player_cubes/player_cube.tscn")
+const PLAYER_CUBE_SCENE := preload("res://features/main_menu_players/player_cube.tscn")
 
 # Références vers le sol physique, son visuel et le conteneur des cubes.
 @onready var floor_body: StaticBody2D = %FloorBody

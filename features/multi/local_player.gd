@@ -8,8 +8,8 @@ var profile_id: StringName
 var profile_name: String
 var color: Color
 
-# État normalisé des commandes, mis à jour par PlayerRegistry.
-var input := PlayerInput.new()
+# État normalisé des commandes, mis à jour par PlayerInputRouter.
+var input := PlayerInputState.new()
 
 
 ## Construit un joueur à partir du profil physique qui lui a été attribué.

@@ -17,13 +17,13 @@ extends Control
 func _ready() -> void:
 	# Le lobby écoute les changements globaux et autorise les nouvelles inscriptions.
 	PlayerRegistry.players_changed.connect(_refresh)
-	PlayerRegistry.set_joining_enabled(true)
+	PlayerInputRouter.set_joining_enabled(true)
 	_refresh(PlayerRegistry.get_players())
 
 
 func _exit_tree() -> void:
 	# Hors du lobby, une commande ne doit plus inscrire un nouveau joueur.
-	PlayerRegistry.set_joining_enabled(false)
+	PlayerInputRouter.set_joining_enabled(false)
 	if PlayerRegistry.players_changed.is_connected(_refresh):
 		PlayerRegistry.players_changed.disconnect(_refresh)
 

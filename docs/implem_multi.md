@@ -1,52 +1,93 @@
 # Intégrer un mini-jeu au multijoueur local
 
-Ce guide explique comment transformer un mini-jeu solo local en mini-jeu compatible avec tous les joueurs inscrits dans le lobby.
+Ce guide explique comment transformer un mini-jeu solo en mini-jeu compatible avec tous les joueurs inscrits dans le lobby.
 
-Le principe essentiel est le suivant :
+Le principe essentiel est :
 
-> Un mini-jeu ne lit jamais les touches physiques. Il reçoit un `LocalPlayer` et lit les commandes normalisées dans `player.input`.
+> Un mini-jeu ne lit jamais les touches physiques. Il reçoit un `LocalPlayer` et interprète les commandes génériques de `player.input` selon son propre gameplay.
 
-Ainsi, le même code de gameplay fonctionne pour ZQSD, les flèches et la souris.
+Ainsi, Action 1 peut signifier « sauter » dans un jeu, « attraper » dans un autre et « valider » dans un troisième.
 
-## Architecture générale
+## Architecture
 
-Le système est séparé en deux niveaux :
+Le système sépare trois responsabilités :
 
 ```text
-Clavier et souris
-        ↓
-PlayerRegistry traduit les événements physiques
-        ↓
-LocalPlayer contient l'identité d'un joueur
-        ↓
-PlayerInput expose les commandes normalisées
-        ↓
-Le mini-jeu déplace un acteur sans connaître son périphérique
+PlayerRegistry
+    Qui joue ?
+
+PlayerInputRouter
+    Quel profil physique demande quelle commande ?
+
+PlayerInputState
+    Que veut faire ce joueur pendant ce tick ?
 ```
 
-Les fichiers importants sont :
+Le flux complet est :
 
-- `player_registry.gd` : conserve les joueurs et traduit les périphériques ;
-- `local_player.gd` : contient l'identité, la couleur et l'input d'un joueur ;
-- `player_input.gd` : définit les commandes disponibles pour tous les profils ;
-- `features/player_cubes/` : exemple complet d'une feature utilisant cette API.
+```text
+Clavier ou souris
+        ↓
+PlayerInputRouter traduit l'événement
+        ↓
+PlayerRegistry retrouve le joueur du profil
+        ↓
+PlayerInputRouter actualise son PlayerInputState
+        ↓
+Le mini-jeu lit player.input
+```
 
-`PlayerRegistry` est un Autoload. Il reste donc vivant pendant les changements de scène.
+### `PlayerRegistry`
 
-## Commandes disponibles
-
-Chaque `LocalPlayer` possède un objet `input` :
+Autoload responsable uniquement des joueurs :
 
 ```gdscript
-player.input.movement
-player.input.jump_pressed
-player.input.jump_just_pressed
-player.input.dash_just_pressed
+PlayerRegistry.get_players()
+PlayerRegistry.get_player_for_profile(profile_id)
+PlayerRegistry.join_profile(profile_id)
+PlayerRegistry.leave_profile(profile_id)
+PlayerRegistry.clear_players()
 ```
 
-### `movement`
+Il ne connaît aucune touche et ne traduit aucun événement.
 
-`movement` est un `Vector2` normalisé :
+### `PlayerInputRouter`
+
+Autoload responsable des périphériques :
+
+- détecte le profil qui rejoint ;
+- sépare les deux zones du clavier ;
+- gère les positions physiques AZERTY ;
+- transforme la souris en direction normalisée ;
+- actualise l'état d'entrée de chaque joueur.
+
+Les mini-jeux ne doivent normalement jamais appeler ce routeur. Le lobby l'utilise seulement pour ouvrir ou fermer les inscriptions :
+
+```gdscript
+PlayerInputRouter.set_joining_enabled(true)
+```
+
+### `PlayerInputState`
+
+Petit objet appartenant à chaque `LocalPlayer`. C'est la seule API d'entrée lue par les mini-jeux.
+
+## API générique des commandes
+
+Chaque joueur expose :
+
+```gdscript
+player.input.direction
+
+player.input.action_1_pressed
+player.input.action_1_just_pressed
+
+player.input.action_2_pressed
+player.input.action_2_just_pressed
+```
+
+### `direction`
+
+Vecteur normalisé entre `-1` et `1` :
 
 ```text
 Vector2(-1, 0) : gauche
@@ -56,40 +97,47 @@ Vector2(0, 1)  : bas
 Vector2.ZERO    : aucune direction
 ```
 
-La longueur maximale du vecteur vaut `1`. Une diagonale n'est donc pas plus rapide qu'une direction simple.
+Une diagonale est limitée à une longueur de `1` afin de ne pas être plus rapide.
 
-### `jump_pressed`
-
-Reste vrai tant que le bouton de saut est maintenu. Utilisez-le pour une action qui doit se répéter ou continuer :
+Un jeu de profil utilisera généralement seulement :
 
 ```gdscript
-if player.input.jump_pressed and is_on_floor():
-	jump()
+var horizontal_direction := player.input.direction.x
 ```
 
-### `jump_just_pressed`
+### Actions maintenues
 
-N'est vrai que pendant le premier tick physique de l'appui :
+Les propriétés `pressed` restent vraies tant que le bouton est maintenu :
 
 ```gdscript
-if player.input.jump_just_pressed:
-	open_door()
+if player.input.action_1_pressed:
+	continue_action()
 ```
 
-### `dash_just_pressed`
+### Actions ponctuelles
 
-Représente une demande ponctuelle de dash :
+Les propriétés `just_pressed` ne sont vraies que pendant le premier tick physique :
 
 ```gdscript
-if player.input.dash_just_pressed:
-	start_dash()
+if player.input.action_2_just_pressed:
+	trigger_action_once()
 ```
 
-Les commandes `just_pressed` doivent être lues dans `_physics_process()`. Elles sont effacées à la fin du tick physique.
+Lisez les commandes ponctuelles dans `_physics_process()`. Le routeur les efface à la fin du tick physique.
+
+## Correspondance physique actuelle
+
+| Profil | Direction | Action 1 | Action 2 |
+|---|---|---|---|
+| Clavier gauche | ZQSD | Maj gauche | `<` |
+| Clavier droit | Flèches | `/` | `!` |
+| Souris | Zones des bords | Clic gauche | Clic droit |
+
+Cette correspondance appartient au routeur. Un mini-jeu ne doit pas la reproduire.
 
 ## Transformer un acteur solo
 
-Imaginons un personnage solo qui lit directement les actions Godot :
+Voici un acteur solo classique :
 
 ```gdscript
 extends CharacterBody2D
@@ -98,8 +146,8 @@ extends CharacterBody2D
 
 
 func _physics_process(_delta: float) -> void:
-	var direction := Input.get_axis("move_left", "move_right")
-	velocity.x = direction * speed
+	var movement := Input.get_axis("move_left", "move_right")
+	velocity.x = movement * speed
 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = -450.0
@@ -110,13 +158,9 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 ```
 
-La première modification consiste à lui donner un `LocalPlayer` :
+### Étape 1 : recevoir un joueur
 
 ```gdscript
-extends CharacterBody2D
-
-@export var speed := 250.0
-
 var player: LocalPlayer
 
 
@@ -124,32 +168,44 @@ func setup(assigned_player: LocalPlayer) -> void:
 	player = assigned_player
 ```
 
-Le gameplay lit ensuite `player.input` :
+### Étape 2 : choisir le sens des actions génériques
+
+Pour ce jeu précis :
+
+```text
+direction.x = déplacement horizontal
+Action 1    = saut
+Action 2    = dash
+```
+
+Cette décision reste locale au mini-jeu.
+
+### Étape 3 : remplacer les appels à `Input`
 
 ```gdscript
 func _physics_process(_delta: float) -> void:
 	if player == null:
 		return
 
-	velocity.x = player.input.movement.x * speed
+	velocity.x = player.input.direction.x * speed
 
-	if player.input.jump_pressed and is_on_floor():
+	if player.input.action_1_pressed and is_on_floor():
 		velocity.y = -450.0
 
-	if player.input.dash_just_pressed:
+	if player.input.action_2_just_pressed:
 		start_dash()
 
 	move_and_slide()
 ```
 
-Le personnage ne contient plus aucune référence à ZQSD, aux flèches ou à la souris.
+L'acteur ne connaît plus ZQSD, les flèches ou la souris.
 
 ## Créer un acteur par joueur
 
-La scène principale du mini-jeu récupère les joueurs inscrits :
+La scène principale du mini-jeu récupère la liste globale :
 
 ```gdscript
-const ACTOR_SCENE := preload("res://chemin/actor.tscn")
+const ACTOR_SCENE := preload("res://mon_jeu/actor.tscn")
 
 
 func _ready() -> void:
@@ -157,7 +213,7 @@ func _ready() -> void:
 		spawn_actor(player)
 ```
 
-Elle instancie ensuite un acteur pour chacun :
+Puis elle associe chaque instance à son joueur :
 
 ```gdscript
 func spawn_actor(player: LocalPlayer) -> void:
@@ -167,13 +223,11 @@ func spawn_actor(player: LocalPlayer) -> void:
 	add_child(actor)
 ```
 
-L'acteur conserve la référence vers son `LocalPlayer`. Son objet `input` est mis à jour automatiquement par le registre global.
+L'objet `LocalPlayer` reste le même pendant la session. Son `input` est actualisé automatiquement par le routeur.
 
-Il n'est pas nécessaire de rechercher le joueur à chaque frame.
+## Supporter un, deux ou trois joueurs
 
-## Choisir les points d'apparition
-
-Ne supposez pas qu'il existe toujours trois joueurs. Calculez les apparitions à partir de la liste reçue :
+Ne supposez jamais un nombre fixe de joueurs :
 
 ```gdscript
 func spawn_all_players() -> void:
@@ -186,11 +240,11 @@ func spawn_all_players() -> void:
 		spawn_actor_at(player, Vector2(x, 300.0))
 ```
 
-Cette formule répartit correctement un, deux ou trois joueurs.
+Cette formule répartit automatiquement les acteurs disponibles.
 
-## Identifier les résultats
+## Scores et résultats
 
-Utilisez `player.id` pour rattacher un score ou un résultat à un joueur :
+Utilisez `player.id` pour associer un résultat au bon joueur :
 
 ```gdscript
 var scores: Dictionary[int, int] = {}
@@ -200,7 +254,7 @@ func add_point(player: LocalPlayer) -> void:
 	scores[player.id] = scores.get(player.id, 0) + 1
 ```
 
-Les autres informations utiles sont :
+Autres informations disponibles :
 
 ```gdscript
 player.display_name
@@ -209,13 +263,13 @@ player.profile_id
 player.profile_name
 ```
 
-`profile_id` peut servir à afficher le périphérique, mais ne doit pas servir à choisir les touches dans le mini-jeu.
+`profile_id` peut servir à l'affichage, mais jamais à choisir les touches dans le mini-jeu.
 
-## Réagir aux connexions et déconnexions
+## Connexions et déconnexions
 
-Normalement, les joueurs rejoignent dans le lobby puis restent identiques pendant un mini-jeu. Dans ce cas, un appel à `get_players()` dans `_ready()` suffit.
+Si les joueurs sont fixes pendant le mini-jeu, un appel à `get_players()` dans `_ready()` suffit.
 
-Si une scène doit également réagir aux départs, elle peut écouter le signal :
+Pour réagir aussi aux changements :
 
 ```gdscript
 func _ready() -> void:
@@ -228,13 +282,13 @@ func _exit_tree() -> void:
 		PlayerRegistry.players_changed.disconnect(_sync_players)
 ```
 
-La fonction `_sync_players()` crée les acteurs manquants et supprime ceux dont l'identifiant n'est plus présent.
+La fonction `_sync_players()` crée les acteurs manquants et supprime ceux dont l'identifiant a disparu.
 
-`features/player_cubes/player_arena.gd` fournit un exemple complet de cette synchronisation.
+La feature `features/main_menu_players/player_arena.gd` en fournit un exemple complet.
 
-## Tester un mini-jeu sans passer par le lobby
+## Tester une scène directement
 
-Pendant le développement uniquement, une scène lancée directement peut créer un joueur de test :
+Pendant le développement uniquement, une scène lancée sans lobby peut inscrire un profil de test :
 
 ```gdscript
 func _ready() -> void:
@@ -244,44 +298,44 @@ func _ready() -> void:
 	spawn_all_players()
 ```
 
-Évitez ce fallback dans la version finale : le lobby doit normalement être responsable des inscriptions.
+N'activez pas les inscriptions depuis chaque mini-jeu. Le lobby est responsable de :
+
+```gdscript
+PlayerInputRouter.set_joining_enabled(true)
+```
 
 ## Ajouter une nouvelle commande universelle
 
-Si un mini-jeu a besoin d'une nouvelle commande, elle doit exister pour tous les profils.
+Si deux actions ne suffisent plus :
 
-La procédure est :
+1. ajouter l'état générique dans `PlayerInputState` ;
+2. associer une entrée pour chaque profil dans `PlayerInputRouter` ;
+3. tester appui, maintien et relâchement dans `test.gd` ;
+4. documenter la nouvelle commande ;
+5. lire uniquement cet état générique dans les mini-jeux.
 
-1. ajouter l'état abstrait dans `PlayerInput` ;
-2. associer une entrée physique pour chaque profil dans `PlayerRegistry` ;
-3. tester l'appui et le relâchement dans `test.gd` ;
-4. utiliser uniquement le nouvel état abstrait dans le mini-jeu.
+N'ajoutez jamais une touche physique directement dans un script de gameplay.
 
-N'ajoutez pas directement une touche physique dans un script de mini-jeu. Sinon le jeu ne fonctionnera plus automatiquement avec les autres profils.
+## Checklist
 
-## Checklist d'intégration
-
-Avant de considérer un mini-jeu comme compatible :
-
-- aucun script de gameplay ne lit directement les touches physiques ;
-- chaque acteur reçoit un `LocalPlayer` avec une fonction `setup()` ;
-- la scène fonctionne avec un, deux et trois joueurs ;
-- les commandes `just_pressed` sont lues dans `_physics_process()` ;
-- les couleurs ou noms proviennent du `LocalPlayer` ;
-- les scores sont associés à `player.id` ;
-- les points d'apparition s'adaptent au nombre de joueurs ;
-- une déconnexion ne laisse pas d'acteur orphelin si elle est autorisée dans la scène.
+- L'acteur reçoit un `LocalPlayer` avec `setup()`.
+- Le gameplay lit uniquement `player.input`.
+- Action 1 et Action 2 sont interprétées localement par le mini-jeu.
+- Aucun nom comme `jump` ou `dash` n'existe dans l'API multijoueur.
+- La scène fonctionne avec un, deux et trois joueurs.
+- Les `just_pressed` sont lus dans `_physics_process()`.
+- Les scores utilisent `player.id`.
+- Les points d'apparition s'adaptent au nombre de joueurs.
+- Une déconnexion ne laisse pas d'acteur orphelin si elle est autorisée.
 
 ## Exemple de référence
 
-Pour voir l'ensemble du branchement dans du code fonctionnel :
-
 ```text
-features/player_cubes/player_arena.gd
-        récupère et synchronise les joueurs
+features/main_menu_players/player_arena.gd
+    récupère et synchronise les LocalPlayer
 
-features/player_cubes/player_cube.gd
-        reçoit un LocalPlayer et lit player.input
+features/main_menu_players/player_cube.gd
+    interprète Action 1 comme saut et Action 2 comme dash
 ```
 
-Cette séparation est le modèle recommandé pour les futurs mini-jeux.
+Cette séparation est le modèle recommandé pour tous les futurs mini-jeux.

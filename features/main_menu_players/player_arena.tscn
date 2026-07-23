@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://features/player_cubes/player_arena.gd" id="1_script"]
+[ext_resource type="Script" path="res://features/main_menu_players/player_arena.gd" id="1_script"]
 
 [sub_resource type="RectangleShape2D" id="FloorShape"]
 size = Vector2(1152, 60)
