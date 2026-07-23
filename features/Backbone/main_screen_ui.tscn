@@ -1,18 +1,9 @@
 [gd_scene format=3 uid="uid://bc0n8xe8j2jwy"]
 
 [ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="1_jdc84"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_jdc84"]
-resource_local_to_scene = true
-font = ExtResource("1_jdc84")
-font_size = 193
-font_color = Color(0.59, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4keca"]
-resource_local_to_scene = true
-font = ExtResource("1_jdc84")
-font_size = 193
-font_color = Color(0.59, 0, 0, 0.14117648)
+[ext_resource type="Texture2D" uid="uid://tadca6b70rwt" path="res://features/Backbone/bombCore.png" id="2_2ntee"]
+[ext_resource type="Texture2D" uid="uid://dq4jtygsawuh3" path="res://features/Backbone/bombFlame.png" id="3_u3wxs"]
+[ext_resource type="Texture2D" uid="uid://dtjfsmspvdbq5" path="res://features/Backbone/bombFuze.png" id="4_trmla"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yf5fn"]
 font = ExtResource("1_jdc84")
@@ -25,22 +16,66 @@ font = ExtResource("1_jdc84")
 font_size = 104
 font_color = Color(0.59, 0, 0, 0.14117648)
 
+[sub_resource type="LabelSettings" id="LabelSettings_jdc84"]
+resource_local_to_scene = true
+font = ExtResource("1_jdc84")
+font_size = 90
+font_color = Color(0.59, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4keca"]
+resource_local_to_scene = true
+font = ExtResource("1_jdc84")
+font_size = 90
+font_color = Color(0.59, 0, 0, 0.14117648)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cgpbt"]
+texture = ExtResource("4_trmla")
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 230, 512, 53)
+
 [node name="MainScreenUI" type="CanvasLayer" unique_id=846818150]
 
-[node name="PanelContainer" type="Panel" parent="." unique_id=943391621]
-custom_minimum_size = Vector2(240, 0)
-anchors_preset = -1
-anchor_right = 0.20052083
-anchor_bottom = 1.0
+[node name="ScoreLabel" type="Label" parent="." unique_id=2127622775]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -889.0
+offset_top = -316.0
+offset_right = -717.0
+offset_bottom = -212.0
+grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+text = "009"
+label_settings = SubResource("LabelSettings_yf5fn")
 
-[node name="TimeLabel" type="Label" parent="PanelContainer" unique_id=881383687]
-layout_mode = 0
-offset_left = 140.0
-offset_top = 252.0
-offset_right = 246.0
-offset_bottom = 445.0
+[node name="BG" type="Label" parent="ScoreLabel" unique_id=96476774]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "888"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="ScoreLabel" unique_id=1610466071]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="." unique_id=881383687]
+offset_left = 98.0
+offset_top = 53.0
+offset_right = 204.0
+offset_bottom = 246.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "9"
@@ -48,7 +83,7 @@ label_settings = SubResource("LabelSettings_jdc84")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BG" type="Label" parent="PanelContainer/TimeLabel" unique_id=202594495]
+[node name="BG" type="Label" parent="TimeLabel" unique_id=202594495]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,30 +95,23 @@ label_settings = SubResource("LabelSettings_4keca")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="PanelContainer" unique_id=2127622775]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -85.5
-offset_top = -52.0
-offset_right = 86.5
-offset_bottom = 52.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "009"
-label_settings = SubResource("LabelSettings_yf5fn")
+[node name="TextureRect" type="TextureRect" parent="." unique_id=357915306]
+z_index = -1
+offset_left = 76.0
+offset_top = 54.0
+offset_right = 257.0
+offset_bottom = 235.0
+texture = ExtResource("2_2ntee")
+expand_mode = 1
 
-[node name="BG" type="Label" parent="PanelContainer/ScoreLabel" unique_id=96476774]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "888"
-label_settings = SubResource("LabelSettings_g4v7s")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HSlider" type="HSlider" parent="TextureRect" unique_id=458585138]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 41.0
+offset_right = 1825.0
+offset_bottom = 145.0
+theme_override_icons/grabber_disabled = ExtResource("3_u3wxs")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_cgpbt")
+value = 15.0
+editable = false
+scrollable = false
