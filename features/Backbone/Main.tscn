@@ -2,14 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bc0n8xe8j2jwy" path="res://features/Backbone/main_screen_ui.tscn" id="1_roav4"]
 [ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="3_dsdgj"]
-<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://dylaai0ysb2ey" path="res://features/Backbone/minigameTest2.tscn" id="3_qkt25"]
 [ext_resource type="PackedScene" path="res://features/projectile_survival/projectile_survival.tscn" id="4_survival"]
-=======
 [ext_resource type="Texture2D" uid="uid://tadca6b70rwt" path="res://features/Backbone/bombCore.png" id="3_gro5s"]
 [ext_resource type="Texture2D" uid="uid://dq4jtygsawuh3" path="res://features/Backbone/bombFlame.png" id="4_7dbg6"]
 [ext_resource type="Texture2D" uid="uid://dtjfsmspvdbq5" path="res://features/Backbone/bombFuze.png" id="5_qkt25"]
->>>>>>> 63b80938018bcbdffe378bcb5c78c4a12e4b7c45
 
 [sub_resource type="LabelSettings" id="LabelSettings_7dbg6"]
 resource_local_to_scene = true
