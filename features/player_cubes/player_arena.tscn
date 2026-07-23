@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/player_cubes/player_arena.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1152, 60)
+
+[node name="PlayerArena" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Cubes" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="FloorBody" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(576, 624)
+collision_layer = 1
+collision_mask = 0
+
+[node name="FloorVisual" type="Polygon2D" parent="FloorBody"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-576, -30, 576, -30, 576, 30, -576, 30)
+color = Color(0.164706, 0.192157, 0.270588, 1)
+
+[node name="FloorLine" type="Line2D" parent="FloorBody"]
+unique_name_in_owner = true
+points = PackedVector2Array(-576, -30, 576, -30)
+width = 4.0
+default_color = Color(0.360784, 0.784314, 1, 0.55)
+
+[node name="FloorShape" type="CollisionShape2D" parent="FloorBody"]
+unique_name_in_owner = true
+shape = SubResource("FloorShape")
