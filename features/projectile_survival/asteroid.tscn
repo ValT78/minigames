@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/projectile_survival/asteroid.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="AsteroidCollisionShape"]
+radius = 25.0
+
+[node name="Asteroid" type="Area2D"]
+z_index = 5
+collision_layer = 4
+collision_mask = 2
+monitoring = true
+monitorable = false
+script = ExtResource("1_script")
+
+[node name="Shadow" type="Polygon2D" parent="."]
+position = Vector2(4, 5)
+polygon = PackedVector2Array(-27, -7, -17, -25, 5, -29, 24, -17, 29, 4, 19, 25, -3, 30, -24, 18)
+color = Color(0.09, 0.055, 0.08, 0.78)
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-27, -7, -17, -25, 5, -29, 24, -17, 29, 4, 19, 25, -3, 30, -24, 18)
+color = Color(0.38, 0.27, 0.24, 1)
+
+[node name="Highlight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, -8, -13, -19, 3, -23, 14, -16, 7, -11, -5, -13)
+color = Color(0.65, 0.48, 0.38, 0.72)
+
+[node name="CraterLarge" type="Polygon2D" parent="."]
+position = Vector2(10, 7)
+polygon = PackedVector2Array(8, 0, 5.66, 5.66, 0, 8, -5.66, 5.66, -8, 0, -5.66, -5.66, 0, -8, 5.66, -5.66)
+color = Color(0.22, 0.14, 0.16, 0.85)
+
+[node name="CraterSmall" type="Polygon2D" parent="."]
+position = Vector2(-10, 9)
+polygon = PackedVector2Array(4, 0, 2.83, 2.83, 0, 4, -2.83, 2.83, -4, 0, -2.83, -2.83, 0, -4, 2.83, -2.83)
+color = Color(0.22, 0.14, 0.16, 0.7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("AsteroidCollisionShape")

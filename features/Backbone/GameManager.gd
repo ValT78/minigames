@@ -1,9 +1,15 @@
 extends Node2D
 
-var isDebug : bool
+## Émis une seule fois lorsque le chronomètre de la manche atteint zéro.
+signal round_timer_expired
 
-var timer : float = 9.999
+const MINI_GAMES_DURATION = 9.999
+
+var _round_timer := Timer.new()
+var isDebug : bool = true
+
 var _isNumberChanging = false
+
 
 @onready var time_slider: HSlider
 @onready var time_label: Label
@@ -15,8 +21,15 @@ var _actualMinigame : Node2D
 var _score : int
 
 func _ready() -> void:
+
 	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
+	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
+	_round_timer.one_shot = true
+	_round_timer.timeout.connect(_on_round_timer_timeout)
+	add_child(_round_timer)
+	resetCountdown()
+	
 	loadScenesFromFolder("res://minigames")
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
 	time_label = $"../Main/MainScreenUI/TimeLabel"
@@ -24,21 +37,30 @@ func _ready() -> void:
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
 	get_tree().current_scene.add_child(_actualMinigame)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if isDebug : return
-	print(timer)
-	timer -= delta
-	if timer < 0 : gameover()
 	updateTimeDisplay()
 
+## Arrête le chronomètre sans émettre round_timer_expired.
+func stop_round_timer() -> void:
+	_round_timer.stop()
+
+## Renvoie le nombre de secondes restantes
+func get_time_left() -> float:
+	return _round_timer.time_left
+
+func _on_round_timer_timeout() -> void:
+	round_timer_expired.emit()
+
 func resetCountdown() -> void :
-	timer = 9.999
+	_round_timer.start(MINI_GAMES_DURATION)
 
 func gameover() -> void :
+	stop_round_timer()
 	get_tree().change_scene_to_packed(mainMenu)
 
 func updateScore(index : int) -> void : 
-	_score += floori(timer)
+	_score += floori(get_time_left())
 	if _score < 10 : 
 		flashUpdateLabel(score_label,"00" + str(_score))
 	elif _score < 100:
@@ -69,7 +91,7 @@ func loadScenesFromFolder(folder_path: String):
 
 #region UI
 func updateTimeDisplay() -> void :
-	var next_text = str(floori(timer))
+	var next_text = str(floori(get_time_left()))
 	if _isNumberChanging : return
 	if time_label.text == next_text : return
 	_isNumberChanging = true
@@ -97,5 +119,5 @@ func minigameWon(index : int = 0) -> void :
 
 
 func minigameLost() -> void :
-	pass
+	gameover()
 #endregion

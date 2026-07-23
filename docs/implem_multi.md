@@ -14,20 +14,20 @@ Le système sépare trois responsabilités :
 
 ```text
 PlayerRegistry
-    Qui joue ?
+	Qui joue ?
 
 PlayerInputRouter
-    Quel profil physique demande quelle commande ?
+	Quel profil physique demande quelle commande ?
 
 PlayerInputState
-    Que veut faire ce joueur pendant ce tick ?
+	Que veut faire ce joueur pendant ce tick ?
 ```
 
 Le flux complet est :
 
 ```text
 Clavier ou souris
-        ↓
+		↓
 PlayerInputRouter traduit l'événement
         ↓
 PlayerRegistry retrouve le joueur du profil
