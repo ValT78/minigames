@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cex5ichp627rf"]
+
+[ext_resource type="Texture2D" uid="uid://cfksp10smpiq8" path="res://features/FessesGame/fesse_idle.jpg" id="1_53ij0"]
+[ext_resource type="Script" uid="uid://cobj8611746lp" path="res://features/FessesGame/minigame_fesses.gd" id="1_w250n"]
+[ext_resource type="PackedScene" uid="uid://cgl8vwbs7iamr" path="res://features/FessesGame/water_melon.tscn" id="3_t212x"]
+[ext_resource type="Texture2D" uid="uid://cccbvyg5r0q0k" path="res://features/FessesGame/water_melon_full.png" id="3_w250n"]
+[ext_resource type="Texture2D" uid="uid://dxthwucykmmoo" path="res://features/FessesGame/water_melon_exploded.png" id="5_r6npw"]
+[ext_resource type="Script" uid="uid://0juqnlcsytjq" path="res://features/FessesGame/bel_homme_aux_grosses_fesses.gd" id="5_ww3bx"]
+[ext_resource type="Texture2D" uid="uid://dpyweiot4uwpc" path="res://features/FessesGame/fesse_droite.jpg" id="6_3jpa4"]
+[ext_resource type="Texture2D" uid="uid://ccw4tokkjpe25" path="res://features/FessesGame/fesse_gauche.jpg" id="7_gwsfj"]
+
+[node name="Node2D" type="Node2D" unique_id=1406540377]
+script = ExtResource("1_w250n")
+water_melon = ExtResource("3_t212x")
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=1870398353]
+position = Vector2(-200, 400)
+
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=1592467922]
+position = Vector2(200, 400)
+
+[node name="WaterMelonExploded" type="Sprite2D" parent="." unique_id=2142184265]
+position = Vector2(-522, -227)
+texture = ExtResource("5_r6npw")
+
+[node name="WaterMelonFull" type="Sprite2D" parent="." unique_id=785166453]
+position = Vector2(528, -205)
+texture = ExtResource("3_w250n")
+
+[node name="BelHommeAuxGrossesFesses" type="Node2D" parent="." unique_id=944431005]
+script = ExtResource("5_ww3bx")
+
+[node name="Idle" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=942664832]
+position = Vector2(2, 3)
+texture = ExtResource("1_53ij0")
+
+[node name="FesseDroite" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=272436552]
+texture = ExtResource("6_3jpa4")
+
+[node name="FesseGauche" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=1665197688]
+texture = ExtResource("7_gwsfj")
