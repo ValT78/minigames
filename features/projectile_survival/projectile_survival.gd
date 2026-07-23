@@ -35,9 +35,7 @@ func _ready() -> void:
 	_create_direct_test_player_if_needed()
 	time_label.visible = not _uses_external_timer
 	if _uses_external_timer:
-		# Ces deux lignes constituent le contrat commun à tous les mini-jeux temporisés.
 		GameManager.round_timer_expired.connect(_on_round_timer_expired)
-		GameManager.start_round_timer(survival_duration)
 	get_viewport().size_changed.connect(_layout_arena)
 	_layout_arena()
 	_spawn_all_players()
