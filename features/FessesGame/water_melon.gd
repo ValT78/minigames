@@ -6,6 +6,7 @@ extends Node2D
 @onready var despawn_timer: Timer = $Timer
 
 var exploded := false
+var big_ass_man : BigAssMan
 
 func crush() -> void:
 	water_melon_exploded.visible = true
@@ -15,4 +16,5 @@ func crush() -> void:
 	despawn_timer.start()
 
 func _on_timer_timeout() -> void:
+	big_ass_man.decontracte()
 	queue_free()

@@ -11,9 +11,10 @@ script = ExtResource("1_eu6tk")
 texture = ExtResource("2_1vej5")
 
 [node name="WaterMelonExploded" type="Sprite2D" parent="." unique_id=547666795]
+visible = false
 texture = ExtResource("3_pt2e2")
 
 [node name="Timer" type="Timer" parent="." unique_id=1837540042]
-wait_time = 0.25
+wait_time = 0.1
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
