@@ -17,7 +17,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	timer -= delta
-	if timer < 0 : gameover()
+	# Un mini-jeu de survie décide lui-même du résultat lorsque le temps expire.
+	if timer < 0:
+		if _actualMinigame.has_method("on_time_expired"):
+			_actualMinigame.on_time_expired()
+		else:
+			gameover()
 	updateTimeDisplay()
 
 func resetCountdown() -> void :
@@ -67,5 +72,6 @@ func minigameWon() -> void :
 
 
 func minigameLost() -> void :
-	pass
+	# La perte du mini-jeu rejoint le comportement global déjà prévu.
+	gameover()
 #endregion

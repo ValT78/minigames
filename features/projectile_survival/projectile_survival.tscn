@@ -62,10 +62,15 @@ script = ExtResource("3_spawner")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="TopPanel" type="PanelContainer" parent="HUD"]
-offset_left = 24.0
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -254.0
 offset_top = 22.0
-offset_right = 254.0
+offset_right = -24.0
 offset_bottom = 98.0
+grow_horizontal = 0
 theme_override_styles/panel = SubResource("HudPanelStyle")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/TopPanel"]

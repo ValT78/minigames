@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bjfhkvvyuqks4" path="res://features/MainMenu/MainMenu.tscn" id="2_dsdgj"]
 [ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="3_dsdgj"]
 [ext_resource type="PackedScene" uid="uid://dylaai0ysb2ey" path="res://features/Backbone/minigameTest2.tscn" id="3_qkt25"]
+[ext_resource type="PackedScene" path="res://features/projectile_survival/projectile_survival.tscn" id="4_survival"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7dbg6"]
 resource_local_to_scene = true
@@ -27,7 +28,7 @@ font_color = Color(0.59, 0, 0, 0.14117648)
 
 [node name="Main" type="Node2D" unique_id=2095609591]
 script = ExtResource("1_dxlp2")
-minigamesScene = Array[PackedScene]([ExtResource("2_7dbg6"), ExtResource("3_qkt25")])
+minigamesScene = Array[PackedScene]([ExtResource("2_7dbg6"), ExtResource("3_qkt25"), ExtResource("4_survival")])
 mainMenu = ExtResource("2_dsdgj")
 
 [node name="MainScreenUI" parent="." unique_id=804081229 instance=ExtResource("1_roav4")]

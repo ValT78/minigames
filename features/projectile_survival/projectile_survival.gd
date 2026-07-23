@@ -26,11 +26,20 @@ var _player_stars: Dictionary[int, SurvivalStar] = {}
 var _arena_rect := Rect2()
 var _elapsed_time := 0.0
 var _round_finished := false
+var _uses_external_timer := false
+var _backbone: Node
 
 
 func _ready() -> void:
-	# La scène directe crée un joueur de test, tandis qu'une partie normale utilise le lobby.
+	# Le parent existant expose déjà les deux fonctions constituant le contrat des mini-jeux.
+	_backbone = get_parent()
+	if not _backbone.has_method("minigameWon") or not _backbone.has_method("minigameLost"):
+		_backbone = null
+	_uses_external_timer = _backbone != null
 	_create_direct_test_player_if_needed()
+	time_label.visible = not _uses_external_timer
+	if _backbone != null:
+		_backbone.set("timer", survival_duration)
 	get_viewport().size_changed.connect(_layout_arena)
 	_layout_arena()
 	_spawn_all_players()
@@ -48,11 +57,18 @@ func _process(delta: float) -> void:
 	if _round_finished:
 		return
 
-	# Le temps local rend la scène testable avant son raccordement au GameManager.
+	# Le temps local pilote le test direct, mais le Backbone décide en partie intégrée.
 	_elapsed_time = minf(_elapsed_time + delta, survival_duration)
 	_update_hud()
-	if _elapsed_time >= survival_duration:
-		_finish_round(true)
+	if not _uses_external_timer and _elapsed_time >= survival_duration:
+		on_time_expired()
+
+
+func on_time_expired() -> void:
+	# Survivre jusqu'à zéro est la condition de victoire spécifique à ce jeu.
+	if _backbone != null:
+		_backbone.set("timer", 0.0)
+	_finish_round(_get_survivor_count() > 0)
 
 
 func _create_direct_test_player_if_needed() -> void:
@@ -133,7 +149,7 @@ func _get_survivor_count() -> int:
 
 
 func _update_hud() -> void:
-	# Ce HUD local pourra être masqué lorsque le Backbone affichera son propre temps.
+	# Le temps local reste utile pour lancer et équilibrer cette scène directement.
 	var remaining_time := maxf(survival_duration - _elapsed_time, 0.0)
 	time_label.text = "%02d" % ceili(remaining_time)
 	remaining_label.text = "%d étoile(s)" % _get_survivor_count()
@@ -152,11 +168,15 @@ func _finish_round(won: bool) -> void:
 	for player_star in _player_stars.values():
 		player_star.set_input_enabled(false)
 
-	# Les signaux constituent le futur point de raccordement au Backbone.
+	# Les signaux gardent la scène autonome, puis le contrat existant prévient son parent.
 	result_panel.visible = true
 	if won:
 		result_label.text = "CONSTELLATION SAUVÉE"
 		round_won.emit()
+		if _backbone != null:
+			_backbone.call("minigameWon")
 	else:
 		result_label.text = "ÉTOILES ÉTEINTES"
 		round_lost.emit()
+		if _backbone != null:
+			_backbone.call("minigameLost")
