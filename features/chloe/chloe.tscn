@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d0t6p2tknmlr1"]
+
+[ext_resource type="Texture2D" uid="uid://bpppv4xqjteio" path="res://features/chloe/Green.png" id="1_4gita"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hes3"]
+size = Vector2(1922, 31.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xh17"]
+size = Vector2(1142, 32)
+
+[node name="Chloe" type="Node2D" unique_id=358187120]
+
+[node name="Boundaries" type="Node2D" parent="." unique_id=1329661193]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=993664172]
+position = Vector2(961, 1095.875)
+shape = SubResource("RectangleShape2D_6hes3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=1264049172]
+position = Vector2(1936, 540)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0xh17")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=1987350092]
+position = Vector2(-16, 540)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0xh17")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=1340098082]
+position = Vector2(961, -15.75)
+shape = SubResource("RectangleShape2D_6hes3")
+
+[node name="Green" type="Sprite2D" parent="." unique_id=1155417634]
+z_index = -1
+scale = Vector2(59.999996, 59.999996)
+texture = ExtResource("1_4gita")
+centered = false

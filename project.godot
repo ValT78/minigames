@@ -22,7 +22,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerRegistry="*res://features/multi/player_registry.gd"
+GameManager="*uid://c5c1tvkhrydc6"
 PlayerInputRouter="*res://features/multi/player_input_router.gd"
+
 
 [display]
 
@@ -37,4 +39,5 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
