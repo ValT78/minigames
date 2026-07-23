@@ -1,9 +1,9 @@
 extends Node2D
 
-var isDebug : bool = true
+var isDebug : bool
 
 var timer : float = 9.999
-var _isNumberChanging = true
+var _isNumberChanging = false
 
 @onready var time_slider: HSlider
 @onready var time_label: Label
@@ -15,16 +15,18 @@ var _actualMinigame : Node2D
 var _score : int
 
 func _ready() -> void:
+	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
 	loadScenesFromFolder("res://minigames")
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
-	time_label = $"../Main/MainScreenUI/PanelContainer/TimeLabel"
-	score_label = $"../Main/MainScreenUI/PanelContainer/ScoreLabel"
+	time_label = $"../Main/MainScreenUI/TimeLabel"
+	score_label = $"../Main/MainScreenUI/ScoreLabel"
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
 	get_tree().current_scene.add_child(_actualMinigame)
 
 func _process(delta: float) -> void:
 	if isDebug : return
+	print(timer)
 	timer -= delta
 	if timer < 0 : gameover()
 	updateTimeDisplay()
