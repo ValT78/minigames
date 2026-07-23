@@ -5,13 +5,16 @@ signal round_timer_expired
 
 const MINI_GAMES_DURATION = 9.999
 
-var _isNumberChanging = false
 var _round_timer := Timer.new()
+var isDebug : bool = true
 
-@onready var time_label: Label = $"../Main/MainScreenUI/PanelContainer/TimeLabel"
+var _isNumberChanging = true
+
+@onready var time_slider: HSlider
+@onready var time_label: Label
 @export var minigamesScene : Array[PackedScene]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
-@onready var score_label: Label = $"../Main/MainScreenUI/PanelContainer/ScoreLabel"
+@onready var score_label: Label
 
 var _actualMinigame : Node2D
 var _score : int
@@ -23,7 +26,11 @@ func _ready() -> void:
 	add_child(_round_timer)
 	resetCountdown()
 
+	if isDebug : return
 	loadScenesFromFolder("res://minigames")
+	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
+	time_label = $"../Main/MainScreenUI/PanelContainer/TimeLabel"
+	score_label = $"../Main/MainScreenUI/PanelContainer/ScoreLabel"
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
 	get_tree().current_scene.add_child(_actualMinigame)
 
