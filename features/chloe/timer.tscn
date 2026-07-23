@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b8s6rfjqrinw2"]
+
+[ext_resource type="Script" uid="uid://driga0v5776n1" path="res://features/chloe/timer.gd" id="1_i1byu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hes3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_042h0"]
+bg_color = Color(0.36464024, 0.6547148, 0.6819092, 1)
+
+[node name="Timer" type="Control" unique_id=8606580]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 15.0
+offset_right = -100.0
+offset_bottom = -607.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i1byu")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1541619141]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_6hes3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_042h0")
+value = 100.0
+show_percentage = false
