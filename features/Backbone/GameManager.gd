@@ -3,17 +3,18 @@ extends Node2D
 var timer : float = 9.999
 var _isNumberChanging = false
 
-@onready var time_label: Label = $MainScreenUI/PanelContainer/TimeLabel
+@onready var time_label: Label = $"../Main/MainScreenUI/PanelContainer/TimeLabel"
 @export var minigamesScene : Array[PackedScene]
-@export var mainMenu : PackedScene
-@onready var score_label: Label = $MainScreenUI/PanelContainer/ScoreLabel
+@onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
+@onready var score_label: Label = $"../Main/MainScreenUI/PanelContainer/ScoreLabel"
 
 var _actualMinigame : Node2D
 var _score : int
 
 func _ready() -> void:
+	loadScenesFromFolder("res://minigames")
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
-	add_child(_actualMinigame)
+	get_tree().current_scene.add_child(_actualMinigame)
 
 func _process(delta: float) -> void:
 	timer -= delta
@@ -26,7 +27,7 @@ func resetCountdown() -> void :
 func gameover() -> void :
 	get_tree().change_scene_to_packed(mainMenu)
 
-func updateScore() -> void : 
+func updateScore(index : int) -> void : 
 	_score += floori(timer)
 	if _score < 10 : 
 		flashUpdateLabel(score_label,"00" + str(_score))
@@ -35,7 +36,26 @@ func updateScore() -> void :
 	else :
 		flashUpdateLabel(score_label, str(min(999,_score)))
 		
-	
+func loadScenesFromFolder(folder_path: String):
+	minigamesScene.clear()
+
+	var dir := DirAccess.open(folder_path)
+	if dir == null:
+		push_error("Impossible d'ouvrir : " + folder_path)
+		return
+
+	dir.list_dir_begin()
+
+	while true:
+		var file_name := dir.get_next()
+		if file_name == "": break
+		if dir.current_is_dir(): continue
+
+		if file_name.ends_with(".tscn"):
+			var scene := load(folder_path.path_join(file_name)) as PackedScene
+			if scene:minigamesScene.append(scene)
+
+	dir.list_dir_end()
 
 #region UI
 func updateTimeDisplay() -> void :
@@ -57,13 +77,13 @@ func flashUpdateLabel(label : Label, text : String) -> void :
 #endregion
 
 #region Game interface
-func minigameWon() -> void :
-	updateScore()
+func minigameWon(index : int = 0) -> void :
+	updateScore(index)
 	resetCountdown()
 	_actualMinigame.queue_free()
 	await get_tree().process_frame
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
-	add_child(_actualMinigame)
+	get_tree().current_scene.add_child(_actualMinigame)
 
 
 func minigameLost() -> void :

@@ -5,7 +5,7 @@ extends Node2D
 func _ready() -> void:
 	await get_tree().create_timer(2).timeout
 	print("1 win")
-	get_parent().minigameWon()
+	GameManager.minigameWon()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerRegistry="*res://features/multi/player_registry.gd"
+GameManager="*uid://c5c1tvkhrydc6"
 
 [display]
 
