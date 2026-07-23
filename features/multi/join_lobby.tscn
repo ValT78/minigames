@@ -1,0 +1,212 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://features/multi/join_lobby.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleCard"]
+bg_color = Color(0.105882, 0.12549, 0.184314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25098, 0.286275, 0.392157, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 24.0
+content_margin_top = 28.0
+content_margin_right = 24.0
+content_margin_bottom = 28.0
+
+[sub_resource type="StyleBoxFlat" id="StyleReset"]
+bg_color = Color(0.164706, 0.192157, 0.270588, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleResetHover"]
+bg_color = Color(0.219608, 0.25098, 0.345098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="JoinLobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0509804, 0.0862745, 1)
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = -48.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.941176, 0.960784, 1, 1)
+theme_override_font_sizes/font_size = 38
+text = "Rejoignez la partie"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.694118, 0.792157, 1)
+theme_override_font_sizes/font_size = 18
+text = "Utilisez les directions de votre profil — ou cliquez avec la souris"
+horizontal_alignment = 1
+
+[node name="PlayerCount" type="Label" parent="Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.741176, 0.811765, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "0 / 3 joueurs connectés"
+horizontal_alignment = 1
+
+[node name="SpacerTop" type="Control" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
+[node name="Cards" type="HBoxContainer" parent="Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="LeftCard" type="PanelContainer" parent="Margin/Content/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleCard")
+
+[node name="Content" type="VBoxContainer" parent="Margin/Content/Cards/LeftCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Player" type="Label" parent="Margin/Content/Cards/LeftCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.360784, 0.784314, 1, 1)
+theme_override_font_sizes/font_size = 25
+text = "CLAVIER GAUCHE"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="Margin/Content/Cards/LeftCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
+theme_override_font_sizes/font_size = 22
+text = "Z  Q  S  D\n\nMaj     <"
+horizontal_alignment = 1
+
+[node name="LeftStatus" type="Label" parent="Margin/Content/Cards/LeftCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 18
+text = "En attente…"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RightCard" type="PanelContainer" parent="Margin/Content/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleCard")
+
+[node name="Content" type="VBoxContainer" parent="Margin/Content/Cards/RightCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Player" type="Label" parent="Margin/Content/Cards/RightCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.811765, 0.360784, 1)
+theme_override_font_sizes/font_size = 25
+text = "CLAVIER DROIT"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="Margin/Content/Cards/RightCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
+theme_override_font_sizes/font_size = 22
+text = "↑  ←  ↓  →\n\n/       !"
+horizontal_alignment = 1
+
+[node name="RightStatus" type="Label" parent="Margin/Content/Cards/RightCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 18
+text = "En attente…"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MouseCard" type="PanelContainer" parent="Margin/Content/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleCard")
+
+[node name="Content" type="VBoxContainer" parent="Margin/Content/Cards/MouseCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Player" type="Label" parent="Margin/Content/Cards/MouseCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.447059, 0.623529, 1)
+theme_override_font_sizes/font_size = 25
+text = "SOURIS"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="Margin/Content/Cards/MouseCard/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
+theme_override_font_sizes/font_size = 22
+text = "Mouvement\n\nClic G     Clic D"
+horizontal_alignment = 1
+
+[node name="MouseStatus" type="Label" parent="Margin/Content/Cards/MouseCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 18
+text = "En attente…"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Hint" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.486275, 0.52549, 0.627451, 1)
+theme_override_font_sizes/font_size = 14
+text = "Échap : réinitialiser les joueurs (test)"
+horizontal_alignment = 1
