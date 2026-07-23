@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/dolphin_ring_race/dolphin_runner.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="DolphinCollisionShape"]
+radius = 22.0
+
+[node name="DolphinRunner" type="CharacterBody2D" groups=["dolphin_race_players"]]
+z_index = 10
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="DolphinVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TailTop" type="Polygon2D" parent="DolphinVisual"]
+polygon = PackedVector2Array(-25, -2, -48, -24, -44, 1)
+color = Color(0.36, 0.78, 1, 1)
+
+[node name="TailBottom" type="Polygon2D" parent="DolphinVisual"]
+polygon = PackedVector2Array(-25, 2, -48, 24, -44, -1)
+color = Color(0.36, 0.78, 1, 1)
+
+[node name="DorsalFin" type="Polygon2D" parent="DolphinVisual"]
+polygon = PackedVector2Array(-7, -13, -18, -31, 10, -15)
+color = Color(0.28, 0.62, 0.86, 1)
+
+[node name="DolphinBody" type="Polygon2D" parent="DolphinVisual"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-31, 0, -24, -12, -5, -18, 18, -14, 33, -7, 49, -5, 57, 0, 45, 4, 31, 5, 17, 14, -7, 17, -25, 11)
+color = Color(0.36, 0.78, 1, 1)
+
+[node name="DolphinBelly" type="Polygon2D" parent="DolphinVisual"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-22, 5, -5, 9, 18, 7, 31, 3, 45, 4, 30, 11, 13, 16, -8, 15)
+color = Color(0.68, 0.9, 1, 1)
+
+[node name="LeftFin" type="Polygon2D" parent="DolphinVisual"]
+polygon = PackedVector2Array(5, 10, -3, 30, 19, 13)
+color = Color(0.28, 0.62, 0.86, 1)
+
+[node name="Eye" type="Polygon2D" parent="DolphinVisual"]
+polygon = PackedVector2Array(27, -9, 31, -9, 31, -5, 27, -5)
+color = Color(0.02, 0.08, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("DolphinCollisionShape")
+
+[node name="PlayerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -22.0
+offset_top = -54.0
+offset_right = 22.0
+offset_bottom = -29.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.1, 0.2, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "J1"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -26.0
+offset_top = 31.0
+offset_right = 26.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.1, 0.2, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 15
+text = "0/4"
+horizontal_alignment = 1

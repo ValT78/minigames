@@ -23,11 +23,11 @@ var _score : int
 func _ready() -> void:
 
 	isDebug = not get_tree().current_scene.name == "Main"
-	if isDebug : return
 	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
 	_round_timer.one_shot = true
 	_round_timer.timeout.connect(_on_round_timer_timeout)
 	add_child(_round_timer)
+	if isDebug : return
 	resetCountdown()
 	
 	loadScenesFromFolder("res://minigames")

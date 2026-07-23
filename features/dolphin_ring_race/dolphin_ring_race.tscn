@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://drk3eg6ox1sme"]
+
+[ext_resource type="Script" uid="uid://cfhujw6iib58b" path="res://features/dolphin_ring_race/dolphin_ring_race.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="2_3bk6u"]
+
+[sub_resource type="StyleBoxFlat" id="ResultPanelStyle"]
+content_margin_left = 40.0
+content_margin_top = 26.0
+content_margin_right = 40.0
+content_margin_bottom = 26.0
+bg_color = Color(0.01, 0.12, 0.19, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.56, 0.96, 1, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="DolphinRingRace" type="Node2D" unique_id=2005578870]
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1198638797]
+unique_name_in_owner = true
+z_index = -100
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.015, 0.29, 0.39, 1)
+
+[node name="WaterGlow" type="Polygon2D" parent="." unique_id=1545099419]
+z_index = -90
+color = Color(0.16, 0.7, 0.75, 0.18)
+polygon = PackedVector2Array(0, 0, 953.1123, 0, 1920, 0, 1920, 360, 0, 760)
+
+[node name="ArenaBorder" type="Line2D" parent="." unique_id=2050908887]
+unique_name_in_owner = true
+z_index = -5
+width = 4.0
+default_color = Color(0.49, 0.94, 0.95, 0.42)
+
+[node name="RingContainer" type="Node2D" parent="." unique_id=1816803788]
+unique_name_in_owner = true
+
+[node name="JellyfishContainer" type="Node2D" parent="." unique_id=1298931443]
+unique_name_in_owner = true
+
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=230103228]
+unique_name_in_owner = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=757551594]
+
+[node name="LocalTimeLabel" type="Label" parent="HUD" unique_id=1375483091]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 26.0
+offset_right = -34.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.9, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.12, 0.2, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_3bk6u")
+theme_override_font_sizes/font_size = 38
+text = "10"
+horizontal_alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="HUD" unique_id=1615824039]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -58.0
+offset_right = 450.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.82, 1, 1, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0.12, 0.2, 0.95)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "ACTION 1 : FAST     •     ACTION 2 : JELLYFISH"
+horizontal_alignment = 1
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=538532000]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.0
+offset_top = -75.0
+offset_right = 305.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("ResultPanelStyle")
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=1452889508]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 1, 1, 1)
+theme_override_font_sizes/font_size = 29
+text = "JOUEUR 1 GAGNE LA COURSE !"
+horizontal_alignment = 1
+vertical_alignment = 1
