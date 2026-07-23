@@ -6,29 +6,28 @@ signal round_timer_expired
 const MINI_GAMES_DURATION = 9.999
 
 var _round_timer := Timer.new()
-var isDebug : bool = true
+var isDebug : bool
 
 var _isNumberChanging = false
 
-
-@onready var time_slider: HSlider
-@onready var time_label: Label
+var time_slider: HSlider
+var time_label: Label
 @export var minigamesScene : Array[PackedScene]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
-@onready var score_label: Label
+var score_label: Label
 
 var _actualMinigame : Node2D
 var _score : int
 
 func _ready() -> void:
-
 	isDebug = not get_tree().current_scene.name == "Main"
-	if isDebug : return
 	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
 	_round_timer.one_shot = true
 	_round_timer.timeout.connect(_on_round_timer_timeout)
 	add_child(_round_timer)
 	resetCountdown()
+	
+	if isDebug : return
 	
 	loadScenesFromFolder("res://minigames")
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
@@ -39,6 +38,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if isDebug : return
+	if not is_instance_valid(time_label) : return
 	updateTimeDisplay()
 
 ## Arrête le chronomètre sans émettre round_timer_expired.
@@ -91,6 +91,8 @@ func loadScenesFromFolder(folder_path: String):
 
 #region UI
 func updateTimeDisplay() -> void :
+	if get_time_left() > 0 :
+		time_slider.value = 100 * get_time_left() / MINI_GAMES_DURATION
 	var next_text = str(floori(get_time_left()))
 	if _isNumberChanging : return
 	if time_label.text == next_text : return
