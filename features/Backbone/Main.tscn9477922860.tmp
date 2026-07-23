@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://hfn6j6o6a0d0"]
+
+[ext_resource type="Script" uid="uid://c5c1tvkhrydc6" path="res://features/Backbone/GameManager.gd" id="1_dxlp2"]
+[ext_resource type="PackedScene" uid="uid://bc0n8xe8j2jwy" path="res://features/Backbone/main_screen_ui.tscn" id="1_roav4"]
+[ext_resource type="PackedScene" uid="uid://bt5fehid33m3s" path="res://features/Backbone/minigameTest1.tscn" id="2_7dbg6"]
+[ext_resource type="PackedScene" uid="uid://bjfhkvvyuqks4" path="res://features/MainMenu/MainMenu.tscn" id="2_dsdgj"]
+[ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="3_dsdgj"]
+[ext_resource type="PackedScene" uid="uid://dylaai0ysb2ey" path="res://features/Backbone/minigameTest2.tscn" id="3_qkt25"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7dbg6"]
+resource_local_to_scene = true
+font = ExtResource("3_dsdgj")
+font_size = 193
+font_color = Color(0.59, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qkt25"]
+resource_local_to_scene = true
+font = ExtResource("3_dsdgj")
+font_size = 193
+font_color = Color(0.59, 0, 0, 0.14117648)
+
+[node name="Main" type="Node2D" unique_id=2095609591]
+script = ExtResource("1_dxlp2")
+minigamesScene = Array[PackedScene]([ExtResource("2_7dbg6"), ExtResource("3_qkt25")])
+mainMenu = ExtResource("2_dsdgj")
+
+[node name="MainScreenUI" parent="." unique_id=804081229 instance=ExtResource("1_roav4")]
+
+[node name="TimeLabel" parent="MainScreenUI/PanelContainer" parent_id_path=PackedInt32Array(804081229, 943391621) index="0" unique_id=881383687]
+label_settings = SubResource("LabelSettings_7dbg6")
+
+[node name="BG" parent="MainScreenUI/PanelContainer/TimeLabel" index="0" unique_id=202594495]
+label_settings = SubResource("LabelSettings_qkt25")
+
+[editable path="MainScreenUI"]

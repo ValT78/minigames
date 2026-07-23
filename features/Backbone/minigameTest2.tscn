@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dylaai0ysb2ey"]
+
+[ext_resource type="Script" uid="uid://d3xtl0bxq0ev4" path="res://features/Backbone/minigame_test_2.gd" id="1_tye6x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d0bg"]
+font_size = 224
+
+[node name="MinigameTest2" type="Node2D" unique_id=911770383]
+script = ExtResource("1_tye6x")
+
+[node name="Label" type="Label" parent="." unique_id=206851101]
+offset_left = 567.0
+offset_top = 477.0
+offset_right = 1914.0
+offset_bottom = 783.0
+text = "MINIGAME 2"
+label_settings = SubResource("LabelSettings_5d0bg")
