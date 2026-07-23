@@ -1,7 +1,12 @@
 extends Node2D
 
-var timer : float = 9.999
+## Émis une seule fois lorsque le chronomètre de la manche atteint zéro.
+signal round_timer_expired
+
+const MINI_GAMES_DURATION = 9.999
+
 var _isNumberChanging = false
+var _round_timer := Timer.new()
 
 @onready var time_label: Label = $"../Main/MainScreenUI/PanelContainer/TimeLabel"
 @export var minigamesScene : Array[PackedScene]
@@ -12,28 +17,39 @@ var _actualMinigame : Node2D
 var _score : int
 
 func _ready() -> void:
+	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
+	_round_timer.one_shot = true
+	_round_timer.timeout.connect(_on_round_timer_timeout)
+	add_child(_round_timer)
+	resetCountdown()
+
 	loadScenesFromFolder("res://minigames")
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
 	get_tree().current_scene.add_child(_actualMinigame)
 
-func _process(delta: float) -> void:
-	timer -= delta
-	# Un mini-jeu de survie décide lui-même du résultat lorsque le temps expire.
-	if timer < 0:
-		if _actualMinigame.has_method("on_time_expired"):
-			_actualMinigame.on_time_expired()
-		else:
-			gameover()
+func _process(_delta: float) -> void:
 	updateTimeDisplay()
 
+## Arrête le chronomètre sans émettre round_timer_expired.
+func stop_round_timer() -> void:
+	_round_timer.stop()
+
+## Renvoie le nombre de secondes restantes
+func get_time_left() -> float:
+	return _round_timer.time_left
+
+func _on_round_timer_timeout() -> void:
+	round_timer_expired.emit()
+
 func resetCountdown() -> void :
-	timer = 9.999
+	_round_timer.start(MINI_GAMES_DURATION)
 
 func gameover() -> void :
+	stop_round_timer()
 	get_tree().change_scene_to_packed(mainMenu)
 
 func updateScore(index : int) -> void : 
-	_score += floori(timer)
+	_score += floori(get_time_left())
 	if _score < 10 : 
 		flashUpdateLabel(score_label,"00" + str(_score))
 	elif _score < 100:
@@ -64,7 +80,7 @@ func loadScenesFromFolder(folder_path: String):
 
 #region UI
 func updateTimeDisplay() -> void :
-	var next_text = str(floori(timer))
+	var next_text = str(floori(get_time_left()))
 	if _isNumberChanging : return
 	if time_label.text == next_text : return
 	_isNumberChanging = true
@@ -92,6 +108,5 @@ func minigameWon(index : int = 0) -> void :
 
 
 func minigameLost() -> void :
-	# La perte du mini-jeu rejoint le comportement global déjà prévu.
 	gameover()
 #endregion

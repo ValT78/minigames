@@ -27,19 +27,17 @@ var _arena_rect := Rect2()
 var _elapsed_time := 0.0
 var _round_finished := false
 var _uses_external_timer := false
-var _backbone: Node
 
 
 func _ready() -> void:
-	# Le parent existant expose déjà les deux fonctions constituant le contrat des mini-jeux.
-	_backbone = get_parent()
-	if not _backbone.has_method("minigameWon") or not _backbone.has_method("minigameLost"):
-		_backbone = null
-	_uses_external_timer = _backbone != null
+	# Le Backbone ajoute désormais les mini-jeux à la scène courante depuis son Autoload.
+	_uses_external_timer = get_tree().current_scene != self
 	_create_direct_test_player_if_needed()
 	time_label.visible = not _uses_external_timer
-	if _backbone != null:
-		_backbone.set("timer", survival_duration)
+	if _uses_external_timer:
+		# Ces deux lignes constituent le contrat commun à tous les mini-jeux temporisés.
+		GameManager.round_timer_expired.connect(_on_round_timer_expired)
+		GameManager.start_round_timer(survival_duration)
 	get_viewport().size_changed.connect(_layout_arena)
 	_layout_arena()
 	_spawn_all_players()
@@ -48,9 +46,11 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	# Évite de conserver une connexion vers une scène retirée par le Backbone.
+	# Évite de conserver une connexion vers une scène retirée entre deux mini-jeux.
 	if get_viewport().size_changed.is_connected(_layout_arena):
 		get_viewport().size_changed.disconnect(_layout_arena)
+	if GameManager.round_timer_expired.is_connected(_on_round_timer_expired):
+		GameManager.round_timer_expired.disconnect(_on_round_timer_expired)
 
 
 func _process(delta: float) -> void:
@@ -61,13 +61,11 @@ func _process(delta: float) -> void:
 	_elapsed_time = minf(_elapsed_time + delta, survival_duration)
 	_update_hud()
 	if not _uses_external_timer and _elapsed_time >= survival_duration:
-		on_time_expired()
+		_on_round_timer_expired()
 
 
-func on_time_expired() -> void:
+func _on_round_timer_expired() -> void:
 	# Survivre jusqu'à zéro est la condition de victoire spécifique à ce jeu.
-	if _backbone != null:
-		_backbone.set("timer", 0.0)
 	_finish_round(_get_survivor_count() > 0)
 
 
@@ -168,15 +166,15 @@ func _finish_round(won: bool) -> void:
 	for player_star in _player_stars.values():
 		player_star.set_input_enabled(false)
 
-	# Les signaux gardent la scène autonome, puis le contrat existant prévient son parent.
+	# Les signaux gardent la scène autonome, puis l'Autoload reçoit le résultat intégré.
 	result_panel.visible = true
 	if won:
 		result_label.text = "CONSTELLATION SAUVÉE"
 		round_won.emit()
-		if _backbone != null:
-			_backbone.call("minigameWon")
+		if _uses_external_timer:
+			GameManager.minigameWon()
 	else:
 		result_label.text = "ÉTOILES ÉTEINTES"
 		round_lost.emit()
-		if _backbone != null:
-			_backbone.call("minigameLost")
+		if _uses_external_timer:
+			GameManager.minigameLost()

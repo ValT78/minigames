@@ -25,7 +25,6 @@ PlayerRegistry="*res://features/multi/player_registry.gd"
 GameManager="*uid://c5c1tvkhrydc6"
 PlayerInputRouter="*res://features/multi/player_input_router.gd"
 
-
 [display]
 
 window/size/viewport_width=1920
