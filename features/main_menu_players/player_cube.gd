@@ -48,16 +48,16 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 
 	# Le mini-jeu lit uniquement l'API normalisée, jamais les touches physiques.
-	var horizontal_input := player.input.movement.x
+	var horizontal_input := player.input.direction.x
 	if absf(horizontal_input) > 0.05:
 		_facing_direction = signf(horizontal_input)
 
 	# Maintenir l'action permet de ressauter dès que le cube retouche le sol.
-	if player.input.jump_pressed and is_on_floor():
+	if player.input.action_1_pressed and is_on_floor():
 		velocity.y = -jump_speed
 
 	# Le dash conserve brièvement sa propre vitesse et sa dernière direction connue.
-	if player.input.dash_just_pressed and _dash_cooldown_left <= 0.0:
+	if player.input.action_2_just_pressed and _dash_cooldown_left <= 0.0:
 		var dash_direction := _facing_direction
 		if absf(horizontal_input) > 0.05:
 			dash_direction = signf(horizontal_input)

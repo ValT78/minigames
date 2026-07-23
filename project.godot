@@ -23,6 +23,8 @@ config/icon="res://icon.svg"
 
 PlayerRegistry="*res://features/multi/player_registry.gd"
 GameManager="*uid://c5c1tvkhrydc6"
+PlayerInputRouter="*res://features/multi/player_input_router.gd"
+
 
 [display]
 

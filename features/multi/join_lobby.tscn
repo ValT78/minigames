@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://features/multi/join_lobby.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://features/player_cubes/player_arena.tscn" id="2_arena"]
+[ext_resource type="PackedScene" path="res://features/main_menu_players/player_arena.tscn" id="2_arena"]
 
 [sub_resource type="StyleBoxFlat" id="StyleCard"]
 bg_color = Color(0.105882, 0.12549, 0.184314, 0.94)
@@ -106,7 +106,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
 theme_override_font_sizes/font_size = 17
-text = "Q / D   •   Maj gauche maintenue : saut   •   < : dash"
+text = "Q / D   •   Action 1 (Maj) : saut   •   Action 2 (<) : dash"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -141,7 +141,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
 theme_override_font_sizes/font_size = 17
-text = "← / →   •   / maintenu : saut   •   ! : dash"
+text = "← / →   •   Action 1 (/) : saut   •   Action 2 (!) : dash"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -176,7 +176,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.917647, 0.933333, 0.980392, 1)
 theme_override_font_sizes/font_size = 17
-text = "Bords écran   •   Clic G maintenu : saut   •   Clic D : dash"
+text = "Bords écran   •   Action 1 (clic G)   •   Action 2 (clic D)"
 horizontal_alignment = 1
 autowrap_mode = 2
 
