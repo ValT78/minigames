@@ -25,11 +25,7 @@ func _create_direct_test_player_if_needed() -> void:
 		return
 
 	PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_LEFT)
-	PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_RIGHT)
-
-func bad_input(player: LocalPlayer) -> void:
-	players_countdown[player.id - 1] += 1 # punition
-	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+	#PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_RIGHT)
 
 func _ready() -> void:
 	_create_direct_test_player_if_needed()
@@ -67,6 +63,10 @@ func check_input(player: LocalPlayer) -> int:
 	if player.input.action_1_just_pressed: return dir
 	if player.input.action_2_just_pressed: return -dir
 	return 0
+
+func bad_input(player: LocalPlayer) -> void:
+	players_countdown[player.id - 1] += 1 # punition
+	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
 
 func good_input(player: LocalPlayer) -> void:
 	players_countdown[player.id - 1] -= 1
