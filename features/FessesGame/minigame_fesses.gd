@@ -80,7 +80,7 @@ func check_input(player: LocalPlayer) -> int:
 	return 0
 
 func bad_input(player: LocalPlayer) -> void:
-	players_countdown[player.id] += 1 # punition
+	players_countdown[player.id] += 2 # punition
 	players_score_label[player.id].text = str(players_countdown[player.id])
 	fail_sound.bus = "Player"+str(player.id)
 	fail_sound.play()
