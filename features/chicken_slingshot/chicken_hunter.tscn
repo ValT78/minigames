@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://bq2wl03e6l1r5"]
+
+[ext_resource type="Script" uid="uid://ckbmtxtwoso7c" path="res://features/chicken_slingshot/chicken_hunter.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="ChargeBackground"]
+bg_color = Color(0.08, 0.07, 0.035, 0.78)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="ChargeFill"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ChickenHunter" type="Node2D" unique_id=177896752]
+z_index = 10
+script = ExtResource("1_script")
+
+[node name="HunterShadow" type="Polygon2D" parent="." unique_id=1395473372]
+position = Vector2(-11, 25)
+scale = Vector2(1.15, 0.42)
+color = Color(0.09, 0.07, 0.025, 0.38)
+polygon = PackedVector2Array(32, 0, 22.63, 22.63, 0, 32, -22.63, 22.63, -32, 0, -22.63, -22.63, 0, -32, 22.63, -22.63)
+
+[node name="HunterVisual" type="Node2D" parent="." unique_id=1278350614]
+unique_name_in_owner = true
+
+[node name="LegBack" type="Line2D" parent="HunterVisual" unique_id=1205599145]
+points = PackedVector2Array(-19, 12, -26, 34)
+width = 11.0
+default_color = Color(0.16, 0.12, 0.08, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegFront" type="Line2D" parent="HunterVisual" unique_id=1865149813]
+points = PackedVector2Array(-4, 14, 1, 36)
+width = 11.0
+default_color = Color(0.2, 0.15, 0.09, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Body" type="Polygon2D" parent="HunterVisual" unique_id=1565012892]
+unique_name_in_owner = true
+position = Vector2(-12, 0)
+scale = Vector2(0.95, 1.18)
+color = Color(0.24, 0.7, 0.95, 1)
+polygon = PackedVector2Array(28, 0, 19.8, 19.8, 0, 28, -19.8, 19.8, -28, 0, -19.8, -19.8, 0, -28, 19.8, -19.8)
+
+[node name="Head" type="Polygon2D" parent="HunterVisual" unique_id=826164862]
+position = Vector2(-7, -31)
+scale = Vector2(0.72, 0.72)
+color = Color(0.94, 0.68, 0.43, 1)
+polygon = PackedVector2Array(22, 0, 15.56, 15.56, 0, 22, -15.56, 15.56, -22, 0, -15.27778, -16.666668, 0, -22, 15.56, -15.56)
+
+[node name="Hat" type="Polygon2D" parent="HunterVisual" unique_id=1681093218]
+unique_name_in_owner = true
+position = Vector2(-9, -48)
+color = Color(0.5, 0.78, 0.24, 1)
+polygon = PackedVector2Array(-30, 7, 28, 7, 18, -4, 12, -17, -12, -17, -20, -4)
+
+[node name="Weapon" type="Node2D" parent="." unique_id=1502464366]
+unique_name_in_owner = true
+position = Vector2(5, -3)
+
+[node name="Handle" type="Line2D" parent="Weapon" unique_id=140570674]
+points = PackedVector2Array(-8, 0, 18, 0)
+width = 9.0
+default_color = Color(0.35, 0.16, 0.055, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="UpperArm" type="Line2D" parent="Weapon" unique_id=1789312602]
+points = PackedVector2Array(14, 0, 31, -17)
+width = 7.0
+default_color = Color(0.48, 0.24, 0.075, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LowerArm" type="Line2D" parent="Weapon" unique_id=2058854877]
+points = PackedVector2Array(14, 0, 31, 17)
+width = 7.0
+default_color = Color(0.48, 0.24, 0.075, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Band" type="Line2D" parent="Weapon" unique_id=2141088185]
+points = PackedVector2Array(31, -17, 25, 0, 31, 17)
+width = 3.0
+default_color = Color(0.12, 0.085, 0.045, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ProjectileOrigin" type="Marker2D" parent="Weapon" unique_id=1136101002]
+unique_name_in_owner = true
+position = Vector2(37, 0)
+
+[node name="ChargeBar" type="ProgressBar" parent="." unique_id=1121510280]
+unique_name_in_owner = true
+visible = false
+offset_left = -58.0
+offset_top = -88.0
+offset_right = 58.0
+offset_bottom = -72.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("ChargeBackground")
+theme_override_styles/fill = SubResource("ChargeFill")
+show_percentage = false
+
+[node name="ArrowBadge" type="Label" parent="." unique_id=2026997629]
+unique_name_in_owner = true
+visible = false
+offset_left = -60.0
+offset_top = 45.0
+offset_right = 65.0
+offset_bottom = 76.0
+pivot_offset = Vector2(62, 15)
+theme_override_colors/font_color = Color(1, 0.84, 0.2, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.06, 0.01, 0.95)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 20
+text = "➤ FLÈCHE"
+horizontal_alignment = 1
+
+[node name="PlayerLabel" type="Label" parent="." unique_id=350531679]
+unique_name_in_owner = true
+offset_left = -52.0
+offset_top = -22.0
+offset_right = -10.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0.8, 0.95, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.05, 0.04, 0.02, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "J1"
+horizontal_alignment = 1

@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://features/chicken_slingshot/slingshot_projectile.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="RockCollisionShape"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="ArrowCollisionShape"]
+size = Vector2(76, 14)
+
+[node name="SlingshotProjectile" type="Area2D"]
+z_index = 16
+collision_layer = 0
+collision_mask = 8
+monitoring = true
+monitorable = false
+script = ExtResource("1_script")
+
+[node name="ProjectileVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="RockVisual" type="Polygon2D" parent="ProjectileVisual"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(13, -2, 9, 10, -3, 13, -12, 6, -13, -5, -5, -13, 7, -11)
+color = Color(0.28, 0.27, 0.24, 1)
+
+[node name="RockHighlight" type="Polygon2D" parent="ProjectileVisual/RockVisual"]
+polygon = PackedVector2Array(-6, -6, 4, -8, 8, -4, 1, 0, -5, -1)
+color = Color(0.58, 0.56, 0.48, 0.8)
+
+[node name="ArrowVisual" type="Node2D" parent="ProjectileVisual"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Shaft" type="Line2D" parent="ProjectileVisual/ArrowVisual"]
+points = PackedVector2Array(-35, 0, 31, 0)
+width = 6.0
+default_color = Color(0.45, 0.24, 0.07, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Head" type="Polygon2D" parent="ProjectileVisual/ArrowVisual"]
+position = Vector2(36, 0)
+polygon = PackedVector2Array(-8, -10, 10, 0, -8, 10)
+color = Color(0.82, 0.84, 0.77, 1)
+
+[node name="FletchingTop" type="Polygon2D" parent="ProjectileVisual/ArrowVisual"]
+position = Vector2(-30, 0)
+polygon = PackedVector2Array(-10, -11, 5, -3, 5, 0, -10, -3)
+color = Color(0.92, 0.2, 0.12, 1)
+
+[node name="FletchingBottom" type="Polygon2D" parent="ProjectileVisual/ArrowVisual"]
+position = Vector2(-30, 0)
+polygon = PackedVector2Array(-10, 11, 5, 3, 5, 0, -10, 3)
+color = Color(0.92, 0.2, 0.12, 1)
+
+[node name="RockCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RockCollisionShape")
+
+[node name="ArrowCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+disabled = true
+shape = SubResource("ArrowCollisionShape")
