@@ -92,4 +92,3 @@ pitch_scale = 1.5
 [node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
 stream = ExtResource("7_gwsfj")
 pitch_scale = 2.0
-autoplay = true
