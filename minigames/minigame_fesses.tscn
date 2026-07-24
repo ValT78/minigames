@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://cex5ichp627rf"]
 
-[ext_resource type="Texture2D" uid="uid://cfksp10smpiq8" path="res://features/FessesGame/fesse_idle.jpg" id="1_53ij0"]
 [ext_resource type="Script" uid="uid://cobj8611746lp" path="res://features/FessesGame/minigame_fesses.gd" id="1_w250n"]
 [ext_resource type="PackedScene" uid="uid://cgl8vwbs7iamr" path="res://features/FessesGame/water_melon.tscn" id="3_t212x"]
+[ext_resource type="Texture2D" uid="uid://crl7swh74harf" path="res://features/FessesGame/body.png" id="5_gwsfj"]
 [ext_resource type="Script" uid="uid://0juqnlcsytjq" path="res://features/FessesGame/bel_homme_aux_grosses_fesses.gd" id="5_ww3bx"]
-[ext_resource type="Texture2D" uid="uid://dpyweiot4uwpc" path="res://features/FessesGame/fesse_droite.jpg" id="6_3jpa4"]
-[ext_resource type="Texture2D" uid="uid://ccw4tokkjpe25" path="res://features/FessesGame/fesse_gauche.jpg" id="7_gwsfj"]
+[ext_resource type="Texture2D" uid="uid://b68d6r2bt2rmb" path="res://features/FessesGame/ass.png" id="6_ww3bx"]
 [ext_resource type="AudioStream" uid="uid://crfm2sxu8stsl" path="res://features/FessesGame/freesound_community-splash-01-35899.mp3" id="7_ww3bx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3jpa4"]
@@ -28,16 +27,26 @@ position = Vector2(1132, 923)
 position = Vector2(960, 540)
 script = ExtResource("5_ww3bx")
 
-[node name="Idle" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=942664832]
-position = Vector2(2, 3)
-texture = ExtResource("1_53ij0")
+[node name="Body" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=1431523363]
+position = Vector2(-75.499985, 4.499939)
+scale = Vector2(1.4557143, 1.7838285)
+texture = ExtResource("5_gwsfj")
 
-[node name="FesseDroite" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=272436552]
-texture = ExtResource("6_3jpa4")
+[node name="Ass" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=252000179]
+position = Vector2(-76.00001, 33.000008)
+rotation = 0.036915988
+scale = Vector2(1.5299559, 1.3382838)
+texture = ExtResource("6_ww3bx")
 
-[node name="FesseGauche" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=1665197688]
-visible = false
-texture = ExtResource("7_gwsfj")
+[node name="TransformLeft" type="Marker2D" parent="BelHommeAuxGrossesFesses" unique_id=1047286462]
+position = Vector2(1.9999771, 164)
+rotation = -0.3823905
+scale = Vector2(1.5299559, 1.3382838)
+
+[node name="TransformRight" type="Marker2D" parent="BelHommeAuxGrossesFesses" unique_id=1716969009]
+position = Vector2(-181, 147)
+rotation = 0.49131688
+scale = Vector2(1.5299559, 1.3382838)
 
 [node name="Player1Score" type="VBoxContainer" parent="." unique_id=1373678829]
 visible = false
