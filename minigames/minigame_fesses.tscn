@@ -8,6 +8,17 @@
 [ext_resource type="AudioStream" uid="uid://bp1whfh66eeui" path="res://features/FessesGame/apebble-fart-5-trimmed.mp3" id="7_gwsfj"]
 [ext_resource type="AudioStream" uid="uid://crfm2sxu8stsl" path="res://features/FessesGame/freesound_community-splash-01-35899.mp3" id="7_ww3bx"]
 
+[sub_resource type="Gradient" id="Gradient_gwsfj"]
+offsets = PackedFloat32Array(0, 0.21122995, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.017379679, 0.017379679, 0.017379679, 1, 1, 1, 0.92156863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_symlb"]
+gradient = SubResource("Gradient_gwsfj")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.47863248, 0.5576923)
+
 [sub_resource type="LabelSettings" id="LabelSettings_3jpa4"]
 font_size = 64
 font_color = Color(0, 0, 0, 1)
@@ -17,6 +28,18 @@ script = ExtResource("1_w250n")
 players_score_containers = [NodePath("Player1Score"), NodePath("Player2Score")]
 players_score_label = [NodePath("Player1Score/Count1"), NodePath("Player2Score/Count2")]
 water_melon_scene = ExtResource("3_t212x")
+
+[node name="BG" type="TextureRect" parent="." unique_id=353019011]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 12.0
+offset_right = 1923.0
+offset_bottom = 1088.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_symlb")
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1870398353]
 position = Vector2(732, 923)
@@ -92,3 +115,6 @@ pitch_scale = 1.5
 [node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
 stream = ExtResource("7_gwsfj")
 pitch_scale = 2.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=9480171]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)

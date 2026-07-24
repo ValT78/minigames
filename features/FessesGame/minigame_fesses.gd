@@ -90,7 +90,7 @@ func good_input(player: LocalPlayer) -> void:
 	players_score_label[player.id].text = str(players_countdown[player.id])
 	if players_countdown[player.id] <= 0:
 		print("Win of player :", player)
-		assert(false) # crash le temps de faire un truc
+		GameManager.minigameWon(player.id)
 			
 	players_score_label[player.id].text = str(players_countdown[player.id])
 	water_melon_splash.bus = "Player"+str(player.id)
