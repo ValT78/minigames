@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://crl7swh74harf" path="res://features/FessesGame/body.png" id="5_gwsfj"]
 [ext_resource type="Script" uid="uid://0juqnlcsytjq" path="res://features/FessesGame/bel_homme_aux_grosses_fesses.gd" id="5_ww3bx"]
 [ext_resource type="Texture2D" uid="uid://b68d6r2bt2rmb" path="res://features/FessesGame/ass.png" id="6_ww3bx"]
+[ext_resource type="AudioStream" uid="uid://bp1whfh66eeui" path="res://features/FessesGame/apebble-fart-5-trimmed.mp3" id="7_gwsfj"]
 [ext_resource type="AudioStream" uid="uid://crfm2sxu8stsl" path="res://features/FessesGame/freesound_community-splash-01-35899.mp3" id="7_ww3bx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3jpa4"]
@@ -87,3 +88,8 @@ horizontal_alignment = 1
 [node name="WaterMelonSplash" type="AudioStreamPlayer2D" parent="." unique_id=22324477]
 stream = ExtResource("7_ww3bx")
 pitch_scale = 1.5
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
+stream = ExtResource("7_gwsfj")
+pitch_scale = 2.0
+autoplay = true
