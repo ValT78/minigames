@@ -9,12 +9,12 @@ extends Node2D
 var exploded := false
 var big_ass_man : BigAssMan
 
-func crush(player_how_crushed : int) -> void:
+func crush(player_how_crushed : LocalPlayer) -> void:
 	water_melon_exploded.visible = true
 	water_melon_full.visible = false
 	
 	exploded = true
-	particles.modulate = Globals.player_0_color if player_how_crushed == 0 else Globals.player_1_color
+	particles.modulate = player_how_crushed.color
 	despawn_timer.start()
 
 func _on_timer_timeout() -> void:

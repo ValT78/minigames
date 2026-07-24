@@ -96,7 +96,7 @@ func good_input(player: LocalPlayer) -> void:
 	water_melon_splash.bus = "Player"+str(player.id)
 	water_melon_splash.play()
 	
-	current_water_melon.crush(player.id)
+	current_water_melon.crush(player)
 
 func spawn_water_melon() -> void:
 	current_water_melon = water_melon_scene.instantiate()
