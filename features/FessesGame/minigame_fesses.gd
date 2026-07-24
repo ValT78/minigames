@@ -1,26 +1,44 @@
 extends Node2D
 
-@onready var left_spawn: Marker2D = $LeftSpawn
-@onready var right_spawn: Marker2D = $RightSpawn
-
 enum SIDE {LEFT, RIGHT}
 var current_pos : SIDE
+
+@onready var left_spawn: Marker2D = $LeftSpawn
+@onready var right_spawn: Marker2D = $RightSpawn
+@export var players_score_containers : Array[VBoxContainer]
+@export var players_score_label : Array[Label]
+@export var water_melon_scene: PackedScene
+@export var water_melon_to_crush := 20
+@onready var bel_homme_aux_grosses_fesses: Node2D = $BelHommeAuxGrossesFesses
+@onready var water_melon_splash: AudioStreamPlayer2D = $WaterMelonSplash
+
+# players_id => player_countdown
+var players_countdown: Array[int]
+var water_melon_crushed := 0
+var current_water_melon: WaterMelon
 
 func set_random_pos() -> void:
 	current_pos = SIDE.LEFT if randf() < 0.5 else SIDE.RIGHT
 
-@export var water_melon: PackedScene
-@export var water_melon_to_crush := 50
+func _create_direct_test_player_if_needed() -> void:
+	if get_tree().current_scene != self or not PlayerRegistry.get_players().is_empty():
+		return
 
-var water_melon_crushed := 0
-var current_water_melon: WaterMelon
-@onready var bel_homme_aux_grosses_fesses: Node2D = $BelHommeAuxGrossesFesses
-
-var players_score: Dictionary[LocalPlayer, int]
+	PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_LEFT)
+	#PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_RIGHT)
 
 func _ready() -> void:
-	for player in PlayerRegistry.get_players():
-		players_score[player] = 0
+	_create_direct_test_player_if_needed()
+	var players := PlayerRegistry.get_players()
+
+	assert(len(players) <= 2)
+	var i := 0
+	for player in players:
+		@warning_ignore("integer_division")
+		players_countdown.append(water_melon_to_crush / len(players))
+		players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+		players_score_containers[i].visible = true
+		i += 1
 
 func _physics_process(_delta: float) -> void:
 	if is_instance_valid(current_water_melon):
@@ -28,29 +46,42 @@ func _physics_process(_delta: float) -> void:
 			return
 		
 		for player in PlayerRegistry.get_players():
-			bel_homme_aux_grosses_fesses.fesse_animation(player.input.direction)
-			var input_score := check_input(player.input.direction)
+			bel_homme_aux_grosses_fesses.fesse_animation(player)
+			var input_score := check_input(player)
 			if input_score == 1:
-				crushing_water_melon(player)
+				good_input(player)
 			if input_score == -1:
-				players_score[player] -= 1
+				bad_input(player)
+				
 	else:
 		set_random_pos()
 		spawn_water_melon()
 		
-func check_input(input_direction : Vector2) -> int:
-	# -1 si mauvais input, 1 si bon input, 0 si pas d'input
-	if input_direction.x == 0:
-		return 0
-	
-	return 1 if sign(input_direction.x) == sign(int(current_pos) - 0.5) else -1
-		
-func crushing_water_melon(player: LocalPlayer) -> void:
+const SIDE_SIGN = {SIDE.LEFT: 1, SIDE.RIGHT: -1}
+func check_input(player: LocalPlayer) -> int:
+	var dir = SIDE_SIGN.get(current_pos, 0)
+	if player.input.action_1_just_pressed: return dir
+	if player.input.action_2_just_pressed: return -dir
+	return 0
+
+func bad_input(player: LocalPlayer) -> void:
+	players_countdown[player.id - 1] += 1 # punition
+	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+
+func good_input(player: LocalPlayer) -> void:
+	players_countdown[player.id - 1] -= 1
+	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+	if players_countdown[player.id - 1] <= 0:
+		print("Win of player :", player)
+		assert(false) # crash le temps de faire un truc
+			
+	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+	water_melon_splash.play()
 	current_water_melon.crush()
-	players_score[player] += 1
 
 func spawn_water_melon() -> void:
-	current_water_melon = water_melon.instantiate()
+	current_water_melon = water_melon_scene.instantiate()
+	current_water_melon.big_ass_man = bel_homme_aux_grosses_fesses
 	match current_pos:
 		SIDE.LEFT:
 			current_water_melon.global_position = left_spawn.global_position
@@ -58,6 +89,3 @@ func spawn_water_melon() -> void:
 			current_water_melon.global_position = right_spawn.global_position
 	
 	add_child(current_water_melon)
-
-	
-	
