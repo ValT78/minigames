@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://coecgw1xvop5c"]
 
-[ext_resource type="Script" uid="uid://bv8p331noh4kk" path="res://features/MapTarget/map_target.gd" id="1_xyqtc"]
-[ext_resource type="Texture2D" uid="uid://y1cqm4qpaowg" path="res://features/MapTarget/map.png" id="2_d04y0"]
-[ext_resource type="Script" uid="uid://bd0hf7xqcaxf5" path="res://features/MapTarget/Country.gd" id="3_sxcbd"]
+[ext_resource type="Script" uid="uid://bv8p331noh4kk" path="res://features/MapTarget/map_target.gd" id="1_opr6b"]
+[ext_resource type="Texture2D" uid="uid://y1cqm4qpaowg" path="res://features/MapTarget/map.png" id="2_3n4fs"]
+[ext_resource type="Script" uid="uid://bd0hf7xqcaxf5" path="res://features/MapTarget/Country.gd" id="3_d041r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font_size = 80
 
 [node name="MapTarget" type="Node2D" unique_id=676898344]
-script = ExtResource("1_xyqtc")
+script = ExtResource("1_opr6b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1264345034]
 position = Vector2(960, 540)
-texture = ExtResource("2_d04y0")
+texture = ExtResource("2_3n4fs")
 
 [node name="CountryCollider" type="Node2D" parent="." unique_id=1908827992]
 
 [node name="France" type="Area2D" parent="CountryCollider" unique_id=47315472]
 position = Vector2(637, 652)
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/France" unique_id=1535316878]
 position = Vector2(87.29091, 49.974518)
@@ -26,7 +26,7 @@ polygon = PackedVector2Array(-44.290905, -111.97452, -12.290907, -138.97452, -0.
 
 [node name="Ukraine" type="Area2D" parent="CountryCollider" unique_id=216025547]
 position = Vector2(1278, 646)
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Ukraine" unique_id=458312555]
 position = Vector2(-48.46907, 1.5075978)
@@ -34,28 +34,28 @@ polygon = PackedVector2Array(-20.53093, -72.50759, -16.53093, -83.50759, 16.4690
 
 [node name="Norway" type="Area2D" parent="CountryCollider" unique_id=1649358573]
 position = Vector2(887, 273)
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Norway" unique_id=668429394]
 polygon = PackedVector2Array(8, 92, 27, 64, 33, 12, 30, -20, 43, -48, 56, -47, 67, -99, 92, -128, 105, -162, 120, -177, 135, -173, 143, -193, 182, -182, 195, -191, 198, -213, 212, -220, 221, -210, 220, -191, 251, -231, 215, -249, 185, -252, 120, -204, 65, -138, 24, -67, -27, -34, -62, -2, -72, 59, -71, 100, -54, 111, -25, 101, 2, 72)
 
 [node name="Iceland" type="Area2D" parent="CountryCollider" unique_id=975248235]
 position = Vector2(585, 86)
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Iceland" unique_id=1308951146]
 position = Vector2(-4, -3)
 polygon = PackedVector2Array(-59, 5, -52, -49, -9, -56, 57, -22, 65, 26, 30, 51, -28, 47)
 
 [node name="Lithuania" type="Area2D" parent="CountryCollider" unique_id=481669951]
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Lithuania" unique_id=256745240]
 position = Vector2(1082.1099, 473.2846)
 polygon = PackedVector2Array(-38.109894, -10.2846, -36.109894, 7.7154, -13.109893, 15.7154, -14.109893, 31.7154, -0.109892845, 41.7154, 33.890106, 35.7154, 45.890106, -9.2846, 13.890107, -30.2846, -28.109894, -26.2846)
 
 [node name="Greece" type="Area2D" parent="CountryCollider" unique_id=383366723]
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Greece" unique_id=1263551383]
 position = Vector2(1131.1981, 927.7353)
@@ -63,7 +63,7 @@ polygon = PackedVector2Array(-101.19813, 7.264702, -82.19813, -29.735298, -42.19
 
 [node name="Morocco" type="Area2D" parent="CountryCollider" unique_id=868526524]
 position = Vector2(426, 1033)
-script = ExtResource("3_sxcbd")
+script = ExtResource("3_d041r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CountryCollider/Morocco" unique_id=2066018427]
 polygon = PackedVector2Array(-119, 45, -88, -28, -53, -47, -20, -52, 23, -90, 38, -63, 95, -45, 91, 30, 29, 50, -120, 58)
