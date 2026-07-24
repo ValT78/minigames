@@ -9,8 +9,17 @@ var current_pos : SIDE
 @export var players_score_label : Array[Label]
 @export var water_melon_scene: PackedScene
 @export var water_melon_to_crush := 20
+
+# Maybe have this global idk
+@export var modulate_player_1 : Color
+@export var modulate_player_2 : Color
+
 @onready var bel_homme_aux_grosses_fesses: Node2D = $BelHommeAuxGrossesFesses
 @onready var water_melon_splash: AudioStreamPlayer2D = $WaterMelonSplash
+@onready var fail_sound: AudioStreamPlayer2D = $FailSound
+
+
+
 
 # players_id => player_countdown
 var players_countdown: Array[int]
@@ -25,7 +34,7 @@ func _create_direct_test_player_if_needed() -> void:
 		return
 
 	PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_LEFT)
-	#PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_RIGHT)
+	PlayerRegistry.join_profile(PlayerRegistry.KEYBOARD_RIGHT)
 
 func _ready() -> void:
 	_create_direct_test_player_if_needed()
@@ -71,19 +80,23 @@ func check_input(player: LocalPlayer) -> int:
 	return 0
 
 func bad_input(player: LocalPlayer) -> void:
-	players_countdown[player.id] += 1 # punition
+	players_countdown[player.id] += 2 # punition
 	players_score_label[player.id].text = str(players_countdown[player.id])
+	fail_sound.bus = "Player"+str(player.id)
+	fail_sound.play()
 
 func good_input(player: LocalPlayer) -> void:
 	players_countdown[player.id] -= 1
 	players_score_label[player.id].text = str(players_countdown[player.id])
 	if players_countdown[player.id] <= 0:
 		print("Win of player :", player)
-		assert(false) # crash le temps de faire un truc
+		GameManager.minigameWon(player.id)
 			
 	players_score_label[player.id].text = str(players_countdown[player.id])
+	water_melon_splash.bus = "Player"+str(player.id)
 	water_melon_splash.play()
-	current_water_melon.crush()
+	
+	current_water_melon.crush(player)
 
 func spawn_water_melon() -> void:
 	current_water_melon = water_melon_scene.instantiate()
