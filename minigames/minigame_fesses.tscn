@@ -21,7 +21,8 @@ fill_from = Vector2(0.47863248, 0.5576923)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3jpa4"]
 font_size = 64
-font_color = Color(0, 0, 0, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1406540377 node_paths=PackedStringArray("players_score_containers", "players_score_label")]
 script = ExtResource("1_w250n")
@@ -73,11 +74,14 @@ rotation = 0.49131688
 scale = Vector2(1.5299559, 1.3382838)
 
 [node name="Player1Score" type="VBoxContainer" parent="." unique_id=1373678829]
-visible = false
-offset_left = 1175.0
-offset_top = 100.0
-offset_right = 1421.0
-offset_bottom = 280.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 878.0
+offset_right = 262.0
+offset_bottom = 1078.0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Player1Score" unique_id=628519668]
 layout_mode = 2
@@ -91,11 +95,17 @@ label_settings = SubResource("LabelSettings_3jpa4")
 horizontal_alignment = 1
 
 [node name="Player2Score" type="VBoxContainer" parent="." unique_id=1088577223]
-visible = false
-offset_left = 1519.0
-offset_top = 100.0
-offset_right = 1765.0
-offset_bottom = 280.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1667.0
+offset_top = 879.0
+offset_right = 1917.0
+offset_bottom = 1079.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Player2Score" unique_id=2049015019]
 layout_mode = 2
