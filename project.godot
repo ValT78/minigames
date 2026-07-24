@@ -15,7 +15,7 @@ show_on_startup=false
 [application]
 
 config/name="Minigames"
-run/main_scene="res://features/multi/join_lobby.tscn"
+run/main_scene="uid://bjfhkvvyuqks4"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

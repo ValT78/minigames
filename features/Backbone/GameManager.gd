@@ -14,26 +14,27 @@ var time_slider: HSlider
 var time_label: Label
 @export var minigamesScene : Array[PackedScene]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
-var score_label: Label
+var score_container: VBoxContainer
 
 var _actualMinigame : Node2D
-var _score : int
+var _score : Array[int] = [0,0]
 
 func _ready() -> void:
-	isDebug = not get_tree().current_scene.name == "Main"
 	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
 	_round_timer.one_shot = true
 	_round_timer.timeout.connect(_on_round_timer_timeout)
 	add_child(_round_timer)
+	get_tree().scene_changed.connect(_on_scene_changed)
+	
+func _on_scene_changed() :
+	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
 	resetCountdown()
-	
-	if isDebug : return
 	
 	loadScenesFromFolder("res://minigames")
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
 	time_label = $"../Main/MainScreenUI/TimeLabel"
-	score_label = $"../Main/MainScreenUI/ScoreLabel"
+	score_container = $"../Main/MainScreenUI/Panel/MarginContainer/HBoxContainer/VBoxContainer"
 	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
 	get_tree().current_scene.add_child(_actualMinigame)
 
@@ -57,17 +58,19 @@ func resetCountdown() -> void :
 	_round_timer.start(MINI_GAMES_DURATION)
 
 func gameover() -> void :
+	_score = [0,0]
 	stop_round_timer()
 	get_tree().change_scene_to_packed(mainMenu)
 
 func updateScore(index : int) -> void : 
-	_score += floori(get_time_left())
-	if _score < 10 : 
-		flashUpdateLabel(score_label,"00" + str(_score))
-	elif _score < 100:
-		flashUpdateLabel(score_label,"0" + str(_score))
+	var score_label : Label = score_container.get_child(index)
+	_score[index] += floori(get_time_left())
+	if _score[index] < 10 : 
+		flashUpdateLabel(score_label,"00" + str(_score[index]))
+	elif _score[index] < 100:
+		flashUpdateLabel(score_label,"0" + str(_score[index]))
 	else :
-		flashUpdateLabel(score_label, str(min(999,_score)))
+		flashUpdateLabel(score_label, str(min(999,_score[index])))
 		
 func loadScenesFromFolder(folder_path: String):
 	minigamesScene.clear()

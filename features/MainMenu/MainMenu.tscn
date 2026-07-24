@@ -1,25 +1,134 @@
 [gd_scene format=3 uid="uid://bjfhkvvyuqks4"]
 
+[ext_resource type="Script" uid="uid://7jm2a1fuuyo2" path="res://features/MainMenu/main_menu.gd" id="1_0ev0v"]
+[ext_resource type="Texture2D" uid="uid://tadca6b70rwt" path="res://features/Backbone/bombCore.png" id="2_58hl1"]
+[ext_resource type="Texture2D" uid="uid://dq4jtygsawuh3" path="res://features/Backbone/bombFlame.png" id="3_elusd"]
+[ext_resource type="Texture2D" uid="uid://dtjfsmspvdbq5" path="res://features/Backbone/bombFuze.png" id="4_drvas"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
-font_size = 330
+font_size = 209
+
+[sub_resource type="LabelSettings" id="LabelSettings_58hl1"]
+font_size = 40
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qr7g0"]
+texture = ExtResource("4_drvas")
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 230, 512, 53)
 
 [node name="MainMenu" type="Node2D" unique_id=766447864]
+script = ExtResource("1_0ev0v")
 
 [node name="Label" type="Label" parent="." unique_id=1333042776]
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 605.0
-offset_top = 377.0
-offset_right = 1483.0
-offset_bottom = 827.0
+offset_left = 91.0
+offset_right = 1829.0
+offset_bottom = 450.0
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
-text = "TEMP"
+text = "Play my game 🔪"
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1574165863]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 727.0
+offset_top = 296.0
+offset_right = 1193.0
+offset_bottom = 746.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "put all player in the zone to start the game"
+label_settings = SubResource("LabelSettings_58hl1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="." unique_id=239224079]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 150.0
+offset_top = 575.0
+offset_right = 600.0
+offset_bottom = 1025.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(1, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "use zqsd to move
+left shift for action 1
+< for action 2"
+label_settings = SubResource("LabelSettings_58hl1")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="." unique_id=217427378]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 1311.0
+offset_top = 575.0
+offset_right = 1761.0
+offset_bottom = 1025.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(1, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "use the arrows to move
+; for action 1
+! for action 2"
+label_settings = SubResource("LabelSettings_58hl1")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1925537019]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="." unique_id=1352855922]
+z_index = -100
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.39, 0.234, 0.015600008, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1703714902]
+z_index = -1
+offset_left = 59.0
+offset_top = 46.0
+offset_right = 240.0
+offset_bottom = 227.0
+texture = ExtResource("2_58hl1")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="TextureRect" unique_id=128492191]
+layout_mode = 0
+offset_left = 155.0
+offset_top = -28.0
+offset_right = 1824.0
+offset_bottom = 212.0
+theme_override_icons/grabber = ExtResource("3_elusd")
+theme_override_icons/grabber_highlight = ExtResource("3_elusd")
+theme_override_icons/grabber_disabled = ExtResource("3_elusd")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_qr7g0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_qr7g0")
+value = 15.0
+scrollable = false
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1881783578]
+position = Vector2(960, 540)
+scale = Vector2(10, 3)
+color = Color(0.23874447, 0.23874435, 0.23874435, 0.5372549)
+offset = Vector2(-50, -50)
+polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)

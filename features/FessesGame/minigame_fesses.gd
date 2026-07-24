@@ -29,6 +29,8 @@ func _create_direct_test_player_if_needed() -> void:
 
 func _ready() -> void:
 	_create_direct_test_player_if_needed()
+	GameManager.round_timer_expired.connect(_on_round_timer_expired)
+			
 	var players := PlayerRegistry.get_players()
 
 	assert(len(players) <= 2)
@@ -36,7 +38,7 @@ func _ready() -> void:
 	for player in players:
 		@warning_ignore("integer_division")
 		players_countdown.append(water_melon_to_crush / len(players))
-		players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+		players_score_label[player.id].text = str(players_countdown[player.id])
 		players_score_containers[i].visible = true
 		i += 1
 
@@ -57,6 +59,10 @@ func _physics_process(_delta: float) -> void:
 		set_random_pos()
 		spawn_water_melon()
 		
+func _on_round_timer_expired() :
+	# ton code cool ou rien si tu veux rien
+	GameManager.minigameLost()
+	
 const SIDE_SIGN = {SIDE.LEFT: 1, SIDE.RIGHT: -1}
 func check_input(player: LocalPlayer) -> int:
 	var dir = SIDE_SIGN.get(current_pos, 0)
@@ -65,17 +71,17 @@ func check_input(player: LocalPlayer) -> int:
 	return 0
 
 func bad_input(player: LocalPlayer) -> void:
-	players_countdown[player.id - 1] += 1 # punition
-	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+	players_countdown[player.id] += 1 # punition
+	players_score_label[player.id].text = str(players_countdown[player.id])
 
 func good_input(player: LocalPlayer) -> void:
-	players_countdown[player.id - 1] -= 1
-	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
-	if players_countdown[player.id - 1] <= 0:
+	players_countdown[player.id] -= 1
+	players_score_label[player.id].text = str(players_countdown[player.id])
+	if players_countdown[player.id] <= 0:
 		print("Win of player :", player)
 		assert(false) # crash le temps de faire un truc
 			
-	players_score_label[player.id - 1].text = str(players_countdown[player.id - 1])
+	players_score_label[player.id].text = str(players_countdown[player.id])
 	water_melon_splash.play()
 	current_water_melon.crush()
 

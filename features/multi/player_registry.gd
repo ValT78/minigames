@@ -36,7 +36,7 @@ const PROFILES := {
 
 # État global conservé par cet Autoload pendant toute la session.
 var _players: Array[LocalPlayer] = []
-var _next_player_id := 1
+var _next_player_id := 0
 
 
 ## Ajoute le profil s'il existe et n'est pas déjà utilisé.

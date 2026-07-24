@@ -12,10 +12,16 @@ font_color = Color(0.59, 0, 0, 0.14117648)
 [sub_resource type="LabelSettings" id="LabelSettings_dxlp2"]
 resource_local_to_scene = true
 font = ExtResource("3_dsdgj")
+font_size = 104
+font_color = Color(1, 0.80799997, 0.36, 0.11764706)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dsdgj"]
+resource_local_to_scene = true
+font = ExtResource("3_dsdgj")
 font_size = 90
 font_color = Color(0.59, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_dsdgj"]
+[sub_resource type="LabelSettings" id="LabelSettings_gro5s"]
 resource_local_to_scene = true
 font = ExtResource("3_dsdgj")
 font_size = 90
@@ -25,13 +31,16 @@ font_color = Color(0.59, 0, 0, 0.14117648)
 
 [node name="MainScreenUI" parent="." unique_id=804081229 instance=ExtResource("1_roav4")]
 
-[node name="BG" parent="MainScreenUI/ScoreLabel" parent_id_path=PackedInt32Array(804081229, 2127622775) index="0" unique_id=96476774]
+[node name="BG" parent="MainScreenUI/Panel/MarginContainer/HBoxContainer/VBoxContainer/ScoreLabel" parent_id_path=PackedInt32Array(804081229, 2127622775) index="0" unique_id=96476774]
 label_settings = SubResource("LabelSettings_dvyoj")
 
-[node name="TimeLabel" parent="MainScreenUI" index="1" unique_id=881383687]
+[node name="BG" parent="MainScreenUI/Panel/MarginContainer/HBoxContainer/VBoxContainer/ScoreLabel2" parent_id_path=PackedInt32Array(804081229, 1392144228) index="0" unique_id=1521087442]
 label_settings = SubResource("LabelSettings_dxlp2")
 
-[node name="BG" parent="MainScreenUI/TimeLabel" index="0" unique_id=202594495]
+[node name="TimeLabel" parent="MainScreenUI" index="1" unique_id=881383687]
 label_settings = SubResource("LabelSettings_dsdgj")
+
+[node name="BG" parent="MainScreenUI/TimeLabel" index="0" unique_id=202594495]
+label_settings = SubResource("LabelSettings_gro5s")
 
 [editable path="MainScreenUI"]

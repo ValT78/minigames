@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://ctlr3kde52k0t"]
 
-[ext_resource type="Script" path="res://features/projectile_survival/projectile_survival.gd" id="1_main"]
-[ext_resource type="Script" path="res://features/projectile_survival/galaxy_background.gd" id="2_background"]
-[ext_resource type="Script" path="res://features/projectile_survival/asteroid_spawner.gd" id="3_spawner"]
+[ext_resource type="Script" uid="uid://5r381oc5i3m3" path="res://features/projectile_survival/projectile_survival.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://bsq3f2bho4r4a" path="res://features/projectile_survival/galaxy_background.gd" id="2_background"]
+[ext_resource type="Script" uid="uid://bybqkx6premrt" path="res://features/projectile_survival/asteroid_spawner.gd" id="3_spawner"]
 
 [sub_resource type="StyleBoxFlat" id="HudPanelStyle"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
 bg_color = Color(0.025, 0.03, 0.1, 0.76)
 border_width_left = 2
 border_width_top = 2
@@ -15,12 +19,12 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="ResultPanelStyle"]
+content_margin_left = 42.0
+content_margin_top = 28.0
+content_margin_right = 42.0
+content_margin_bottom = 28.0
 bg_color = Color(0.02, 0.025, 0.09, 0.94)
 border_width_left = 3
 border_width_top = 3
@@ -31,37 +35,33 @@ corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
-content_margin_left = 42.0
-content_margin_top = 28.0
-content_margin_right = 42.0
-content_margin_bottom = 28.0
 
-[node name="ProjectileSurvival" type="Node2D"]
+[node name="ProjectileSurvival" type="Node2D" unique_id=373542650]
 script = ExtResource("1_main")
 
-[node name="GalaxyBackground" type="Node2D" parent="."]
+[node name="GalaxyBackground" type="Node2D" parent="." unique_id=1371768516]
 z_index = -100
 script = ExtResource("2_background")
 
-[node name="ArenaBorder" type="Line2D" parent="."]
+[node name="ArenaBorder" type="Line2D" parent="." unique_id=1216147825]
 unique_name_in_owner = true
 z_index = -5
 width = 3.0
 default_color = Color(0.48, 0.58, 1, 0.42)
 
-[node name="AsteroidContainer" type="Node2D" parent="."]
+[node name="AsteroidContainer" type="Node2D" parent="." unique_id=795030618]
 unique_name_in_owner = true
 
-[node name="PlayerContainer" type="Node2D" parent="."]
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=47275495]
 unique_name_in_owner = true
 
-[node name="AsteroidSpawner" type="Node" parent="."]
+[node name="AsteroidSpawner" type="Node" parent="." unique_id=954083022]
 unique_name_in_owner = true
 script = ExtResource("3_spawner")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1887896489]
 
-[node name="TopPanel" type="PanelContainer" parent="HUD"]
+[node name="TopPanel" type="PanelContainer" parent="HUD" unique_id=1244816293]
 unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
@@ -73,27 +73,30 @@ offset_bottom = 98.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("HudPanelStyle")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/TopPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/TopPanel" unique_id=739939981]
+layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="TimeLabel" type="Label" parent="HUD/TopPanel/HBoxContainer"]
+[node name="TimeLabel" type="Label" parent="HUD/TopPanel/HBoxContainer" unique_id=820181050]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 48)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.94, 1, 1)
 theme_override_font_sizes/font_size = 34
 text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RemainingLabel" type="Label" parent="HUD/TopPanel/HBoxContainer"]
+[node name="RemainingLabel" type="Label" parent="HUD/TopPanel/HBoxContainer" unique_id=1775918888]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.79, 1, 1)
 theme_override_font_sizes/font_size = 19
 text = "1 étoile"
 vertical_alignment = 1
 
-[node name="InstructionLabel" type="Label" parent="HUD"]
+[node name="InstructionLabel" type="Label" parent="HUD" unique_id=739270463]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -113,7 +116,7 @@ theme_override_font_sizes/font_size = 18
 text = "ACTION 1 : ÉCLIPSE     •     ACTION 2 : ONDE DE RÉPULSION"
 horizontal_alignment = 1
 
-[node name="ResultPanel" type="PanelContainer" parent="HUD"]
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=2101749373]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -129,8 +132,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("ResultPanelStyle")
 
-[node name="ResultLabel" type="Label" parent="HUD/ResultPanel"]
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=1064308627]
 unique_name_in_owner = true
+layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.94, 1, 1)
 theme_override_font_sizes/font_size = 30
 text = "CONSTELLATION SAUVÉE"
