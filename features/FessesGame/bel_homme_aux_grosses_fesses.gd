@@ -1,32 +1,36 @@
 class_name BigAssMan
 extends Node2D
 
-@onready var idle: Sprite2D = $Idle
-@onready var fesse_droite: Sprite2D = $FesseDroite
-@onready var fesse_gauche: Sprite2D = $FesseGauche
+@onready var body: Sprite2D = $Body
+@onready var ass: Sprite2D = $Ass
+@onready var transform_left: Marker2D = $TransformLeft
+@onready var transform_right: Marker2D = $TransformRight
+@onready var base_transform := ass.global_transform
 
-# TODO mettre les beaux dessins de maxime + changer la logique de contracte pour l'animation des fesses
+@export var anim_duration: float = 0.05
+
+var _tween: Tween
+
 func _ready() -> void:
 	decontracte()
-	
-func decontracte():
-	idle.visible = true
-	fesse_droite.visible = false
-	fesse_gauche.visible = false
 
-func contracte_gauche():
-	idle.visible = false
-	fesse_droite.visible = false
-	fesse_gauche.visible = true
-	
-func contracte_droite():
-	idle.visible = false
-	fesse_droite.visible = true
-	fesse_gauche.visible = false
+func _tween_to(target_transform: Transform2D, duration: float = anim_duration) -> void:
+	_tween = create_tween()
+	_tween.tween_property(ass, "global_transform", target_transform, duration) \
+		  .set_trans(Tween.TRANS_SINE) \
+		  .set_ease(Tween.EASE_IN_OUT)
+
+func decontracte() -> void:
+	_tween_to(base_transform)
+
+func contracte_gauche() -> void:
+	_tween_to(transform_left.global_transform)
+
+func contracte_droite() -> void:
+	_tween_to(transform_right.global_transform)
 
 func fesse_animation(player: LocalPlayer) -> void:
 	if player.input.action_1_just_pressed:
 		contracte_gauche()
 	if player.input.action_2_just_pressed:
 		contracte_droite()
-		

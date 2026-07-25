@@ -36,7 +36,7 @@ const PROFILES := {
 
 # État global conservé par cet Autoload pendant toute la session.
 var _players: Array[LocalPlayer] = []
-var _next_player_id := 1
+var _next_player_id := 0
 
 
 ## Ajoute le profil s'il existe et n'est pas déjà utilisé.
@@ -44,6 +44,7 @@ var _next_player_id := 1
 func join_profile(profile_id: StringName) -> bool:
 	if not PROFILES.has(profile_id) or has_profile(profile_id):
 		return false
+	if profile_id == &"mouse" : return false
 
 	# Les identifiants ne sont jamais recyclés avant une réinitialisation complète.
 	var player_number := _next_player_id

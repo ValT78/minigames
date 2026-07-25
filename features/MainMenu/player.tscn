@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://5cm10smsfx3p"]
+
+[ext_resource type="Script" uid="uid://dr1fupbt5ry13" path="res://features/MainMenu/mainMenuPlayer.gd" id="1_mdmsq"]
+[ext_resource type="Texture2D" uid="uid://bvbwgns1dt5wv" path="res://icon.svg" id="2_j0cjq"]
+[ext_resource type="Texture2D" uid="uid://bfmre4305e6vi" path="res://features/MainMenu/heart.png" id="3_xsdrq"]
+[ext_resource type="Texture2D" uid="uid://beeyv7xx7vbbe" path="res://features/MainMenu/note.png" id="4_2p2qx"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wgxnn"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 275.50998
+gravity = Vector3(0, 98, 0)
+anim_speed_max = 3.77
+
+[sub_resource type="Gradient" id="Gradient_ph5ae"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.39130434, 0.6847826, 1)
+colors = PackedColorArray(1, 0.6117647, 0.6117647, 1, 0.96862745, 1, 0.6117647, 1, 0.61, 0.85700005, 1, 1, 1, 0.61, 0.93500006, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yf5fn"]
+gradient = SubResource("Gradient_ph5ae")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4v7s"]
+particle_flag_disable_z = true
+angle_min = -29.99999
+angle_max = 30.000011
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 371.43
+initial_velocity_max = 1000.0
+gravity = Vector3(0, -5, 0)
+color_ramp = SubResource("GradientTexture1D_yf5fn")
+turbulence_enabled = true
+turbulence_noise_strength = 5.53
+
+[node name="Player" type="Node2D" unique_id=1384677058 node_paths=PackedStringArray("body")]
+z_index = 2
+script = ExtResource("1_mdmsq")
+body = NodePath("Sprite2D")
+_distanceToCenter = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=803782160]
+texture = ExtResource("2_j0cjq")
+
+[node name="redParticle" type="GPUParticles2D" parent="Sprite2D" unique_id=747814829]
+emitting = false
+texture = ExtResource("3_xsdrq")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_wgxnn")
+
+[node name="musiqueParticule" type="GPUParticles2D" parent="Sprite2D" unique_id=1715139729]
+emitting = false
+texture = ExtResource("4_2p2qx")
+lifetime = 1.44
+one_shot = true
+explosiveness = 0.3
+process_material = SubResource("ParticleProcessMaterial_g4v7s")

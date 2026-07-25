@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cl6jtpq3h2rtc"]
+
+[ext_resource type="Script" uid="uid://b6r8qv82v3ixn" path="res://features/MapTarget/player_target.gd" id="1_13xcq"]
+[ext_resource type="Texture2D" uid="uid://bo61wuae68en7" path="res://features/MapTarget/target.png" id="1_xsdm3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 32.0
+
+[node name="PlayerTarget" type="Node2D" unique_id=768489747]
+script = ExtResource("1_13xcq")
+_speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=661783685]
+texture = ExtResource("1_xsdm3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1683451264]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1238510573]
+shape = SubResource("CircleShape2D_g4v7s")

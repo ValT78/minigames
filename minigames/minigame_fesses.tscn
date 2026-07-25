@@ -1,22 +1,46 @@
 [gd_scene format=3 uid="uid://cex5ichp627rf"]
 
-[ext_resource type="Texture2D" uid="uid://cfksp10smpiq8" path="res://features/FessesGame/fesse_idle.jpg" id="1_53ij0"]
 [ext_resource type="Script" uid="uid://cobj8611746lp" path="res://features/FessesGame/minigame_fesses.gd" id="1_w250n"]
 [ext_resource type="PackedScene" uid="uid://cgl8vwbs7iamr" path="res://features/FessesGame/water_melon.tscn" id="3_t212x"]
+[ext_resource type="Texture2D" uid="uid://crl7swh74harf" path="res://features/FessesGame/body.png" id="5_gwsfj"]
 [ext_resource type="Script" uid="uid://0juqnlcsytjq" path="res://features/FessesGame/bel_homme_aux_grosses_fesses.gd" id="5_ww3bx"]
-[ext_resource type="Texture2D" uid="uid://dpyweiot4uwpc" path="res://features/FessesGame/fesse_droite.jpg" id="6_3jpa4"]
-[ext_resource type="Texture2D" uid="uid://ccw4tokkjpe25" path="res://features/FessesGame/fesse_gauche.jpg" id="7_gwsfj"]
+[ext_resource type="Texture2D" uid="uid://b68d6r2bt2rmb" path="res://features/FessesGame/ass.png" id="6_ww3bx"]
+[ext_resource type="AudioStream" uid="uid://bp1whfh66eeui" path="res://features/FessesGame/apebble-fart-5-trimmed.mp3" id="7_gwsfj"]
 [ext_resource type="AudioStream" uid="uid://crfm2sxu8stsl" path="res://features/FessesGame/freesound_community-splash-01-35899.mp3" id="7_ww3bx"]
+
+[sub_resource type="Gradient" id="Gradient_gwsfj"]
+offsets = PackedFloat32Array(0, 0.21122995, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.017379679, 0.017379679, 0.017379679, 1, 1, 1, 0.92156863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_symlb"]
+gradient = SubResource("Gradient_gwsfj")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.47863248, 0.5576923)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3jpa4"]
 font_size = 64
-font_color = Color(0, 0, 0, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1406540377 node_paths=PackedStringArray("players_score_containers", "players_score_label")]
 script = ExtResource("1_w250n")
 players_score_containers = [NodePath("Player1Score"), NodePath("Player2Score")]
 players_score_label = [NodePath("Player1Score/Count1"), NodePath("Player2Score/Count2")]
 water_melon_scene = ExtResource("3_t212x")
+
+[node name="BG" type="TextureRect" parent="." unique_id=353019011]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 12.0
+offset_right = 1923.0
+offset_bottom = 1088.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_symlb")
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1870398353]
 position = Vector2(732, 923)
@@ -28,23 +52,36 @@ position = Vector2(1132, 923)
 position = Vector2(960, 540)
 script = ExtResource("5_ww3bx")
 
-[node name="Idle" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=942664832]
-position = Vector2(2, 3)
-texture = ExtResource("1_53ij0")
+[node name="Body" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=1431523363]
+position = Vector2(-75.499985, 4.499939)
+scale = Vector2(1.4557143, 1.7838285)
+texture = ExtResource("5_gwsfj")
 
-[node name="FesseDroite" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=272436552]
-texture = ExtResource("6_3jpa4")
+[node name="Ass" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=252000179]
+position = Vector2(-76.00001, 33.000008)
+rotation = 0.036915988
+scale = Vector2(1.5299559, 1.3382838)
+texture = ExtResource("6_ww3bx")
 
-[node name="FesseGauche" type="Sprite2D" parent="BelHommeAuxGrossesFesses" unique_id=1665197688]
-visible = false
-texture = ExtResource("7_gwsfj")
+[node name="TransformLeft" type="Marker2D" parent="BelHommeAuxGrossesFesses" unique_id=1047286462]
+position = Vector2(1.9999771, 164)
+rotation = -0.3823905
+scale = Vector2(1.5299559, 1.3382838)
+
+[node name="TransformRight" type="Marker2D" parent="BelHommeAuxGrossesFesses" unique_id=1716969009]
+position = Vector2(-181, 147)
+rotation = 0.49131688
+scale = Vector2(1.5299559, 1.3382838)
 
 [node name="Player1Score" type="VBoxContainer" parent="." unique_id=1373678829]
-visible = false
-offset_left = 1175.0
-offset_top = 100.0
-offset_right = 1421.0
-offset_bottom = 280.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 878.0
+offset_right = 262.0
+offset_bottom = 1078.0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Player1Score" unique_id=628519668]
 layout_mode = 2
@@ -58,11 +95,17 @@ label_settings = SubResource("LabelSettings_3jpa4")
 horizontal_alignment = 1
 
 [node name="Player2Score" type="VBoxContainer" parent="." unique_id=1088577223]
-visible = false
-offset_left = 1519.0
-offset_top = 100.0
-offset_right = 1765.0
-offset_bottom = 280.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1667.0
+offset_top = 879.0
+offset_right = 1917.0
+offset_bottom = 1079.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Player2Score" unique_id=2049015019]
 layout_mode = 2
@@ -78,3 +121,10 @@ horizontal_alignment = 1
 [node name="WaterMelonSplash" type="AudioStreamPlayer2D" parent="." unique_id=22324477]
 stream = ExtResource("7_ww3bx")
 pitch_scale = 1.5
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
+stream = ExtResource("7_gwsfj")
+pitch_scale = 2.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=9480171]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
