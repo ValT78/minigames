@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://bv8p331noh4kk" path="res://features/MapTarget/map_target.gd" id="1_opr6b"]
 [ext_resource type="Texture2D" uid="uid://y1cqm4qpaowg" path="res://features/MapTarget/map.png" id="2_3n4fs"]
 [ext_resource type="Script" uid="uid://bd0hf7xqcaxf5" path="res://features/MapTarget/Country.gd" id="3_d041r"]
+[ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="4_3n4fs"]
+[ext_resource type="Texture2D" uid="uid://cyb5s7ch7e48i" path="res://features/MapTarget/WoodFloors_WallnutWood_Pattern2_A2.png" id="5_d041r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
-font_size = 80
+font = ExtResource("4_3n4fs")
+font_size = 97
 
 [node name="MapTarget" type="Node2D" unique_id=676898344]
 script = ExtResource("1_opr6b")
@@ -69,15 +72,31 @@ script = ExtResource("3_d041r")
 polygon = PackedVector2Array(-119, 45, -88, -28, -53, -47, -20, -52, 23, -90, 38, -63, 95, -45, 91, 30, 29, 50, -120, 58)
 
 [node name="CountryIndication" type="Label" parent="." unique_id=1704002539]
-offset_left = 321.0
-offset_top = 103.0
-offset_right = 686.0
-offset_bottom = 326.0
+offset_left = 312.0
+offset_top = 128.0
+offset_right = 677.0
+offset_bottom = 351.0
 text = "FIND
 Lithuania"
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=408637267]
+z_index = -100
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_d041r")
+expand_mode = 1
+stretch_mode = 1
 
 [connection signal="area_entered" from="CountryCollider/France" to="CountryCollider/France" method="_on_area_entered"]
 [connection signal="area_entered" from="CountryCollider/Ukraine" to="CountryCollider/Ukraine" method="_on_area_entered"]
