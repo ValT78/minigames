@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://bfo354wf3xva4"]
+
+[ext_resource type="Script" uid="uid://pwtj0u35ed7d" path="res://features/wizard_maze/wizard_maze.gd" id="1_game"]
+[ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_badge"]
+bg_color = Color(0.16, 0.08, 0.21, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_instruction"]
+bg_color = Color(0.08, 0.045, 0.11, 0.92)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.52, 0.36, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_result"]
+bg_color = Color(0.1, 0.05, 0.15, 0.96)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.95, 0.75, 0.32, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.55)
+shadow_size = 12
+
+[node name="WizardMaze" type="Node2D" unique_id=1432634398]
+script = ExtResource("1_game")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1347282628]
+unique_name_in_owner = true
+z_index = -20
+mouse_filter = 2
+color = Color(0.055, 0.026, 0.074, 1)
+
+[node name="BoardContainer" type="Node2D" parent="." unique_id=664239385]
+unique_name_in_owner = true
+
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=1549427970]
+unique_name_in_owner = true
+
+[node name="SpellContainer" type="Node2D" parent="." unique_id=1714847532]
+unique_name_in_owner = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=772523160]
+layer = 24
+
+[node name="LocalTimeBadge" type="PanelContainer" parent="HUD" unique_id=1226184504]
+offset_left = 46.0
+offset_top = 38.0
+offset_right = 154.0
+offset_bottom = 113.0
+theme_override_styles/panel = SubResource("StyleBox_badge")
+
+[node name="LocalTimeLabel" type="Label" parent="HUD/LocalTimeBadge" unique_id=982754348]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.3, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionPanel" type="PanelContainer" parent="HUD" unique_id=1887608807]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 301.0
+offset_top = -134.0
+offset_right = -49.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBox_instruction")
+
+[node name="InstructionLabel" type="Label" parent="HUD/InstructionPanel" unique_id=970931965]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.88, 0.72, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 22
+text = "ZQSD : MOVE     •     ACTION 1 : GO THROUGH WALLS     •     ACTION 2 : INVERSE CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=1446432146]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -82.0
+offset_right = 360.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_result")
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=949426741]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+text = "UN CHAPEAU S'ÉCHAPPE !"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

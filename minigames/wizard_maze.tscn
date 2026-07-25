@@ -1,0 +1,5 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://features/wizard_maze/wizard_maze.tscn" id="1_maze"]
+
+[node name="WizardMaze" instance=ExtResource("1_maze")]

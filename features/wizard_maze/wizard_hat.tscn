@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/wizard_maze/wizard_hat.gd" id="1_hat"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_hat"]
+radius = 15.0
+
+[node name="WizardHat" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 0
+collision_mask = 1
+motion_mode = 1
+script = ExtResource("1_hat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape_hat")
+
+[node name="Shadow" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(3, 7)
+color = Color(0.07, 0.03, 0.09, 0.48)
+polygon = PackedVector2Array(-23, -5, 18, -5, 27, 1, 18, 7, -23, 7, -30, 1)
+
+[node name="HatVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="HatCone" type="Polygon2D" parent="HatVisual"]
+unique_name_in_owner = true
+color = Color(0.3, 0.7, 1, 1)
+polygon = PackedVector2Array(-17, 5, -8, -13, -1, -31, 8, -16, 19, 5)
+
+[node name="ConeHighlight" type="Polygon2D" parent="HatVisual"]
+color = Color(1, 1, 1, 0.17)
+polygon = PackedVector2Array(-10, 2, -5, -13, -1, -25, 2, -13, 5, 2)
+
+[node name="HatBand" type="Polygon2D" parent="HatVisual"]
+unique_name_in_owner = true
+color = Color(0.75, 0.9, 1, 1)
+polygon = PackedVector2Array(-17, -1, 18, -1, 20, 7, -20, 7)
+
+[node name="Buckle" type="Polygon2D" parent="HatVisual"]
+color = Color(1, 0.82, 0.3, 1)
+polygon = PackedVector2Array(-5, 0, 5, 0, 5, 7, -5, 7)
+
+[node name="BuckleHole" type="Polygon2D" parent="HatVisual"]
+color = Color(0.17, 0.08, 0.2, 1)
+polygon = PackedVector2Array(-2, 2, 2, 2, 2, 5, -2, 5)
+
+[node name="HatBrim" type="Polygon2D" parent="HatVisual"]
+unique_name_in_owner = true
+color = Color(0.18, 0.45, 0.7, 1)
+polygon = PackedVector2Array(-29, 6, -20, 1, 20, 1, 29, 6, 20, 12, -20, 12)
+
+[node name="DirectionRune" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+position = Vector2(0, 1)
+color = Color(1, 0.9, 0.48, 0.72)
+polygon = PackedVector2Array(20, 0, 11, -5, 11, 5)
+
+[node name="PlayerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -24.0
+offset_top = -54.0
+offset_right = 24.0
+offset_bottom = -29.0
+text = "J1"
+horizontal_alignment = 1
+theme_override_colors/font_shadow_color = Color(0.08, 0.03, 0.1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="ConfusionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -48.0
+offset_top = 20.0
+offset_right = 48.0
+offset_bottom = 45.0
+text = "ENVERS !"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.93, 0.58, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.03, 0.1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+
+[node name="TeleportGem" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-9, 20)
+color = Color(0.55, 0.85, 1, 1)
+polygon = PackedVector2Array(0, -5, 5, 0, 0, 5, -5, 0)
+
+[node name="SpellGem" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(9, 20)
+color = Color(0.85, 0.53, 1, 1)
+polygon = PackedVector2Array(0, -5, 5, 0, 0, 5, -5, 0)

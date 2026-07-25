@@ -217,7 +217,7 @@ func _grant_special_arrows() -> void:
 func _on_round_timer_expired() -> void:
 	if _round_finished:
 		return
-	_finish_round(0)
+	_finish_round(-1)
 
 
 func _finish_round(winner_player_id: int) -> void:
@@ -238,8 +238,8 @@ func _finish_round(winner_player_id: int) -> void:
 	result_panel.visible = true
 	if winner_player_id >= 0:
 		var winner := _get_player_by_id(winner_player_id)
-		result_label.text = "%s REMPORTE LA CHASSE !" % (
-			winner.display_name.to_upper() if winner != null else "UN JOUEUR"
+		result_label.text = "%s WIN THE HUNT !" % (
+			winner.display_name.to_upper() if winner != null else "PLAYER"
 		)
 		if winner != null:
 			result_label.modulate = winner.color.lightened(0.25)

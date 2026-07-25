@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://features/wizard_maze/wizard_maze.tscn" id="1_game"]
+[ext_resource type="Script" path="res://features/wizard_maze/_wizard_maze_smoke_test.gd" id="2_test"]
+
+[node name="WizardMazeSmokeTest" instance=ExtResource("1_game")]
+
+[node name="SmokeTestRunner" type="Node" parent="."]
+script = ExtResource("2_test")
