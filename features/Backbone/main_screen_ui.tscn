@@ -34,14 +34,14 @@ font_color = Color(1, 0.80799997, 0.36, 0.11764706)
 [sub_resource type="LabelSettings" id="LabelSettings_jdc84"]
 resource_local_to_scene = true
 font = ExtResource("1_jdc84")
-font_size = 90
+font_size = 60
 font_color = Color(0.59, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4keca"]
+[sub_resource type="LabelSettings" id="LabelSettings_trmla"]
 resource_local_to_scene = true
 font = ExtResource("1_jdc84")
-font_size = 90
-font_color = Color(0.59, 0, 0, 0.14117648)
+font_size = 60
+font_color = Color(0.59, 0, 0, 0.2627451)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cgpbt"]
 texture = ExtResource("4_trmla")
@@ -137,21 +137,18 @@ offset_top = 53.0
 offset_right = 204.0
 offset_bottom = 246.0
 size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "9"
+text = "09"
 label_settings = SubResource("LabelSettings_jdc84")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BG" type="Label" parent="TimeLabel" unique_id=202594495]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "8"
-label_settings = SubResource("LabelSettings_4keca")
+[node name="BG" type="Label" parent="TimeLabel" unique_id=1822998609]
+layout_mode = 0
+offset_right = 106.0
+offset_bottom = 193.0
+size_flags_horizontal = 4
+text = "88"
+label_settings = SubResource("LabelSettings_trmla")
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -3,7 +3,7 @@ extends Node2D
 ## Émis une seule fois lorsque le chronomètre de la manche atteint zéro.
 signal round_timer_expired
 
-const MINI_GAMES_DURATION = 9.999
+const MINI_GAMES_DURATION = 14.999
 
 var _round_timer := Timer.new()
 var isDebug : bool
@@ -98,6 +98,7 @@ func updateTimeDisplay() -> void :
 	if get_time_left() > 0 :
 		time_slider.value = 100 * get_time_left() / MINI_GAMES_DURATION
 	var next_text = str(floori(get_time_left()))
+	if next_text.length() < 2 : next_text = "0" + next_text
 	if _isNumberChanging : return
 	if time_label.text == next_text : return
 	_isNumberChanging = true
