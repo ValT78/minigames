@@ -1,3 +1,47 @@
 [gd_scene format=3 uid="uid://cnpsk7u6o6k8n"]
 
+[ext_resource type="Script" uid="uid://dhrbr4tds5abs" path="res://features/chloe/hole_player.gd" id="1_fifrr"]
+[ext_resource type="Texture2D" uid="uid://bt50r81y38wla" path="res://features/chloe/Hole.png" id="1_idgd0"]
+[ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="3_0kt3y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 28.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fifrr"]
+font = ExtResource("3_0kt3y")
+font_size = 79
+
 [node name="HolePlayer" type="Node2D" unique_id=2135031835]
+script = ExtResource("1_fifrr")
+_speed = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1595360045]
+z_index = -1
+position = Vector2(2.3841858e-07, -80)
+scale = Vector2(5, 5)
+texture = ExtResource("1_idgd0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1711534788]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=590775359]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Label" type="Label" parent="." unique_id=1939390037]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 44.0
+offset_right = 149.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "5 / 5"
+label_settings = SubResource("LabelSettings_fifrr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
