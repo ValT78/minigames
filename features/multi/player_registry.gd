@@ -95,5 +95,6 @@ func clear_players() -> void:
 	if _players.is_empty():
 		return
 	_players.clear()
-	_next_player_id = 1
+	# La numérotation initiale commence à zéro, comme les deux emplacements de score.
+	_next_player_id = 0
 	players_changed.emit(get_players())

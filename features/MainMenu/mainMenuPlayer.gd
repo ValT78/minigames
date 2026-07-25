@@ -7,7 +7,7 @@ var player : LocalPlayer
 @onready var musique_particule: GPUParticles2D = $Sprite2D/musiqueParticule
 
 func setup(_player : LocalPlayer, postion : Vector2) :
-	print("join : ", _player)
+	# Le menu recrée uniquement l'avatar visuel du joueur déjà inscrit.
 	player = _player
 	body.self_modulate = player.color
 	global_position = postion

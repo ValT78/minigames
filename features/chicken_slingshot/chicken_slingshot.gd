@@ -247,7 +247,7 @@ func _finish_round(winner_player_id: int) -> void:
 		if _uses_external_timer:
 			GameManager.minigameWon(winner_player_id)
 	else:
-		result_label.text = "PERDU !"
+		result_label.text = "LOST !"
 		round_lost.emit()
 		if _uses_external_timer:
 			GameManager.minigameLost()

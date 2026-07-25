@@ -105,12 +105,17 @@ func updateTimeDisplay() -> void :
 	_isNumberChanging = false
 
 func flashUpdateLabel(label : Label, text : String) -> void :
+	# Le changement de scène peut libérer le Label pendant l'animation asynchrone.
+	if not is_instance_valid(label):
+		return
 	var tweenDown = create_tween()
-	tweenDown.tween_property(time_label,"label_settings:font_color:a",0,0.1)
+	tweenDown.tween_property(label,"modulate:a",0,0.1)
 	await tweenDown.finished
+	if not is_instance_valid(label):
+		return
 	label.text = text
 	var tweenUp = create_tween()
-	tweenUp.tween_property(time_label,"label_settings:font_color:a",1,0.1)
+	tweenUp.tween_property(label,"modulate:a",1,0.1)
 	await tweenUp.finished
 #endregion
 

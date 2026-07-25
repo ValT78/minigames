@@ -1,9 +1,6 @@
 class_name ClockJump
 extends Node2D
 
-signal round_won(winner_player_id: int)
-signal round_lost
-
 # Réglages courts adaptés au chronomètre actuel du Backbone.
 @export_range(1, 10, 1) var creatures_to_win := 3
 @export_range(5.0, 30.0, 1.0) var direct_test_duration := 10.0
@@ -237,7 +234,7 @@ func _on_round_timer_expired() -> void:
 	if _round_finished:
 		return
 	# Aucun classement secondaire : sans trois créatures, toute la manche est perdue.
-	_finish_round(0)
+	_finish_round(-1)
 
 
 func _finish_round(winner_player_id: int) -> void:
@@ -254,19 +251,18 @@ func _finish_round(winner_player_id: int) -> void:
 
 	# Le lancement direct garde le panneau affiché ; le Backbone enchaîne sinon.
 	result_panel.visible = true
-	if winner_player_id > 0:
+	# Les identifiants commencent à zéro ; seule la valeur -1 représente l'absence de gagnant.
+	if winner_player_id >= 0:
 		var winner := _get_player_by_id(winner_player_id)
-		result_label.text = "%s REMONTE L'HORLOGE !" % (
-			winner.display_name.to_upper() if winner != null else "UN JOUEUR"
+		result_label.text = "%s FIXED THE CLOCK !" % (
+			winner.display_name.to_upper() if winner != null else "PLAYER"
 		)
 		if winner != null:
 			result_label.add_theme_color_override("font_color", winner.color.lightened(0.3))
-		round_won.emit(winner_player_id)
 		if _uses_external_timer:
 			GameManager.minigameWon(winner_player_id)
 	else:
-		result_label.text = "LE TEMPS S'EST ARRÊTÉ"
-		round_lost.emit()
+		result_label.text = "Times UP !"
 		if _uses_external_timer:
 			GameManager.minigameLost()
 
