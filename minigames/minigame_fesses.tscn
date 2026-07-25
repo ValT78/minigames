@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cgl8vwbs7iamr" path="res://features/FessesGame/water_melon.tscn" id="3_t212x"]
 [ext_resource type="Texture2D" uid="uid://crl7swh74harf" path="res://features/FessesGame/body.png" id="5_gwsfj"]
 [ext_resource type="Script" uid="uid://0juqnlcsytjq" path="res://features/FessesGame/bel_homme_aux_grosses_fesses.gd" id="5_ww3bx"]
+[ext_resource type="AudioStream" uid="uid://cacwq50kfwpy1" path="res://features/FessesGame/pastequeEcrasee-003.wav" id="6_gwsfj"]
 [ext_resource type="Texture2D" uid="uid://b68d6r2bt2rmb" path="res://features/FessesGame/ass.png" id="6_ww3bx"]
 [ext_resource type="AudioStream" uid="uid://bp1whfh66eeui" path="res://features/FessesGame/apebble-fart-5-trimmed.mp3" id="7_gwsfj"]
-[ext_resource type="AudioStream" uid="uid://crfm2sxu8stsl" path="res://features/FessesGame/freesound_community-splash-01-35899.mp3" id="7_ww3bx"]
 
 [sub_resource type="Gradient" id="Gradient_gwsfj"]
 offsets = PackedFloat32Array(0, 0.21122995, 1)
@@ -34,10 +34,8 @@ water_melon_scene = ExtResource("3_t212x")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 12.0
-offset_right = 1923.0
-offset_bottom = 1088.0
+offset_right = 1918.0
+offset_bottom = 1076.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_symlb")
@@ -119,8 +117,7 @@ label_settings = SubResource("LabelSettings_3jpa4")
 horizontal_alignment = 1
 
 [node name="WaterMelonSplash" type="AudioStreamPlayer2D" parent="." unique_id=22324477]
-stream = ExtResource("7_ww3bx")
-pitch_scale = 1.5
+stream = ExtResource("6_gwsfj")
 
 [node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
 stream = ExtResource("7_gwsfj")
