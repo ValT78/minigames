@@ -30,7 +30,7 @@ func contracte_droite() -> void:
 	_tween_to(transform_right.global_transform)
 
 func fesse_animation(player: LocalPlayer) -> void:
-	if player.input.action_1_just_pressed:
+	if player.input.left_just_pressed:
 		contracte_gauche()
-	if player.input.action_2_just_pressed:
+	if player.input.right_just_pressed:
 		contracte_droite()
