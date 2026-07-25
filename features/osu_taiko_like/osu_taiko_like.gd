@@ -20,6 +20,9 @@ var countdown_players : Array[int]
 
 var game_lines : Array[TaikoGameLine]
 
+func _on_round_timer_expired():
+	GameManager.minigameLost()
+
 # Init
 func _create_direct_test_player_if_needed() -> void:
 	if get_tree().current_scene != self or not PlayerRegistry.get_players().is_empty():
@@ -46,6 +49,7 @@ func instantiate_line(player : LocalPlayer, line_gtrans: Transform2D):
 func _ready() -> void:
 	_create_direct_test_player_if_needed()
 	players = PlayerRegistry.get_players()
+	GameManager.round_timer_expired.connect(_on_round_timer_expired)
 
 	if len(players) == 1:
 		instantiate_line(players[0], pos_single_j_1.global_transform)

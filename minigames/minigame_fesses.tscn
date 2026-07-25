@@ -74,6 +74,7 @@ rotation = 0.49131688
 scale = Vector2(1.5299559, 1.3382838)
 
 [node name="Player1Score" type="VBoxContainer" parent="." unique_id=1373678829]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -95,6 +96,7 @@ label_settings = SubResource("LabelSettings_3jpa4")
 horizontal_alignment = 1
 
 [node name="Player2Score" type="VBoxContainer" parent="." unique_id=1088577223]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
