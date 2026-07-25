@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://sxt0jr6vf3y"]
+
+[ext_resource type="Script" uid="uid://dm7t1fpf0uedq" path="res://features/clock_jump/clock_jump.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_move"]
+bg_color = Color(0.12, 0.2, 0.25, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.72, 0.84, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_fall"]
+bg_color = Color(0.28, 0.16, 0.11, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94, 0.58, 0.24, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_boost"]
+bg_color = Color(0.11, 0.25, 0.18, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.9, 0.59, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_brick"]
+bg_color = Color(0.29, 0.12, 0.14, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.93, 0.4, 0.44, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="ClockJump" type="Node2D" unique_id=22768723]
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=865900391]
+unique_name_in_owner = true
+z_index = -100
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.075, 0.038, 0.027, 1)
+
+[node name="ClockDecor" type="Node2D" parent="." unique_id=2103209208]
+unique_name_in_owner = true
+z_index = -50
+position = Vector2(960, 555)
+
+[node name="ClockFace" type="Polygon2D" parent="ClockDecor" unique_id=459999386]
+color = Color(0.227, 0.141, 0.114, 1)
+polygon = PackedVector2Array(0, -440, 168, -406, 311, -311, 406, -168, 440, 0, 406, 168, 311, 311, 168, 406, 0, 440, -168, 406, -311, 311, -406, 168, -440, 0, -406, -168, -311, -311, -168, -406)
+
+[node name="ClockBorder" type="Line2D" parent="ClockDecor" unique_id=245541723]
+points = PackedVector2Array(0, -440, 168, -406, 311, -311, 406, -168, 440, 0, 406, 168, 311, 311, 168, 406, 0, 440, -168, 406, -311, 311, -406, 168, -440, 0, -406, -168, -311, -311, -168, -406, 0, -440)
+width = 12.0
+default_color = Color(0.561, 0.396, 0.208, 1)
+joint_mode = 1
+
+[node name="HourMark12" type="Line2D" parent="ClockDecor" unique_id=274208362]
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark01" type="Line2D" parent="ClockDecor" unique_id=388729347]
+rotation = 0.523599
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark02" type="Line2D" parent="ClockDecor" unique_id=1811954069]
+rotation = 1.047198
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark03" type="Line2D" parent="ClockDecor" unique_id=96709934]
+rotation = 1.570796
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark04" type="Line2D" parent="ClockDecor" unique_id=77323705]
+rotation = 2.094395
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark05" type="Line2D" parent="ClockDecor" unique_id=1075424218]
+rotation = 2.617994
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark06" type="Line2D" parent="ClockDecor" unique_id=1586353307]
+rotation = 3.141593
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark07" type="Line2D" parent="ClockDecor" unique_id=1351721319]
+rotation = 3.665191
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark08" type="Line2D" parent="ClockDecor" unique_id=733288758]
+rotation = 4.18879
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark09" type="Line2D" parent="ClockDecor" unique_id=749892441]
+rotation = 4.712389
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark10" type="Line2D" parent="ClockDecor" unique_id=477089721]
+rotation = 5.235988
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourMark11" type="Line2D" parent="ClockDecor" unique_id=728135435]
+rotation = 5.759587
+points = PackedVector2Array(0, -392, 0, -422)
+width = 7.0
+default_color = Color(0.82, 0.643, 0.369, 1)
+
+[node name="HourHand" type="Line2D" parent="ClockDecor" unique_id=715014736]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, -145, -105)
+width = 13.0
+default_color = Color(0.839, 0.694, 0.427, 1)
+end_cap_mode = 2
+
+[node name="MinuteHand" type="Line2D" parent="ClockDecor" unique_id=311049997]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 80, -245)
+width = 9.0
+default_color = Color(0.725, 0.51, 0.208, 1)
+end_cap_mode = 2
+
+[node name="CenterPin" type="Polygon2D" parent="ClockDecor" unique_id=1054053075]
+color = Color(0.894, 0.765, 0.467, 1)
+polygon = PackedVector2Array(-19, 0, -13, -13, 0, -19, 13, -13, 19, 0, 13, 13, 0, 19, -13, 13)
+
+[node name="PlatformContainer" type="Node2D" parent="." unique_id=2077754806]
+unique_name_in_owner = true
+
+[node name="BrickContainer" type="Node2D" parent="." unique_id=455335205]
+unique_name_in_owner = true
+
+[node name="CreatureContainer" type="Node2D" parent="." unique_id=1710234876]
+unique_name_in_owner = true
+
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=916015185]
+unique_name_in_owner = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1018414852]
+
+[node name="LocalTimeLabel" type="Label" parent="HUD" unique_id=818390493]
+unique_name_in_owner = true
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 122.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0.95, 0.78, 0.42, 1)
+theme_override_font_sizes/font_size = 40
+text = "10"
+
+[node name="ScoreRow" type="HBoxContainer" parent="HUD" unique_id=839361511]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 78.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="ObjectiveLabel" type="Label" parent="HUD" unique_id=1120744122]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 82.0
+offset_bottom = 132.0
+grow_horizontal = 2
+pivot_offset = Vector2(960, 25)
+theme_override_colors/font_color = Color(1, 0.82, 0.42, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.04, 0.02, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 34
+text = "Crush 3 Monsters !"
+horizontal_alignment = 1
+
+[node name="InstructionBar" type="HBoxContainer" parent="HUD" unique_id=833341569]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MoveBadge" type="PanelContainer" parent="HUD/InstructionBar" unique_id=1957781459]
+custom_minimum_size = Vector2(172, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_move")
+
+[node name="Label" type="Label" parent="HUD/InstructionBar/MoveBadge" unique_id=550713137]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "<- ->  MOVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FallBadge" type="PanelContainer" parent="HUD/InstructionBar" unique_id=672174213]
+custom_minimum_size = Vector2(158, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_fall")
+
+[node name="Label" type="Label" parent="HUD/InstructionBar/FallBadge" unique_id=969791261]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.81, 0.56, 1)
+theme_override_font_sizes/font_size = 20
+text = "↓  FALL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoostBadge" type="PanelContainer" parent="HUD/InstructionBar" unique_id=1212952125]
+custom_minimum_size = Vector2(168, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_boost")
+
+[node name="Label" type="Label" parent="HUD/InstructionBar/BoostBadge" unique_id=34509523]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.67, 1, 0.78, 1)
+theme_override_font_sizes/font_size = 20
+text = "A1  BOOST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BrickBadge" type="PanelContainer" parent="HUD/InstructionBar" unique_id=123475423]
+custom_minimum_size = Vector2(174, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_brick")
+
+[node name="Label" type="Label" parent="HUD/InstructionBar/BrickBadge" unique_id=1343543358]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.72, 1)
+theme_override_font_sizes/font_size = 20
+text = "A2  BRIQUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=841798657]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -75.0
+offset_right = 330.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=1889293512]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.77, 0.4, 1)
+theme_override_font_sizes/font_size = 34
+text = "RÉSULTAT"
+horizontal_alignment = 1
+vertical_alignment = 1

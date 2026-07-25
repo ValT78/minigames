@@ -154,7 +154,7 @@ theme_override_styles/panel = SubResource("HudPanelStyle")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.71, 1)
 theme_override_font_sizes/font_size = 18
-text = "HAUT/BAS : BOUGER   •   GAUCHE/DROITE : VISER   •   ACTION 1 : CHARGER 1 S PUIS RELÂCHER   •   ACTION 2 : FLÈCHE"
+text = "UP/DOWN : MOVE   -   <- -> : TARGET   •   ACTION 1 : SHOOT   •   ACTION 2 : ARROW"
 horizontal_alignment = 1
 
 [node name="ArrowAnnouncement" type="PanelContainer" parent="HUD"]

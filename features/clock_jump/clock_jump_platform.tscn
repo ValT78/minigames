@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/clock_jump/clock_jump_platform.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_default"]
+size = Vector2(240, 24)
+
+[node name="ClockJumpPlatform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape_default")
+
+[node name="PlatformVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PlatformBody" type="Polygon2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+color = Color(0.725, 0.51, 0.208, 1)
+polygon = PackedVector2Array(-120, -12, 120, -12, 120, 12, -120, 12)
+
+[node name="PlatformHighlight" type="Line2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+points = PackedVector2Array(-120, -10, 120, -10)
+width = 4.0
+default_color = Color(0.84, 0.68, 0.4, 1)
+
+[node name="LeftRivet" type="Polygon2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+color = Color(0.357, 0.224, 0.141, 1)
+polygon = PackedVector2Array(-86, -4, -82, -4, -80, 0, -82, 4, -86, 4, -88, 0)
+
+[node name="RightRivet" type="Polygon2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+color = Color(0.357, 0.224, 0.141, 1)
+polygon = PackedVector2Array(82, -4, 86, -4, 88, 0, 86, 4, 82, 4, 80, 0)
+
+[node name="BrickHorizontalJoint" type="Line2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+visible = false
+points = PackedVector2Array(-120, 0, 120, 0)
+width = 3.0
+default_color = Color(0.443, 0.208, 0.176, 1)
+
+[node name="BrickVerticalJoint" type="Line2D" parent="PlatformVisual"]
+unique_name_in_owner = true
+visible = false
+points = PackedVector2Array(0, -12, 0, 12)
+width = 3.0
+default_color = Color(0.443, 0.208, 0.176, 1)

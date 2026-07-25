@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bwh3jsm5qxd2x"]
+
+[ext_resource type="Script" uid="uid://8a7udr0phord" path="res://features/clock_jump/clock_creature.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_body"]
+radius = 20.0
+
+[node name="ClockCreature" type="Area2D" unique_id=1572791665]
+collision_layer = 4
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=537058548]
+shape = SubResource("CircleShape_body")
+
+[node name="CreatureVisual" type="Node2D" parent="." unique_id=125160338]
+unique_name_in_owner = true
+
+[node name="BackLegLeft" type="Line2D" parent="CreatureVisual" unique_id=1576320705]
+points = PackedVector2Array(-4, 6, -10, 18)
+width = 4.0
+default_color = Color(0.44313726, 0.1764706, 0.20784314, 1)
+
+[node name="FrontLegLeft" type="Line2D" parent="CreatureVisual" unique_id=394375093]
+points = PackedVector2Array(-1, 7, -5, 19)
+width = 4.0
+default_color = Color(0.44313726, 0.1764706, 0.20784314, 1)
+
+[node name="FrontLegRight" type="Line2D" parent="CreatureVisual" unique_id=1891350448]
+points = PackedVector2Array(1, 6, 4, 19)
+width = 4.0
+default_color = Color(0.44313726, 0.1764706, 0.20784314, 1)
+
+[node name="BackLegRight" type="Line2D" parent="CreatureVisual" unique_id=857326942]
+points = PackedVector2Array(4, 5, 9, 18)
+width = 4.0
+default_color = Color(0.44313726, 0.1764706, 0.20784314, 1)
+
+[node name="Body" type="Polygon2D" parent="CreatureVisual" unique_id=1968223253]
+color = Color(0.435, 0.235, 0.345, 1)
+polygon = PackedVector2Array(-20, 0, -18, -9, -13, -16, -5, -20, 5, -20, 13, -16, 18, -9, 20, 0, 11, 1, 7, 6, 0, 10, -7, 6, -12, 1)
+
+[node name="LeftEye" type="Polygon2D" parent="CreatureVisual" unique_id=1275405868]
+polygon = PackedVector2Array(-11, -8, -7, -10, -3, -8, -3, -2, -7, 0, -11, -2)
+
+[node name="RightEye" type="Polygon2D" parent="CreatureVisual" unique_id=1294522162]
+polygon = PackedVector2Array(3, -8, 7, -10, 11, -8, 11, -2, 7, 0, 3, -2)
+
+[node name="LeftPupil" type="Polygon2D" parent="CreatureVisual" unique_id=860259153]
+color = Color(0.141, 0.082, 0.137, 1)
+polygon = PackedVector2Array(-9, -7, -6, -7, -6, -3, -9, -3)
+
+[node name="RightPupil" type="Polygon2D" parent="CreatureVisual" unique_id=1837022973]
+color = Color(0.141, 0.082, 0.137, 1)
+polygon = PackedVector2Array(5, -7, 8, -7, 8, -3, 5, -3)
