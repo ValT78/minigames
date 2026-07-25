@@ -75,8 +75,8 @@ func _on_round_timer_expired() :
 const SIDE_SIGN = {SIDE.LEFT: 1, SIDE.RIGHT: -1}
 func check_input(player: LocalPlayer) -> int:
 	var dir = SIDE_SIGN.get(current_pos, 0)
-	if player.input.action_1_just_pressed: return dir
-	if player.input.action_2_just_pressed: return -dir
+	if player.input.left_just_pressed: return dir
+	if player.input.right_just_pressed: return -dir
 	return 0
 
 func bad_input(player: LocalPlayer) -> void:
