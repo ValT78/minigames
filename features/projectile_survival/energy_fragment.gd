@@ -20,5 +20,5 @@ func _on_body_entered(body: Node2D) -> void:
 	if _is_collected or not body is SurvivalStar or not body.is_alive():
 		return
 	_is_collected = true
-	monitoring = false
+	set_deferred("monitoring", false)
 	collected.emit(self, body)

@@ -12,7 +12,7 @@ signal projectile_requested(
 # La charge minimale autorise le tir ; la charge maximale fixe sa portée finale.
 @export var movement_speed := 550.0
 @export var maximum_aim_angle_degrees := 25.0
-@export var minimum_charge_duration := 0.2
+@export var minimum_charge_duration := 0.0
 @export var maximum_charge_duration := 0.5
 @export var shot_cooldown := 0.0
 @export var body_radius := 30.0

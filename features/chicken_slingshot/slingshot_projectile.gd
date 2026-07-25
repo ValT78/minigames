@@ -3,7 +3,7 @@ extends Area2D
 
 # Le caillou avance en ligne droite et sa distance dépend de la charge.
 @export var rock_speed := 1500.0
-@export var minimum_rock_distance := 560.0
+@export var minimum_rock_distance := 320.0
 @export var maximum_rock_distance := 1420.0
 @export var arrow_speed := 2300.0
 

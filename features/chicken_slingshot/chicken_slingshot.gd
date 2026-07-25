@@ -236,7 +236,7 @@ func _finish_round(winner_player_id: int) -> void:
 
 	# En test direct le panneau reste affiché ; intégré, le Backbone enchaîne la scène.
 	result_panel.visible = true
-	if winner_player_id > 0:
+	if winner_player_id >= 0:
 		var winner := _get_player_by_id(winner_player_id)
 		result_label.text = "%s REMPORTE LA CHASSE !" % (
 			winner.display_name.to_upper() if winner != null else "UN JOUEUR"

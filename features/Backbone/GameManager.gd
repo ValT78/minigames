@@ -150,5 +150,5 @@ func minigameWon(index : int = 0) -> void :
 
 
 func minigameLost() -> void :
-	gameover()
+	call_deferred("gameover")
 #endregion
