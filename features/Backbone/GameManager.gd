@@ -4,6 +4,10 @@ extends Node2D
 signal round_timer_expired
 
 const MINI_GAMES_DURATION = 14.999
+const DEFAULT_MINIGAME_OBJECTIVE := "GET READY!"
+const MINIGAME_TRANSITION_SCENE := preload(
+	"res://features/minigame_transition/minigame_transition.tscn"
+)
 
 var _round_timer := Timer.new()
 var isDebug : bool
@@ -19,6 +23,7 @@ var forceLoadScene : int = -1
 
 var _actualMinigame : Node2D
 var _score : Array[int] = [0,0]
+var _is_transitioning := false
 
 func _ready() -> void:
 	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
@@ -33,7 +38,7 @@ func _ready() -> void:
 func _on_scene_changed() :
 	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
-	resetCountdown()
+	stop_round_timer()
 	
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
 	time_label = $"../Main/MainScreenUI/TimeLabel"
@@ -106,12 +111,34 @@ func loadScenesFromFolder(folder_path: String):
 
 	dir.list_dir_end()
 
-func startNewMinigame() :
-	var nextMinigameIndex : int 
-	if forceLoadScene == -1 :  nextMinigameIndex = randi_range(0,minigamesScene.size()-1)
-	else : nextMinigameIndex = forceLoadScene
-	_actualMinigame = minigamesScene[nextMinigameIndex].instantiate()
+func startNewMinigame() -> void:
+
+	_is_transitioning = true
+	stop_round_timer()
+	var next_minigame_index := forceLoadScene
+	if next_minigame_index == -1:
+		next_minigame_index = randi_range(0, minigamesScene.size() - 1)
+	var next_minigame_scene := minigamesScene[next_minigame_index]
+	var next_minigame := next_minigame_scene.instantiate() as Node2D
+	
+	_actualMinigame = next_minigame
+	_actualMinigame.process_mode = Node.PROCESS_MODE_DISABLED
 	get_tree().current_scene.add_child(_actualMinigame)
+
+	var objective_text := DEFAULT_MINIGAME_OBJECTIVE
+	if "minigame_objective" in _actualMinigame:
+		objective_text = str(_actualMinigame.get("minigame_objective"))
+	var transition := MINIGAME_TRANSITION_SCENE.instantiate() as MinigameTransition
+	get_tree().current_scene.add_child(transition)
+	await transition.play(objective_text)
+
+	# Pas de timer pendant la transition
+	if not is_instance_valid(_actualMinigame):
+		_is_transitioning = false
+		return
+	_actualMinigame.process_mode = Node.PROCESS_MODE_INHERIT
+	resetCountdown()
+	_is_transitioning = false
 
 #region UI
 func updateTimeDisplay() -> void :
@@ -142,13 +169,20 @@ func flashUpdateLabel(label : Label, text : String) -> void :
 
 #region Game interface
 func minigameWon(index : int = 0) -> void :
+	if _is_transitioning:
+		return
+	_is_transitioning = true
 	updateScore(index)
-	resetCountdown()
+	stop_round_timer()
 	_actualMinigame.queue_free()
 	await get_tree().process_frame
 	startNewMinigame()
 
 
 func minigameLost() -> void :
+	if _is_transitioning:
+		return
+	_is_transitioning = true
+	stop_round_timer()
 	call_deferred("gameover")
 #endregion

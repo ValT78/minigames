@@ -1,7 +1,7 @@
 class_name ClockJump
 extends Node2D
 
-# Réglages courts adaptés au chronomètre actuel du Backbone.
+@export_multiline var minigame_objective := "CRUSH MONSTERS BEFORE THE OTHERS!"
 @export_range(1, 10, 1) var creatures_to_win := 3
 @export_range(5.0, 30.0, 1.0) var direct_test_duration := 10.0
 @export_range(1, 6, 1) var maximum_active_bricks_per_player := 3
