@@ -23,17 +23,22 @@ z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1918.0
-offset_bottom = 1076.0
+offset_left = -227.0
+offset_top = -1.0
+offset_right = 2579.0
+offset_bottom = 1605.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_n50gk")
+stretch_mode = 6
 
 [node name="PosMult_J1" type="Marker2D" parent="." unique_id=1043804337]
-position = Vector2(0, 360)
+position = Vector2(0, 540)
 
 [node name="PosMult_J2" type="Marker2D" parent="." unique_id=2121516959]
-position = Vector2(0, 720)
+position = Vector2(0, 810)
 
 [node name="PosSingle_J1" type="Marker2D" parent="." unique_id=1703849045]
 position = Vector2(0, 540)
