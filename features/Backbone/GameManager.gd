@@ -12,9 +12,10 @@ var _isNumberChanging = false
 
 var time_slider: HSlider
 var time_label: Label
-@export var minigamesScene : Array[PackedScene]
+var minigamesScene : Array[PackedScene]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
 var score_container: VBoxContainer
+var forceLoadScene : int = -1
 
 var _actualMinigame : Node2D
 var _score : Array[int] = [0,0]
@@ -25,18 +26,30 @@ func _ready() -> void:
 	_round_timer.timeout.connect(_on_round_timer_timeout)
 	add_child(_round_timer)
 	get_tree().scene_changed.connect(_on_scene_changed)
+	loadScenesFromFolder("res://minigames")
+	if not OS.has_feature("editor") : forceLoadScene = -1
+		
 	
 func _on_scene_changed() :
 	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
 	resetCountdown()
 	
-	loadScenesFromFolder("res://minigames")
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
 	time_label = $"../Main/MainScreenUI/TimeLabel"
 	score_container = $"../Main/MainScreenUI/Panel/MarginContainer/HBoxContainer/VBoxContainer"
-	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
-	get_tree().current_scene.add_child(_actualMinigame)
+	var playersInput := PlayerRegistry.get_players()
+	
+	assert(len(playersInput) <= 2)
+	for playerInput in playersInput:
+		var label : Label = score_container.get_child(playerInput.id)
+		label.visible = true
+		label.label_settings.font_color = playerInput.color
+		label.get_child(0).label_settings.font_color = playerInput.color
+		label.get_child(0).label_settings.font_color.a = 30/255
+	
+	startNewMinigame()
+		
 
 func _process(_delta: float) -> void:
 	if isDebug : return
@@ -93,6 +106,13 @@ func loadScenesFromFolder(folder_path: String):
 
 	dir.list_dir_end()
 
+func startNewMinigame() :
+	var nextMinigameIndex : int 
+	if forceLoadScene == -1 :  nextMinigameIndex = randi_range(0,minigamesScene.size()-1)
+	else : nextMinigameIndex = forceLoadScene
+	_actualMinigame = minigamesScene[nextMinigameIndex].instantiate()
+	get_tree().current_scene.add_child(_actualMinigame)
+
 #region UI
 func updateTimeDisplay() -> void :
 	if get_time_left() > 0 :
@@ -126,8 +146,7 @@ func minigameWon(index : int = 0) -> void :
 	resetCountdown()
 	_actualMinigame.queue_free()
 	await get_tree().process_frame
-	_actualMinigame = minigamesScene[randi_range(0,minigamesScene.size()-1)].instantiate()
-	get_tree().current_scene.add_child(_actualMinigame)
+	startNewMinigame()
 
 
 func minigameLost() -> void :

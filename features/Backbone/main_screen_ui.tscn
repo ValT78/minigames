@@ -76,6 +76,7 @@ label_settings = SubResource("LabelSettings_57qmd")
 layout_mode = 2
 
 [node name="ScoreLabel" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2127622775]
+visible = false
 layout_mode = 2
 text = "000"
 label_settings = SubResource("LabelSettings_2ntee")
@@ -104,6 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ScoreLabel2" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1392144228]
+visible = false
 layout_mode = 2
 text = "000"
 label_settings = SubResource("LabelSettings_yf5fn")
