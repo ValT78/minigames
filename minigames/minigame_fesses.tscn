@@ -122,6 +122,3 @@ stream = ExtResource("6_gwsfj")
 [node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=205219941]
 stream = ExtResource("7_gwsfj")
 pitch_scale = 2.0
-
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=9480171]
-polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)

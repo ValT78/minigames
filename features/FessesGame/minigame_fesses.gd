@@ -9,7 +9,7 @@ var current_pos : SIDE
 @export var players_score_containers : Array[VBoxContainer]
 @export var players_score_label : Array[Label]
 @export var water_melon_scene: PackedScene
-@export var water_melon_to_crush := 20
+@export var water_melon_to_crush := 15
 
 # Maybe have this global idk
 @export var modulate_player_1 : Color

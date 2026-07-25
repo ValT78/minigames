@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cw75of2el32bl"]
+
+[ext_resource type="Script" uid="uid://ctguaj1sviqj3" path="res://features/osu_taiko_like/osu_taiko_like.gd" id="1_y5ku6"]
+[ext_resource type="AudioStream" uid="uid://cacwq50kfwpy1" path="res://features/FessesGame/pastequeEcrasee-003.wav" id="2_ypuc8"]
+[ext_resource type="AudioStream" uid="uid://bp1whfh66eeui" path="res://features/FessesGame/apebble-fart-5-trimmed.mp3" id="3_y5ku6"]
+
+[sub_resource type="Gradient" id="Gradient_gwsfj"]
+offsets = PackedFloat32Array(0.0013368984, 0.9852941, 1)
+colors = PackedColorArray(0.21060628, 0.26080284, 0.40038142, 1, 0.9254902, 0.9843137, 0.9098039, 1, 1, 1, 0.92156863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n50gk"]
+gradient = SubResource("Gradient_gwsfj")
+width = 256
+height = 256
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[node name="OsuTaikoLike" type="Node2D" unique_id=1920961688]
+script = ExtResource("1_y5ku6")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1374598060]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1918.0
+offset_bottom = 1076.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_n50gk")
+
+[node name="PosMult_J1" type="Marker2D" parent="." unique_id=1043804337]
+position = Vector2(0, 360)
+
+[node name="PosMult_J2" type="Marker2D" parent="." unique_id=2121516959]
+position = Vector2(0, 720)
+
+[node name="PosSingle_J1" type="Marker2D" parent="." unique_id=1703849045]
+position = Vector2(0, 540)
+
+[node name="Tempo" type="Timer" parent="." unique_id=867085673]
+wait_time = 0.1
+autostart = true
+
+[node name="WaterMelonSplash" type="AudioStreamPlayer2D" parent="." unique_id=435177433]
+stream = ExtResource("2_ypuc8")
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=2123345737]
+stream = ExtResource("3_y5ku6")
+pitch_scale = 2.0
+
+[connection signal="timeout" from="Tempo" to="." method="_on_tempo_timeout"]

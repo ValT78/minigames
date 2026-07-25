@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://byywsxsgiaqac"]
+
+[ext_resource type="Script" uid="uid://cskt252fhqd1" path="res://features/osu_taiko_like/watermelon_taiko.gd" id="1_8ggao"]
+[ext_resource type="Texture2D" uid="uid://cq81fipugxfw8" path="res://features/FessesGame/watermelon.png" id="1_tl4fr"]
+[ext_resource type="Texture2D" uid="uid://25qi205lwbnj" path="res://features/FessesGame/watermelonExplose.png" id="2_bcgvd"]
+[ext_resource type="Texture2D" uid="uid://c8tpymacltr2b" path="res://features/FessesGame/particles.png" id="3_8ggao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kdcd"]
+size = Vector2(105, 95)
+
+[node name="WatermelonTaiko" type="Area2D" unique_id=1466316735]
+script = ExtResource("1_8ggao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=119343002]
+position = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_6kdcd")
+
+[node name="WaterMelonFull" type="Sprite2D" parent="." unique_id=1791610145]
+z_index = 10
+position = Vector2(3, 5.0000005)
+scale = Vector2(0.27490234, 0.25073245)
+texture = ExtResource("1_tl4fr")
+
+[node name="WaterMelonExploded" type="Sprite2D" parent="." unique_id=1858161182]
+visible = false
+z_index = 10
+position = Vector2(3, 5.0000005)
+scale = Vector2(0.27490234, 0.25073245)
+texture = ExtResource("2_bcgvd")
+
+[node name="Particles" type="Sprite2D" parent="WaterMelonExploded" unique_id=1584778265]
+modulate = Color(1, 1, 1, 0.28627452)
+z_index = 10
+position = Vector2(-16.499933, 4.4999924)
+scale = Vector2(2.99875, 3.115)
+texture = ExtResource("3_8ggao")
+
+[node name="Timer" type="Timer" parent="." unique_id=275539104]
+wait_time = 0.1
