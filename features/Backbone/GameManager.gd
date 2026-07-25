@@ -87,7 +87,7 @@ func gameover() -> void :
 
 func updateScore(index : int) -> void : 
 	var score_label : Label = score_container.get_child(index)
-	_score[index] += floori(get_time_left())
+	_score[index] += floori(get_time_left() + timerDifficulty)
 	if _score[index] < 10 : 
 		flashUpdateLabel(score_label,"00" + str(_score[index]))
 	elif _score[index] < 100:
