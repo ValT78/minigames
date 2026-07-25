@@ -10,7 +10,7 @@ func setup(input : LocalPlayer) :
 	
 func _physics_process(delta: float) -> void:
 	if not _input : return
-	global_position += _input.input.direction * _speed
+	global_position += _input.input.direction * _speed * delta * 40
 	
 	if _input.input.action_1_just_pressed :
 		print(country)

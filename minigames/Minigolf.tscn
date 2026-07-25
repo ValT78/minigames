@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://lob2oxyktwuq"]
+
+[ext_resource type="Script" uid="uid://utfcrbjgf1yn" path="res://features/Minigolf/minigolf.gd" id="1_rcts6"]
+[ext_resource type="PackedScene" uid="uid://b8tg2b2q3a3i0" path="res://features/Minigolf/wall.tscn" id="2_s1jcd"]
+[ext_resource type="PackedScene" uid="uid://b2qxxe27cajph" path="res://features/Minigolf/GolfBall.tscn" id="2_wb72b"]
+[ext_resource type="Script" uid="uid://b4nqoyrt5nsu2" path="res://features/Minigolf/hole.gd" id="3_4c6nv"]
+[ext_resource type="Texture2D" uid="uid://cfwwsa0ktbdj8" path="res://features/Minigolf/golfGreen.png" id="3_s1jcd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 48.0
+
+[sub_resource type="Gradient" id="Gradient_57qmd"]
+interpolation_color_space = 1
+colors = PackedColorArray(1, 0.9533333, 0.72, 0.34509805, 0, 0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yf5fn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g4v7s"]
+noise = SubResource("FastNoiseLite_yf5fn")
+color_ramp = SubResource("Gradient_57qmd")
+
+[node name="Minigolf" type="Node2D" unique_id=1550520101]
+script = ExtResource("1_rcts6")
+
+[node name="Wall" parent="." unique_id=602864968 instance=ExtResource("2_s1jcd")]
+position = Vector2(1870, 541)
+scale = Vector2(1, 10.8)
+
+[node name="Wall2" parent="." unique_id=9204137 instance=ExtResource("2_s1jcd")]
+position = Vector2(50, 541)
+scale = Vector2(1, 10.8)
+
+[node name="Wall3" parent="." unique_id=1022182391 instance=ExtResource("2_s1jcd")]
+position = Vector2(960, 50)
+rotation = 1.5707964
+scale = Vector2(1, 19.2)
+
+[node name="Wall4" parent="." unique_id=149306566 instance=ExtResource("2_s1jcd")]
+position = Vector2(960.00006, 1030)
+rotation = 1.5707964
+scale = Vector2(1, 19.2)
+
+[node name="Wall5" parent="." unique_id=1649401823 instance=ExtResource("2_s1jcd")]
+position = Vector2(1212, 765)
+scale = Vector2(1, 6.34)
+
+[node name="Wall6" parent="." unique_id=138953630 instance=ExtResource("2_s1jcd")]
+position = Vector2(655, 319)
+scale = Vector2(1, 6.34)
+
+[node name="Wall7" parent="." unique_id=1815926281 instance=ExtResource("2_s1jcd")]
+position = Vector2(980, 799)
+rotation = 0.7853982
+scale = Vector2(1, 6.34)
+
+[node name="Wall8" parent="." unique_id=2083498967 instance=ExtResource("2_s1jcd")]
+position = Vector2(889, 285.00006)
+rotation = 0.7853982
+scale = Vector2(1, 6.34)
+
+[node name="Wall9" parent="." unique_id=2034539378 instance=ExtResource("2_s1jcd")]
+position = Vector2(1636.9998, 274)
+rotation = -0.7853982
+scale = Vector2(1, 6.34)
+
+[node name="hole" type="Area2D" parent="." unique_id=2095199270]
+position = Vector2(345, 549)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("3_4c6nv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hole" unique_id=1134447381]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Polygon2D" type="Polygon2D" parent="hole" unique_id=247710179]
+z_index = -1
+color = Color(0.062399995, 0.075413324, 0.16, 1)
+polygon = PackedVector2Array(112, 0, 104, -40, 80.00001, -80, 40, -104, 0, -112.00001, -40, -104, -79.99999, -80, -103.99999, -40, -112.00001, 0, -104, 40, -80, 80, -40, 104, 0, 112.00001, 40, 104, 79.999985, 80, 104.00001, 40)
+uv = PackedVector2Array(49.000336, 48)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1698497627]
+z_index = -99
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_s1jcd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=308060822]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_g4v7s")
+
+[node name="GolfBall" parent="." unique_id=1095497937 instance=ExtResource("2_wb72b")]
+position = Vector2(1693, 800)
+
+[connection signal="body_entered" from="hole" to="hole" method="_on_body_entered"]

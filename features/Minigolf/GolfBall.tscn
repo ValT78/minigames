@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2qxxe27cajph"]
+
+[ext_resource type="Texture2D" uid="uid://bvbwgns1dt5wv" path="res://icon.svg" id="1_fbf8j"]
+[ext_resource type="Script" uid="uid://bsgag8utkmohj" path="res://features/Minigolf/golf_ball.gd" id="1_m71ay"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 64.0
+
+[node name="GolfBall" type="RigidBody2D" unique_id=1095497937]
+mass = 0.001
+gravity_scale = 0.0
+linear_damp = 1.0
+script = ExtResource("1_m71ay")
+_speed = 2.5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1460084652]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_fbf8j")
+
+[node name="arrow" type="Node2D" parent="." unique_id=419728409]
+scale = Vector2(0.5, 0.5)
+
+[node name="Line2D" type="Line2D" parent="arrow" unique_id=1871414873]
+points = PackedVector2Array(100, 0, 200, 0, 165, -32, 200, 0, 165, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=118332826]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_g4v7s")

@@ -11,5 +11,4 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_entered(area: Area2D) -> void:
-	print(area)
 	area.get_parent().country = name
