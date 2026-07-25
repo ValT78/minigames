@@ -3,7 +3,7 @@ extends Node2D
 enum SIDE {LEFT, RIGHT}
 var current_pos : SIDE
 
-@export_multiline var minigame_objective := "CRUSH YOUR WATERMELONS ON THE CORRECT SIDE!"
+@export_multiline var minigame_objective := "CRUSH YOUR WATERMELONS !"
 @onready var left_spawn: Marker2D = $LeftSpawn
 @onready var right_spawn: Marker2D = $RightSpawn
 @export var players_score_containers : Array[VBoxContainer]

@@ -4,7 +4,7 @@ extends Node2D
 signal round_won(winner_player_id: int)
 signal round_lost
 
-@export_multiline var minigame_objective := "HUNT CHICKENS BEFORE THE OTHERS!"
+@export_multiline var minigame_objective := "KILL THE CHICKENS !"
 @export_range(1, 12, 1) var chickens_to_win := 5
 @export_range(1.0, 9.0, 0.5) var arrow_grant_time_left := 5.0
 @export_range(5.0, 30.0, 1.0) var direct_test_duration := 10.0

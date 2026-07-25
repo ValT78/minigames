@@ -1,7 +1,7 @@
 extends Node2D
 const PLAYER_TARGET = preload("uid://cl6jtpq3h2rtc")
 
-@export_multiline var minigame_objective := "FIND THE REQUESTED COUNTRY!"
+@export_multiline var minigame_objective := "FIND THE COUNTRY!"
 var country : String = "France"
 var countryList : Array[String] = ["France","Ukraine","Norway","Iceland","Lithuania","Greece","Morocco"]
 var players : Array[Node2D] = []
