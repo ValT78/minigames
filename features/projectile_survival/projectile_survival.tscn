@@ -52,6 +52,9 @@ default_color = Color(0.48, 0.58, 1, 0.42)
 [node name="AsteroidContainer" type="Node2D" parent="." unique_id=795030618]
 unique_name_in_owner = true
 
+[node name="FragmentContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="PlayerContainer" type="Node2D" parent="." unique_id=47275495]
 unique_name_in_owner = true
 
@@ -66,7 +69,7 @@ unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -254.0
+offset_left = -374.0
 offset_top = 22.0
 offset_right = -24.0
 offset_bottom = 98.0
@@ -89,11 +92,11 @@ vertical_alignment = 1
 
 [node name="RemainingLabel" type="Label" parent="HUD/TopPanel/HBoxContainer" unique_id=1775918888]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 48)
+custom_minimum_size = Vector2(230, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.79, 1, 1)
 theme_override_font_sizes/font_size = 19
-text = "1 étoile"
+text = "J0 0/4  •  J1 0/4"
 vertical_alignment = 1
 
 [node name="InstructionLabel" type="Label" parent="HUD" unique_id=739270463]
@@ -113,7 +116,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 18
-text = "ACTION 1 : ÉCLIPSE     •     ACTION 2 : ONDE DE RÉPULSION"
+text = "PREMIER À 4 FRAGMENTS     •     ACTION 1 : ÉCLIPSE     •     ACTION 2 : ONDE DE RÉPULSION"
 horizontal_alignment = 1
 
 [node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=2101749373]

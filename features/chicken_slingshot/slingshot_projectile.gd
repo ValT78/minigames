@@ -1,13 +1,11 @@
 class_name SlingshotProjectile
 extends Area2D
 
-# Le caillou est lent et sa distance dépend de la charge ; la flèche ignore ces limites.
-@export var rock_speed := 470.0
+# Le caillou avance en ligne droite et sa distance dépend de la charge.
+@export var rock_speed := 1500.0
 @export var minimum_rock_distance := 560.0
 @export var maximum_rock_distance := 1420.0
-@export var minimum_arc_height := 95.0
-@export var maximum_arc_height := 235.0
-@export var arrow_speed := 1450.0
+@export var arrow_speed := 2300.0
 
 @onready var projectile_visual: Node2D = %ProjectileVisual
 @onready var rock_visual: Polygon2D = %RockVisual
@@ -15,11 +13,10 @@ extends Area2D
 @onready var rock_collision: CollisionShape2D = %RockCollision
 @onready var arrow_collision: CollisionShape2D = %ArrowCollision
 
-# La racine conserve la progression horizontale ; le dessin et sa collision suivent la cloche.
+# Chaque instance conserve sa propre progression pour autoriser plusieurs tirs simultanés.
 var _owner_player_id := 0
 var _travel_direction := Vector2.RIGHT
 var _maximum_distance := 700.0
-var _arc_height := 120.0
 var _travelled_distance := 0.0
 var _is_arrow := false
 var _cleanup_rect := Rect2()
@@ -40,7 +37,6 @@ func setup(
 	_is_arrow = is_arrow
 	_cleanup_rect = viewport_rect.grow(220.0)
 	_maximum_distance = lerpf(minimum_rock_distance, maximum_rock_distance, charge_ratio)
-	_arc_height = lerpf(minimum_arc_height, maximum_arc_height, charge_ratio)
 	_apply_projectile_mode()
 
 
@@ -61,17 +57,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_rock(delta: float) -> void:
+	# La portée chargée détruit uniquement cette instance, sans affecter les autres tirs.
 	var movement_distance := rock_speed * delta
 	position += _travel_direction * movement_distance
 	_travelled_distance += movement_distance
-
-	# Un sinus donne une montée et une retombée régulières jusqu'à la portée chargée.
-	var travel_progress := clampf(_travelled_distance / _maximum_distance, 0.0, 1.0)
-	var current_height := sin(travel_progress * PI) * _arc_height
-	projectile_visual.position.y = -current_height
-	rock_collision.position.y = -current_height
-	var height_scale := 1.0 + current_height / 520.0
-	projectile_visual.scale = Vector2.ONE * height_scale
 	if _travelled_distance >= _maximum_distance:
 		queue_free()
 

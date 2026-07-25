@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/projectile_survival/energy_fragment.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="FragmentCollisionShape"]
+radius = 22.0
+
+[node name="EnergyFragment" type="Area2D"]
+z_index = 4
+collision_layer = 8
+collision_mask = 2
+monitoring = true
+monitorable = false
+script = ExtResource("1_script")
+
+[node name="OuterGlow" type="Polygon2D" parent="."]
+scale = Vector2(1.4, 1.4)
+polygon = PackedVector2Array(0, -22, 7, -7, 22, 0, 7, 7, 0, 22, -7, 7, -22, 0, -7, -7)
+color = Color(0.3, 1, 0.8, 0.2)
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -22, 7, -7, 22, 0, 7, 7, 0, 22, -7, 7, -22, 0, -7, -7)
+color = Color(0.3, 1, 0.78, 1)
+
+[node name="Core" type="Polygon2D" parent="."]
+scale = Vector2(0.45, 0.45)
+polygon = PackedVector2Array(0, -22, 7, -7, 22, 0, 7, 7, 0, 22, -7, 7, -22, 0, -7, -7)
+color = Color(0.9, 1, 0.95, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("FragmentCollisionShape")

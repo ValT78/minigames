@@ -172,7 +172,7 @@ func _on_projectile_requested(
 	if _round_finished:
 		return
 
-	# Le même projectile est configuré en caillou balistique ou en flèche perforante.
+	# Chaque demande crée une instance indépendante : plusieurs tirs peuvent rester actifs.
 	var projectile: SlingshotProjectile = PROJECTILE_SCENE.instantiate()
 	projectile.setup(
 		player_id,

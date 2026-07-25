@@ -2,11 +2,11 @@ class_name AsteroidSpawner
 extends Node
 
 # La courbe va d'un astéroïde lisible à des vagues nombreuses en fin de manche.
-@export var initial_wave_interval := 1.25
-@export var final_wave_interval := 0.42
+@export var initial_wave_interval := 0.9
+@export var final_wave_interval := 0.28
 @export var warning_duration := 0.45
-@export var initial_asteroid_speed := 360.0
-@export var final_asteroid_speed := 650.0
+@export var initial_asteroid_speed := 440.0
+@export var final_asteroid_speed := 780.0
 
 const ASTEROID_SCENE := preload("res://features/projectile_survival/asteroid.tscn")
 const WARNING_MARKER_SCENE := preload("res://features/projectile_survival/warning_marker.tscn")
@@ -52,11 +52,11 @@ func _physics_process(delta: float) -> void:
 
 func _spawn_wave(difficulty: float) -> void:
 	# Les paliers rendent l'augmentation du nombre immédiatement perceptible.
-	var asteroid_count := 1
+	var asteroid_count := 2
 	if difficulty >= 0.35:
-		asteroid_count = 2
-	if difficulty >= 0.72:
 		asteroid_count = 3
+	if difficulty >= 0.72:
+		asteroid_count = 4
 
 	for asteroid_index in asteroid_count:
 		var launch_data := _create_launch_data(difficulty, asteroid_index)

@@ -6,7 +6,7 @@ signal round_lost
 
 # Réglages de manche conçus pour le timer actuel de dix secondes.
 @export_range(2, 8, 1) var ring_count := 3
-@export_range(0.5, 5.0, 0.1) var ring_reveal_interval := 3
+@export_range(0.5, 5.0, 0.1) var ring_reveal_interval := 2
 @export_range(5.0, 30.0, 1.0) var direct_test_duration := 10.0
 @export_range(50.0, 220.0, 1.0) var arena_margin := 105.0
 @export var create_test_players_when_running_directly := true

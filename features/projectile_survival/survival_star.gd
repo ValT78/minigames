@@ -4,8 +4,8 @@ extends CharacterBody2D
 signal eliminated(player_star: SurvivalStar)
 
 # Réglages principaux accessibles aux game designers dans l'inspecteur.
-@export var movement_speed := 330.0
-@export var dash_speed := 860.0
+@export var movement_speed := 530.0
+@export var dash_speed := 1200.0
 @export var dash_duration := 0.24
 @export var dash_cooldown := 1.05
 @export var repulsion_range := 165.0

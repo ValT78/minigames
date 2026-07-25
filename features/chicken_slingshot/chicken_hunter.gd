@@ -14,7 +14,7 @@ signal projectile_requested(
 @export var maximum_aim_angle_degrees := 25.0
 @export var minimum_charge_duration := 0.2
 @export var maximum_charge_duration := 0.5
-@export var shot_cooldown := 0.6
+@export var shot_cooldown := 0.0
 @export var body_radius := 30.0
 
 @onready var hunter_visual: Node2D = %HunterVisual
