@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://gob0r73siqk7"]
+
+[ext_resource type="Script" uid="uid://3evy2siuakxm" path="res://features/osu_taiko_like/game_line.gd" id="1_a4lqb"]
+[ext_resource type="Texture2D" uid="uid://crl7swh74harf" path="res://features/FessesGame/body.png" id="1_imeay"]
+[ext_resource type="Texture2D" uid="uid://b68d6r2bt2rmb" path="res://features/FessesGame/ass.png" id="2_6kdcd"]
+[ext_resource type="PackedScene" uid="uid://byywsxsgiaqac" path="res://features/osu_taiko_like/watermelon_taiko.tscn" id="3_6kdcd"]
+
+[sub_resource type="Gradient" id="Gradient_n50gk"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h2ih8"]
+gradient = SubResource("Gradient_n50gk")
+
+[sub_resource type="Gradient" id="Gradient_qyint"]
+colors = PackedColorArray(0.54901963, 0.46666667, 0.54509807, 1, 0.2574758, 0.25747576, 0.25747573, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rrys1"]
+gradient = SubResource("Gradient_qyint")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrdm1"]
+size = Vector2(20, 101)
+
+[sub_resource type="Gradient" id="Gradient_rrys1"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ypuc8"]
+gradient = SubResource("Gradient_rrys1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_a4lqb"]
+font_size = 64
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameLine" type="Node2D" unique_id=1397865267 node_paths=PackedStringArray("press_line_area")]
+script = ExtResource("1_a4lqb")
+press_line_area = NodePath("PressLineArea")
+
+[node name="BG_Line_border" type="TextureRect" parent="." unique_id=819578667]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -51.25
+offset_right = 1918.0
+offset_bottom = 51.75
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_h2ih8")
+
+[node name="BG_Line" type="TextureRect" parent="." unique_id=1551215236]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -46.0
+offset_right = 1917.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_rrys1")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1746086824]
+z_index = -1
+position = Vector2(188, -138)
+scale = Vector2(0.37000003, 0.5767327)
+texture = ExtResource("1_imeay")
+
+[node name="Ass" type="Sprite2D" parent="." unique_id=1991352876]
+position = Vector2(189, -139)
+scale = Vector2(0.36830357, 0.347205)
+texture = ExtResource("2_6kdcd")
+
+[node name="PressLineArea" type="Area2D" parent="." unique_id=1190700109]
+position = Vector2(200, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PressLineArea" unique_id=1175220994]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_wrdm1")
+
+[node name="PressLine" type="TextureRect" parent="PressLineArea" unique_id=2135862030]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -49.0
+offset_right = 2.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_ypuc8")
+expand_mode = 1
+
+[node name="WatermelonTaiko" parent="." unique_id=1466316735 instance=ExtResource("3_6kdcd")]
+position = Vector2(767, 0)
+
+[node name="PlayerScore" type="VBoxContainer" parent="." unique_id=504793831]
+offset_left = 323.0
+offset_top = -242.0
+offset_right = 573.0
+offset_bottom = -42.0
+
+[node name="Label" type="Label" parent="PlayerScore" unique_id=1127314688]
+layout_mode = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_a4lqb")
+
+[node name="Count" type="Label" parent="PlayerScore" unique_id=1200810647]
+layout_mode = 2
+text = "30"
+label_settings = SubResource("LabelSettings_a4lqb")
+horizontal_alignment = 1
+
+[node name="AssIdle" type="Marker2D" parent="." unique_id=506769289]
+position = Vector2(189, -139)
+scale = Vector2(0.36830357, 0.347205)
+
+[node name="AssCrush1" type="Marker2D" parent="." unique_id=971575930]
+position = Vector2(175, -64.99999)
+rotation = 0.17359683
+scale = Vector2(0.36830357, 0.347205)
+
+[node name="AssCrush2" type="Marker2D" parent="." unique_id=889875130]
+position = Vector2(198.99998, -63)
+rotation = -0.24891654
+scale = Vector2(0.36830357, 0.347205)

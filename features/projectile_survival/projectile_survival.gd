@@ -5,7 +5,7 @@ signal round_won
 signal round_lost
 
 # Paramètres de manche modifiables sans toucher au générateur d'astéroïdes.
-@export_multiline var minigame_objective := "COLLECT ENERGY FRAGMENTS BEFORE THE OTHERS!"
+@export_multiline var minigame_objective := "COLLECT ENERGY FRAGMENTS !"
 @export_range(5.0, 120.0, 1.0) var survival_duration := 20.0
 @export_range(40.0, 180.0, 1.0) var arena_margin := 84.0
 @export_range(1, 10, 1) var fragments_to_collect_per_player := 4

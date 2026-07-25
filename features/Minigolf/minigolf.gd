@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_multiline var minigame_objective := "BE THE FIRST TO SINK YOUR BALL!"
+@export_multiline var minigame_objective := "PUT THE BALL IN THE ALL!"
 var players : Array[Node2D] = []
 const GOLF_BALL = preload("uid://b2qxxe27cajph")
 

@@ -21,9 +21,13 @@ var minigamesScene : Array[PackedScene]
 var score_container: VBoxContainer
 var forceLoadScene : int = -1
 
+var lastMinigameIndex : Array[int]
 var _actualMinigame : Node2D
 var _score : Array[int] = [0,0]
 var _is_transitioning := false
+
+var timerDifficulty : float
+var difficultyIncressAmount = 0.5
 
 func _ready() -> void:
 	# Le Timer natif garantit une seule notification lorsque le temps arrive à zéro.
@@ -38,6 +42,7 @@ func _ready() -> void:
 func _on_scene_changed() :
 	isDebug = not get_tree().current_scene.name == "Main"
 	if isDebug : return
+	timerDifficulty = 0
 	stop_round_timer()
 	
 	time_slider = $"../Main/MainScreenUI/TextureRect/HSlider"
@@ -73,7 +78,7 @@ func _on_round_timer_timeout() -> void:
 	round_timer_expired.emit()
 
 func resetCountdown() -> void :
-	_round_timer.start(MINI_GAMES_DURATION)
+	_round_timer.start(MINI_GAMES_DURATION - timerDifficulty)
 
 func gameover() -> void :
 	_score = [0,0]
@@ -82,7 +87,7 @@ func gameover() -> void :
 
 func updateScore(index : int) -> void : 
 	var score_label : Label = score_container.get_child(index)
-	_score[index] += floori(get_time_left())
+	_score[index] += floori(get_time_left() + timerDifficulty)
 	if _score[index] < 10 : 
 		flashUpdateLabel(score_label,"00" + str(_score[index]))
 	elif _score[index] < 100:
@@ -117,7 +122,12 @@ func startNewMinigame() -> void:
 	stop_round_timer()
 	var next_minigame_index := forceLoadScene
 	if next_minigame_index == -1:
+		if lastMinigameIndex.size() > 4 : lastMinigameIndex.pop_front()
 		next_minigame_index = randi_range(0, minigamesScene.size() - 1)
+		while lastMinigameIndex.has(next_minigame_index) :
+			next_minigame_index = randi_range(0, minigamesScene.size() - 1)
+		lastMinigameIndex.push_back(next_minigame_index)
+			
 	var next_minigame_scene := minigamesScene[next_minigame_index]
 	var next_minigame := next_minigame_scene.instantiate() as Node2D
 	
@@ -172,6 +182,10 @@ func minigameWon(index : int = 0) -> void :
 	if _is_transitioning:
 		return
 	_is_transitioning = true
+	
+	timerDifficulty += difficultyIncressAmount
+	timerDifficulty = min(10,timerDifficulty)
+	
 	updateScore(index)
 	stop_round_timer()
 	_actualMinigame.queue_free()

@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://d0t6p2tknmlr1"]
+
+[ext_resource type="Script" uid="uid://df77oqp18x520" path="res://features/chloe/invertedGolf.gd" id="1_ykamv"]
+[ext_resource type="Texture2D" uid="uid://bpppv4xqjteio" path="res://features/chloe/Green.png" id="2_t2x36"]
+[ext_resource type="PackedScene" uid="uid://bao05who60mbg" path="res://features/chloe/ball.tscn" id="3_xj17o"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dxprh"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vkuwr"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vyp1o"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xh17"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_quf2l"]
+
+[node name="InvertedGolf" type="Node2D" unique_id=358187120]
+script = ExtResource("1_ykamv")
+
+[node name="Boundaries" type="Node2D" parent="." unique_id=1329661193]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundaries" unique_id=1432423851]
+physics_material_override = SubResource("PhysicsMaterial_dxprh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/StaticBody2D" unique_id=993664172]
+position = Vector2(961, 1081)
+shape = SubResource("WorldBoundaryShape2D_vkuwr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundaries" unique_id=1735201041]
+physics_material_override = SubResource("PhysicsMaterial_dxprh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries/StaticBody2D2" unique_id=1264049172]
+position = Vector2(1921, 540)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_vyp1o")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundaries" unique_id=1913858338]
+physics_material_override = SubResource("PhysicsMaterial_dxprh")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries/StaticBody2D3" unique_id=1987350092]
+position = Vector2(-1, 540)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_0xh17")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundaries" unique_id=581535111]
+physics_material_override = SubResource("PhysicsMaterial_dxprh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries/StaticBody2D4" unique_id=1340098082]
+position = Vector2(961, -1)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_quf2l")
+
+[node name="Green" type="Sprite2D" parent="." unique_id=1155417634]
+z_index = -1
+scale = Vector2(59.999996, 59.999996)
+texture = ExtResource("2_t2x36")
+centered = false
+
+[node name="Ball" parent="." unique_id=1067080949 instance=ExtResource("3_xj17o")]
+position = Vector2(160, 200)
+
+[node name="Ball2" parent="." unique_id=1533831334 instance=ExtResource("3_xj17o")]
+position = Vector2(360, 200)
+
+[node name="Ball3" parent="." unique_id=483573671 instance=ExtResource("3_xj17o")]
+position = Vector2(560, 200)
+
+[node name="Ball4" parent="." unique_id=833972193 instance=ExtResource("3_xj17o")]
+position = Vector2(760, 200)
+
+[node name="Ball5" parent="." unique_id=1880911472 instance=ExtResource("3_xj17o")]
+position = Vector2(960, 200)
+
+[node name="Ball6" parent="." unique_id=910627188 instance=ExtResource("3_xj17o")]
+position = Vector2(1160, 200)
+
+[node name="Ball7" parent="." unique_id=1291636440 instance=ExtResource("3_xj17o")]
+position = Vector2(1360, 200)
+
+[node name="Ball8" parent="." unique_id=814644792 instance=ExtResource("3_xj17o")]
+position = Vector2(1560, 200)
+
+[node name="Ball9" parent="." unique_id=1866696523 instance=ExtResource("3_xj17o")]
+position = Vector2(1760, 200)
