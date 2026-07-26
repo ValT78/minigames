@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://ys0hay3jkrm1"]
 
-[ext_resource type="Script" path="res://features/chicken_slingshot/chicken_slingshot.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://d008lskk3c8ec" path="res://features/chicken_slingshot/chicken_slingshot.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="HudPanelStyle"]
@@ -35,10 +35,10 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
-[node name="ChickenSlingshot" type="Node2D"]
+[node name="ChickenSlingshot" type="Node2D" unique_id=788826272]
 script = ExtResource("1_script")
 
-[node name="PlayerSide" type="ColorRect" parent="."]
+[node name="PlayerSide" type="ColorRect" parent="." unique_id=795782003]
 unique_name_in_owner = true
 z_index = -100
 offset_right = 430.0
@@ -46,7 +46,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 color = Color(0.46, 0.31, 0.15, 1)
 
-[node name="FieldSide" type="ColorRect" parent="."]
+[node name="FieldSide" type="ColorRect" parent="." unique_id=1509500568]
 unique_name_in_owner = true
 z_index = -100
 offset_left = 430.0
@@ -55,17 +55,17 @@ offset_bottom = 1080.0
 mouse_filter = 2
 color = Color(0.28, 0.52, 0.12, 1)
 
-[node name="FieldLight" type="Polygon2D" parent="."]
+[node name="FieldLight" type="Polygon2D" parent="." unique_id=996205564]
 z_index = -95
-polygon = PackedVector2Array(430, 0, 1920, 0, 1920, 240, 430, 670)
 color = Color(0.6, 0.78, 0.2, 0.15)
+polygon = PackedVector2Array(430, 0, 1920, 0, 1920, 240, 430, 670)
 
-[node name="DirtLight" type="Polygon2D" parent="."]
+[node name="DirtLight" type="Polygon2D" parent="." unique_id=1644157903]
 z_index = -95
-polygon = PackedVector2Array(0, 0, 430, 0, 430, 1080, 0, 1080)
 color = Color(0.84, 0.63, 0.31, 0.1)
+polygon = PackedVector2Array(0, 0, 430, 0, 430, 1080, 0, 1080)
 
-[node name="FenceBack" type="Line2D" parent="."]
+[node name="FenceBack" type="Line2D" parent="." unique_id=741159473]
 unique_name_in_owner = true
 z_index = -5
 points = PackedVector2Array(430, 82, 430, 998)
@@ -74,7 +74,7 @@ default_color = Color(0.22, 0.105, 0.035, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="FenceFront" type="Line2D" parent="."]
+[node name="FenceFront" type="Line2D" parent="." unique_id=2083195004]
 unique_name_in_owner = true
 z_index = -4
 points = PackedVector2Array(430, 82, 430, 998)
@@ -83,7 +83,7 @@ default_color = Color(0.73, 0.46, 0.18, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="FenceHighlight" type="Line2D" parent="."]
+[node name="FenceHighlight" type="Line2D" parent="." unique_id=404343856]
 unique_name_in_owner = true
 z_index = -3
 points = PackedVector2Array(424, 82, 424, 998)
@@ -92,34 +92,34 @@ default_color = Color(0.94, 0.69, 0.3, 0.75)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="ChickenContainer" type="Node2D" parent="."]
+[node name="ChickenContainer" type="Node2D" parent="." unique_id=207055426]
 unique_name_in_owner = true
 
-[node name="ProjectileContainer" type="Node2D" parent="."]
+[node name="ProjectileContainer" type="Node2D" parent="." unique_id=1988286017]
 unique_name_in_owner = true
 
-[node name="PlayerContainer" type="Node2D" parent="."]
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=1798233456]
 unique_name_in_owner = true
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1517375282]
 
-[node name="ScorePanel" type="PanelContainer" parent="HUD"]
+[node name="ScorePanel" type="PanelContainer" parent="HUD" unique_id=562496079]
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 490.0
-offset_top = 18.0
+offset_top = 993.0
 offset_right = -260.0
-offset_bottom = 84.0
+offset_bottom = 1059.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("HudPanelStyle")
 
-[node name="ScoreRow" type="HBoxContainer" parent="HUD/ScorePanel"]
+[node name="ScoreRow" type="HBoxContainer" parent="HUD/ScorePanel" unique_id=1646988913]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="LocalTimeLabel" type="Label" parent="HUD"]
+[node name="LocalTimeLabel" type="Label" parent="HUD" unique_id=1027774797]
 unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
@@ -138,8 +138,8 @@ theme_override_font_sizes/font_size = 44
 text = "10"
 horizontal_alignment = 1
 
-[node name="InstructionPanel" type="PanelContainer" parent="HUD"]
-anchors_preset = 12
+[node name="InstructionPanel" type="PanelContainer" parent="HUD" unique_id=2027781568]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 340.0
@@ -150,14 +150,14 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("HudPanelStyle")
 
-[node name="InstructionLabel" type="Label" parent="HUD/InstructionPanel"]
+[node name="InstructionLabel" type="Label" parent="HUD/InstructionPanel" unique_id=1032928431]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.71, 1)
 theme_override_font_sizes/font_size = 18
 text = "UP/DOWN : MOVE   -   <- -> : TARGET   •   ACTION 1 : SHOOT   •   ACTION 2 : ARROW"
 horizontal_alignment = 1
 
-[node name="ArrowAnnouncement" type="PanelContainer" parent="HUD"]
+[node name="ArrowAnnouncement" type="PanelContainer" parent="HUD" unique_id=737208901]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -174,18 +174,18 @@ grow_vertical = 2
 pivot_offset = Vector2(330, 68)
 theme_override_styles/panel = SubResource("AnnouncementPanelStyle")
 
-[node name="ArrowLabel" type="Label" parent="HUD/ArrowAnnouncement"]
+[node name="ArrowLabel" type="Label" parent="HUD/ArrowAnnouncement" unique_id=413220207]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.86, 0.3, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 32
-text = "➤  FLÈCHE OBTENUE — ACTION 2  ➤"
+text = "You got an arrow !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResultPanel" type="PanelContainer" parent="HUD"]
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=1689959236]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -201,7 +201,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("AnnouncementPanelStyle")
 
-[node name="ResultLabel" type="Label" parent="HUD/ResultPanel"]
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=1410463917]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.93, 0.62, 1)

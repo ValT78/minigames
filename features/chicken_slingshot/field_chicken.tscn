@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://lgviqvw0yi12"]
+[gd_scene format=3 uid="uid://lgviqvw0yi12"]
 
 [ext_resource type="Script" uid="uid://ckw6iibd1rt16" path="res://features/chicken_slingshot/field_chicken.gd" id="1_script"]
-[ext_resource type="AudioStream" path="res://features/chicken_slingshot/chickenDeath.wav" id="2_death_sound"]
+[ext_resource type="AudioStream" uid="uid://nyls4ghsj68t" path="res://features/chicken_slingshot/chickenDeath.wav" id="2_death_sound"]
 
 [sub_resource type="CircleShape2D" id="ChickenCollisionShape"]
 radius = 30.0
@@ -74,7 +74,7 @@ joint_mode = 2
 unique_name_in_owner = true
 shape = SubResource("ChickenCollisionShape")
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=174153955]
 unique_name_in_owner = true
 stream = ExtResource("2_death_sound")
-volume_db = -3.0
+volume_db = -20.0

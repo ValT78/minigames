@@ -45,6 +45,6 @@ func _refresh(players: Array[LocalPlayer]) -> void:
 			status.modulate = Color("a9b1c6")
 			card.modulate = Color(1, 1, 1, 0.68)
 		else:
-			status.text = "%s — prêt !" % player.display_name
+			status.text = "%s - prêt !" % player.display_name
 			status.modulate = player.color
 			card.modulate = Color.WHITE

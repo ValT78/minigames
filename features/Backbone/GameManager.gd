@@ -32,7 +32,7 @@ var time_label: Label
 ]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
 var score_container: HBoxContainer
-var forceLoadScene : int = -1
+var forceLoadScene : int = 0
 
 var lastMinigameIndex : Array[int]
 var _actualMinigame : Node2D
