@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://features/clock_jump/clock_jumper.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://features/clock_jump/spring.wav" id="2_spring"]
+[ext_resource type="AudioStream" path="res://features/clock_jump/bump.wav" id="3_bump"]
+[ext_resource type="AudioStream" path="res://features/clock_jump/enemy_splashed.wav" id="4_enemy_splashed"]
+[ext_resource type="AudioStream" path="res://features/clock_jump/boost.wav" id="5_boost"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape_body"]
 radius = 20.0
@@ -67,3 +71,19 @@ theme_override_colors/font_shadow_color = Color(0.08, 0.04, 0.03, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 19
+
+[node name="SpringSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_spring")
+
+[node name="BumpSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_bump")
+
+[node name="EnemySplashedSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_enemy_splashed")
+
+[node name="BoostSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_boost")

@@ -22,6 +22,10 @@ signal brick_requested(jumper: ClockJumper, brick_position: Vector2)
 @onready var bottom_plate: Polygon2D = %BottomPlate
 @onready var boost_glow: Polygon2D = %BoostGlow
 @onready var action_feedback: Label = %ActionFeedback
+@onready var spring_sound: AudioStreamPlayer = %SpringSound
+@onready var bump_sound: AudioStreamPlayer = %BumpSound
+@onready var enemy_splashed_sound: AudioStreamPlayer = %EnemySplashedSound
+@onready var boost_sound: AudioStreamPlayer = %BoostSound
 
 # L'acteur conserve seulement son joueur et les états réinitialisés à chaque rebond.
 var player: LocalPlayer
@@ -95,6 +99,8 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity_force * delta
 	move_and_slide()
 	if is_on_floor():
+		# Chaque contact avec une plateforme fait entendre le rebond du ressort.
+		spring_sound.play()
 		_start_automatic_jump(automatic_jump_speed)
 
 	# Les bords horizontaux sont fermés et une chute complète replace le ressort au départ.
@@ -111,6 +117,7 @@ func can_squash_creature(creature_y: float) -> bool:
 func bounce_from_creature() -> void:
 	# Un écrasement réussi offre un rebond plus haut et recharge les deux actions.
 	_start_automatic_jump(creature_bounce_speed)
+	enemy_splashed_sound.play()
 	_play_action_feedback("SPLOTCH !", Color("ffe06f"))
 
 
@@ -124,6 +131,7 @@ func hit_by_creature(creature_position: Vector2) -> void:
 		horizontal_push = 1.0
 	velocity = Vector2(horizontal_push * 300.0, 230.0)
 	_hit_lock_left = 0.3
+	bump_sound.play()
 	_play_action_feedback("OOF", Color("ff6b72"))
 	_play_hit_juice(horizontal_push)
 
@@ -165,6 +173,7 @@ func _apply_player_style() -> void:
 
 func _play_boost_juice() -> void:
 	# Le halo et l'étirement vertical rendent l'impulsion évidente au premier regard.
+	boost_sound.play()
 	_play_action_feedback("BOOST", Color("72f5a6"))
 	_play_spring_juice(Vector2(0.76, 1.38), 0.2)
 	boost_glow.scale = Vector2(0.55, 0.55)
