@@ -8,6 +8,7 @@ const DEFAULT_MINIGAME_OBJECTIVE := "GET READY!"
 const MINIGAME_TRANSITION_SCENE := preload(
 	"res://features/minigame_transition/minigame_transition.tscn"
 )
+const GAME_OVER_SCENE := preload("res://features/game_over/game_over.tscn")
 
 var _round_timer := Timer.new()
 var isDebug : bool
@@ -81,7 +82,18 @@ func resetCountdown() -> void :
 	_round_timer.start(MINI_GAMES_DURATION - timerDifficulty)
 
 func gameover() -> void :
+	# Les scores restent disponibles pendant l'écran de résultat.
+	stop_round_timer()
+	get_tree().change_scene_to_packed(GAME_OVER_SCENE)
+
+func get_final_scores() -> Array[int]:
+	# Une copie empêche l'interface de modifier le score de la session.
+	return _score.duplicate()
+
+func return_to_main_menu() -> void:
+	# Quitter clôt la session avant de revenir au lobby principal.
 	_score = [0,0]
+	timerDifficulty = 0.0
 	stop_round_timer()
 	get_tree().change_scene_to_packed(mainMenu)
 
