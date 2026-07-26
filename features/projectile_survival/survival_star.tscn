@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hmd0dgyumvv3" path="res://features/projectile_survival/survival_star.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://c8pgo1tpkke80" path="res://features/projectile_survival/dash.wav" id="2_ysehh"]
+[ext_resource type="AudioStream" uid="uid://dlauiy06l4c4m" path="res://features/projectile_survival/collect.wav" id="3_collect"]
 
 [sub_resource type="CircleShape2D" id="StarCollisionShape"]
 radius = 20.0
@@ -59,5 +60,8 @@ vertical_alignment = 1
 unique_name_in_owner = true
 shape = SubResource("StarCollisionShape")
 
-[node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=1293511059]
+[node name="DashSound" type="AudioStreamPlayer" parent="." unique_id=549569568]
 stream = ExtResource("2_ysehh")
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_collect")

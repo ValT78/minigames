@@ -5,9 +5,9 @@ signal round_won(winner_player_id: int)
 signal round_lost
 
 @export_multiline var minigame_objective := "ESCAPE THE WIZARD MAZE BEFORE THE OTHERS!"
-@export_range(9, 31, 2) var maze_width := 23
+@export_range(9, 31, 2) var maze_width := 21
 @export_range(7, 19, 2) var maze_height := 11
-@export_range(30, 140, 1) var target_path_length := 72
+@export_range(30, 140, 1) var target_path_length := 64
 @export_range(5.0, 30.0, 1.0) var direct_test_duration := 15.0
 @export var create_test_players_when_running_directly := true
 
@@ -17,12 +17,6 @@ signal round_lost
 @export_range(0.0, 600.0, 1.0) var maze_top_margin := 205.0
 @export_range(0.0, 600.0, 1.0) var maze_right_margin := 25.0
 @export_range(0.0, 600.0, 1.0) var maze_bottom_margin := 150.0
-
-@export_category("Direct test layout")
-@export_range(0.0, 600.0, 1.0) var direct_test_left_margin := 70.0
-@export_range(0.0, 600.0, 1.0) var direct_test_top_margin := 145.0
-@export_range(0.0, 600.0, 1.0) var direct_test_right_margin := 70.0
-@export_range(0.0, 600.0, 1.0) var direct_test_bottom_margin := 80.0
 
 # Tous les éléments propres au mini-jeu restent regroupés dans sa feature.
 const MAZE_BOARD_SCENE := preload("res://features/wizard_maze/maze_board.tscn")
@@ -106,21 +100,12 @@ func _create_maze() -> void:
 func _get_available_maze_rect() -> Rect2:
 	# Les marges sont indépendantes afin de déplacer ou agrandir le plateau depuis l'inspecteur.
 	var viewport_size := get_viewport_rect().size
-	if _uses_external_timer:
-		return _create_maze_rect_from_margins(
-			viewport_size,
-			maze_left_margin,
-			maze_top_margin,
-			maze_right_margin,
-			maze_bottom_margin,
-		)
-		
 	return _create_maze_rect_from_margins(
 		viewport_size,
-		direct_test_left_margin,
-		direct_test_top_margin,
-		direct_test_right_margin,
-		direct_test_bottom_margin,
+		maze_left_margin,
+		maze_top_margin,
+		maze_right_margin,
+		maze_bottom_margin,
 	)
 
 

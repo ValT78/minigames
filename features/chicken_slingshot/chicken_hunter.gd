@@ -25,6 +25,7 @@ signal projectile_requested(
 @onready var charge_bar: ProgressBar = %ChargeBar
 @onready var arrow_badge: Label = %ArrowBadge
 @onready var player_label: Label = %PlayerLabel
+@onready var shot_sound: AudioStreamPlayer = %ShotSound
 
 # Les états de charge restent locaux au tireur et indépendants des touches physiques.
 var player: LocalPlayer
@@ -108,6 +109,7 @@ func _fire_projectile(charge_ratio: float, is_arrow: bool) -> void:
 
 	# Le canon local donne une origine et une direction cohérentes avec le visuel incliné.
 	var travel_direction := Vector2.RIGHT.rotated(weapon.global_rotation)
+	shot_sound.play()
 	projectile_requested.emit(
 		player.id,
 		projectile_origin.global_position,

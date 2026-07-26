@@ -185,6 +185,7 @@ func _on_dolphin_entered_ring(route_index: int, dolphin: DolphinRunner) -> void:
 	_next_ring_by_player_id[player_id] += 1
 	var completed_ring_count: int = _next_ring_by_player_id[player_id]
 	dolphin.update_progress(completed_ring_count, ring_count)
+	dolphin.play_ring_sound()
 	_route_rings[route_index].flash(dolphin.player.color)
 	if completed_ring_count >= ring_count:
 		_finish_round(dolphin)

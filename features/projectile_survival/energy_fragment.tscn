@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://2irvr473fxsp"]
 
 [ext_resource type="Script" uid="uid://o7mq4p0ydv85" path="res://features/projectile_survival/energy_fragment.gd" id="1_script"]
-[ext_resource type="AudioStream" uid="uid://dlauiy06l4c4m" path="res://features/projectile_survival/collect.wav" id="2_6iakf"]
 
 [sub_resource type="CircleShape2D" id="FragmentCollisionShape"]
 radius = 22.0
@@ -29,6 +28,3 @@ polygon = PackedVector2Array(0, -22, 7, -7, 22, 0, 7, 7, 0, 22, -7, 7, -22, 0, -
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1901490098]
 shape = SubResource("FragmentCollisionShape")
-
-[node name="CollectSound" type="AudioStreamPlayer2D" parent="." unique_id=807111112]
-stream = ExtResource("2_6iakf")
