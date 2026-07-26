@@ -28,6 +28,7 @@ buses/default_bus_layout="uid://co1kjc756yb6m"
 PlayerRegistry="*res://features/multi/player_registry.gd"
 GameManager="*uid://c5c1tvkhrydc6"
 PlayerInputRouter="*res://features/multi/player_input_router.gd"
+BackgroundMusicPlayer="*uid://c3fg5hd6bq3nw"
 
 [display]
 
