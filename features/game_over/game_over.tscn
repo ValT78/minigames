@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://bafc3t8j50yby"]
 
-[ext_resource type="Script" path="res://features/game_over/game_over.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://features/Backbone/bombCore.png" id="3_bomb"]
-[ext_resource type="FontFile" path="res://Global assets/Fonts/Cheese Milky.otf" id="4_title_font"]
-[ext_resource type="FontFile" path="res://Global assets/Fonts/7segments.ttf" id="5_score_font"]
+[ext_resource type="Script" uid="uid://dqijdbwdqlx86" path="res://features/game_over/game_over.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://tadca6b70rwt" path="res://features/Backbone/bombCore.png" id="3_bomb"]
+[ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="4_title_font"]
+[ext_resource type="AudioStream" uid="uid://bxb8nks442o8l" path="res://features/game_over/Bomba.wav" id="5_74tyx"]
+[ext_resource type="FontFile" uid="uid://c2kb3jvobtucf" path="res://Global assets/Fonts/7segments.ttf" id="5_score_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_score"]
 bg_color = Color(0.055, 0.043, 0.035, 0.92)
@@ -33,6 +34,18 @@ corner_radius_bottom_left = 18
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBox_button_pressed"]
+bg_color = Color(0.5, 0.07, 0.035, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.67, 0.16, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [sub_resource type="StyleBoxFlat" id="StyleBox_button_hover"]
 bg_color = Color(0.92, 0.23, 0.08, 1)
 border_width_left = 5
@@ -47,19 +60,7 @@ corner_radius_bottom_left = 18
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_button_pressed"]
-bg_color = Color(0.5, 0.07, 0.035, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 0.67, 0.16, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[node name="GameOver" type="Control"]
+[node name="GameOver" type="Control" unique_id=897019762]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=913332972]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,15 +79,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.075, 0.045, 0.025, 1)
 
-[node name="TopGlow" type="Polygon2D" parent="."]
+[node name="TopGlow" type="Polygon2D" parent="." unique_id=826165541]
 position = Vector2(960, 220)
 color = Color(0.36, 0.055, 0.025, 0.8)
 polygon = PackedVector2Array(-960, -220, 960, -220, 680, 420, -680, 420)
 
-[node name="ExplosionArtwork" type="Control" parent="."]
+[node name="ExplosionArtwork" type="Control" parent="." unique_id=1175216688]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 0
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -100,90 +101,90 @@ grow_vertical = 2
 pivot_offset = Vector2(400, 350)
 mouse_filter = 2
 
-[node name="ExplosionShapes" type="Node2D" parent="ExplosionArtwork"]
+[node name="ExplosionShapes" type="Node2D" parent="ExplosionArtwork" unique_id=922727965]
 position = Vector2(400, 350)
 
-[node name="OuterBurst" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="OuterBurst" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=148323315]
 color = Color(0.914, 0.294, 0.133, 1)
 polygon = PackedVector2Array(345, 0, 216.7, 38.2, 324.2, 118, 190.5, 110, 264.3, 221.8, 141.4, 168.5, 172.5, 298.8, 75.2, 206.7, 59.9, 339.8, 0, 220, -59.9, 339.8, -75.2, 206.7, -172.5, 298.8, -141.4, 168.5, -264.3, 221.8, -190.5, 110, -324.2, 118, -216.7, 38.2, -345, 0, -216.7, -38.2, -324.2, -118, -190.5, -110, -264.3, -221.8, -141.4, -168.5, -172.5, -298.8, -75.2, -206.7, -59.9, -339.8, 0, -220, 59.9, -339.8, 75.2, -206.7, 172.5, -298.8, 141.4, -168.5, 264.3, -221.8, 190.5, -110, 324.2, -118, 216.7, -38.2)
 
-[node name="InnerBurst" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="InnerBurst" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=742652693]
 color = Color(1, 0.784, 0.239, 1)
 polygon = PackedVector2Array(260, 0, 162.5, 28.7, 244.3, 88.9, 142.9, 82.5, 199.2, 167.1, 106.1, 126.4, 130, 225.2, 56.4, 155, 45.1, 256.1, 0, 165, -45.1, 256.1, -56.4, 155, -130, 225.2, -106.1, 126.4, -199.2, 167.1, -142.9, 82.5, -244.3, 88.9, -162.5, 28.7, -260, 0, -162.5, -28.7, -244.3, -88.9, -142.9, -82.5, -199.2, -167.1, -106.1, -126.4, -130, -225.2, -56.4, -155, -45.1, -256.1, 0, -165, 45.1, -256.1, 56.4, -155, 130, -225.2, 106.1, -126.4, 199.2, -167.1, 142.9, -82.5, 244.3, -88.9, 162.5, -28.7)
 
-[node name="ExplosionCenter" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="ExplosionCenter" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=1616342124]
 color = Color(1, 0.945, 0.651, 1)
 polygon = PackedVector2Array(125, 0, 115.5, 47.8, 88.4, 88.4, 47.8, 115.5, 0, 125, -47.8, 115.5, -88.4, 88.4, -115.5, 47.8, -125, 0, -115.5, -47.8, -88.4, -88.4, -47.8, -115.5, 0, -125, 47.8, -115.5, 88.4, -88.4, 115.5, -47.8)
 
-[node name="DebrisTopLeft" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="DebrisTopLeft" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=1812424762]
 position = Vector2(-330, -95)
 rotation = -0.35
 color = Color(1, 0.812, 0.361, 1)
 polygon = PackedVector2Array(-28, -12, 22, -18, 30, 13, -16, 20)
 
-[node name="DebrisTopRight" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="DebrisTopRight" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=1227009168]
 position = Vector2(315, -125)
 rotation = 0.45
 color = Color(1, 0.439, 0.263, 1)
 polygon = PackedVector2Array(-28, -12, 22, -18, 30, 13, -16, 20)
 
-[node name="DebrisBottomLeft" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="DebrisBottomLeft" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=1591830391]
 position = Vector2(-280, 190)
 rotation = 0.25
 color = Color(1, 0.439, 0.263, 1)
 polygon = PackedVector2Array(-28, -12, 22, -18, 30, 13, -16, 20)
 
-[node name="DebrisBottomRight" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="DebrisBottomRight" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=753578309]
 position = Vector2(305, 175)
 rotation = -0.5
 color = Color(1, 0.812, 0.361, 1)
 polygon = PackedVector2Array(-28, -12, 22, -18, 30, 13, -16, 20)
 
-[node name="SmokeLeft" type="Node2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="SmokeLeft" type="Node2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=717281082]
 position = Vector2(-210, -210)
 scale = Vector2(0.9, 0.9)
 
-[node name="LeftPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft"]
+[node name="LeftPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft" unique_id=630992145]
 position = Vector2(-45, 12)
 scale = Vector2(1.2, 1.2)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="CenterPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft"]
+[node name="CenterPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft" unique_id=1616812823]
 position = Vector2(0, -16)
 scale = Vector2(1.525, 1.525)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="RightPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft"]
+[node name="RightPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeLeft" unique_id=714443935]
 position = Vector2(52, 10)
 scale = Vector2(1.075, 1.075)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="SmokeRight" type="Node2D" parent="ExplosionArtwork/ExplosionShapes"]
+[node name="SmokeRight" type="Node2D" parent="ExplosionArtwork/ExplosionShapes" unique_id=1059864229]
 position = Vector2(230, -185)
 scale = Vector2(0.7, 0.7)
 
-[node name="LeftPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight"]
+[node name="LeftPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight" unique_id=1260251641]
 position = Vector2(-45, 12)
 scale = Vector2(1.2, 1.2)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="CenterPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight"]
+[node name="CenterPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight" unique_id=1205469072]
 position = Vector2(0, -16)
 scale = Vector2(1.525, 1.525)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="RightPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight"]
+[node name="RightPuff" type="Polygon2D" parent="ExplosionArtwork/ExplosionShapes/SmokeRight" unique_id=631498314]
 position = Vector2(52, 10)
 scale = Vector2(1.075, 1.075)
 color = Color(0.48, 0.47, 0.44, 0.9)
 polygon = PackedVector2Array(40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28, 0, -40, 28, -28)
 
-[node name="Flash" type="ColorRect" parent="."]
+[node name="Flash" type="ColorRect" parent="." unique_id=1046798837]
 unique_name_in_owner = true
 z_index = 100
 layout_mode = 1
@@ -195,7 +196,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0.95, 0.72, 1)
 
-[node name="ResultContent" type="VBoxContainer" parent="."]
+[node name="ResultContent" type="VBoxContainer" parent="." unique_id=805689845]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -210,145 +211,144 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="BoomLabel" type="Label" parent="ResultContent"]
-layout_mode = 2
+[node name="BoomLabel" type="Label" parent="ResultContent" unique_id=578881590]
 custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.22, 1)
 theme_override_colors/font_shadow_color = Color(0.42, 0.025, 0.01, 1)
 theme_override_constants/shadow_offset_x = 8
 theme_override_constants/shadow_offset_y = 10
-theme_override_font_sizes/font_size = 150
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 150
 text = "BOOM !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BombCenter" type="CenterContainer" parent="ResultContent"]
-layout_mode = 2
+[node name="BombCenter" type="CenterContainer" parent="ResultContent" unique_id=1368544163]
 custom_minimum_size = Vector2(0, 290)
+layout_mode = 2
 mouse_filter = 2
 
-[node name="Bomb" type="TextureRect" parent="ResultContent/BombCenter"]
+[node name="Bomb" type="TextureRect" parent="ResultContent/BombCenter" unique_id=1465716102]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(275, 275)
 layout_mode = 2
-pivot_offset = Vector2(137.5, 137.5)
 mouse_filter = 2
 texture = ExtResource("3_bomb")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="GameOverLabel" type="Label" parent="ResultContent"]
+[node name="GameOverLabel" type="Label" parent="ResultContent" unique_id=880509114]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.78, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 86
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 86
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FinalScoreLabel" type="Label" parent="ResultContent"]
+[node name="FinalScoreLabel" type="Label" parent="ResultContent" unique_id=1122381489]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.83, 0.72, 0.55, 1)
-theme_override_font_sizes/font_size = 34
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 34
 text = "FINAL SCORE"
 horizontal_alignment = 1
 
-[node name="Scores" type="HBoxContainer" parent="ResultContent"]
+[node name="Scores" type="HBoxContainer" parent="ResultContent" unique_id=657457983]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
 theme_override_constants/separation = 36
 alignment = 1
 
-[node name="FirstScoreCard" type="PanelContainer" parent="ResultContent/Scores"]
+[node name="FirstScoreCard" type="PanelContainer" parent="ResultContent/Scores" unique_id=655877353]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 140)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_score")
 
-[node name="Margin" type="MarginContainer" parent="ResultContent/Scores/FirstScoreCard"]
+[node name="Margin" type="MarginContainer" parent="ResultContent/Scores/FirstScoreCard" unique_id=137494908]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 10
 
-[node name="Values" type="VBoxContainer" parent="ResultContent/Scores/FirstScoreCard/Margin"]
+[node name="Values" type="VBoxContainer" parent="ResultContent/Scores/FirstScoreCard/Margin" unique_id=206867233]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="FirstPlayerLabel" type="Label" parent="ResultContent/Scores/FirstScoreCard/Margin/Values"]
+[node name="FirstPlayerLabel" type="Label" parent="ResultContent/Scores/FirstScoreCard/Margin/Values" unique_id=197393581]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.75, 0.64, 1)
-theme_override_font_sizes/font_size = 25
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 25
 text = "PLAYER 1"
 horizontal_alignment = 1
 
-[node name="FirstScoreLabel" type="Label" parent="ResultContent/Scores/FirstScoreCard/Margin/Values"]
+[node name="FirstScoreLabel" type="Label" parent="ResultContent/Scores/FirstScoreCard/Margin/Values" unique_id=1344596757]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.36, 0.78, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 72
 theme_override_fonts/font = ExtResource("5_score_font")
+theme_override_font_sizes/font_size = 72
 text = "000"
 horizontal_alignment = 1
 
-[node name="SecondScoreCard" type="PanelContainer" parent="ResultContent/Scores"]
+[node name="SecondScoreCard" type="PanelContainer" parent="ResultContent/Scores" unique_id=1433804889]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 140)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_score")
 
-[node name="Margin" type="MarginContainer" parent="ResultContent/Scores/SecondScoreCard"]
+[node name="Margin" type="MarginContainer" parent="ResultContent/Scores/SecondScoreCard" unique_id=618066072]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 10
 
-[node name="Values" type="VBoxContainer" parent="ResultContent/Scores/SecondScoreCard/Margin"]
+[node name="Values" type="VBoxContainer" parent="ResultContent/Scores/SecondScoreCard/Margin" unique_id=998864074]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SecondPlayerLabel" type="Label" parent="ResultContent/Scores/SecondScoreCard/Margin/Values"]
+[node name="SecondPlayerLabel" type="Label" parent="ResultContent/Scores/SecondScoreCard/Margin/Values" unique_id=285503045]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.75, 0.64, 1)
-theme_override_font_sizes/font_size = 25
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 25
 text = "PLAYER 2"
 horizontal_alignment = 1
 
-[node name="SecondScoreLabel" type="Label" parent="ResultContent/Scores/SecondScoreCard/Margin/Values"]
+[node name="SecondScoreLabel" type="Label" parent="ResultContent/Scores/SecondScoreCard/Margin/Values" unique_id=965206284]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.81, 0.36, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 72
 theme_override_fonts/font = ExtResource("5_score_font")
+theme_override_font_sizes/font_size = 72
 text = "000"
 horizontal_alignment = 1
 
-[node name="QuitCenter" type="CenterContainer" parent="ResultContent"]
-layout_mode = 2
+[node name="QuitCenter" type="CenterContainer" parent="ResultContent" unique_id=380408747]
 custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="ResultContent/QuitCenter"]
+[node name="QuitButton" type="Button" parent="ResultContent/QuitCenter" unique_id=785883327]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 92)
 layout_mode = 2
@@ -357,13 +357,17 @@ focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
 theme_override_colors/font_color = Color(1, 0.96, 0.78, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.88, 0.55, 1)
-theme_override_font_sizes/font_size = 44
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBox_button_normal")
+theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
 theme_override_styles/hover = SubResource("StyleBox_button_hover")
 theme_override_styles/focus = SubResource("StyleBox_button_hover")
-theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
 text = "ESC - QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1859469312]
+stream = ExtResource("5_74tyx")
+autoplay = true
