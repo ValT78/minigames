@@ -20,7 +20,6 @@ const PLATFORM_SCENE := preload("res://features/clock_jump/clock_jump_platform.t
 @onready var player_container: Node2D = %PlayerContainer
 @onready var score_row: HBoxContainer = %ScoreRow
 @onready var local_time_label: Label = %LocalTimeLabel
-@onready var objective_label: Label = %ObjectiveLabel
 @onready var instruction_bar: HBoxContainer = %InstructionBar
 @onready var result_panel: PanelContainer = %ResultPanel
 @onready var result_label: Label = %ResultLabel
@@ -52,7 +51,7 @@ func _ready() -> void:
 	_create_course()
 	_spawn_all_players()
 	_update_hud()
-	_play_intro()
+	#_play_intro()
 
 
 func _exit_tree() -> void:
@@ -181,7 +180,7 @@ func _spawn_all_players() -> void:
 func _create_score_label(player: LocalPlayer) -> void:
 	# Un petit compteur coloré suffit à montrer la course vers les trois créatures.
 	var score_label := Label.new()
-	score_label.custom_minimum_size = Vector2(190.0, 50.0)
+	score_label.custom_minimum_size = Vector2(0.0, 50.0)
 	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	score_label.add_theme_font_size_override("font_size", 27)
 	score_label.add_theme_color_override("font_color", player.color.lightened(0.28))
@@ -295,27 +294,6 @@ func _update_score_label(player_id: int) -> void:
 		_creature_scores.get(player_id, 0),
 		creatures_to_win,
 	]
-
-
-func _play_intro() -> void:
-	# L'objectif attire brièvement l'œil, puis laisse toute la place à la partie.
-	objective_label.modulate.a = 0.0
-	objective_label.scale = Vector2(0.7, 0.7)
-	var objective_tween := create_tween()
-	objective_tween.set_parallel(true)
-	objective_tween.tween_property(objective_label, "modulate:a", 1.0, 0.18)
-	objective_tween.tween_property(objective_label, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK)
-	objective_tween.chain().tween_property(objective_label, "modulate:a", 0.0, 0.3).set_delay(1.25)
-
-	# Les quatre commandes montent ensemble depuis le bas et restent visibles pendant la manche.
-	var instruction_position := instruction_bar.position
-	instruction_bar.position.y += 18.0
-	instruction_bar.modulate.a = 0.0
-	var instruction_tween := create_tween()
-	instruction_tween.set_parallel(true)
-	instruction_tween.tween_property(instruction_bar, "position", instruction_position, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	instruction_tween.tween_property(instruction_bar, "modulate:a", 1.0, 0.25)
-
 
 func _pulse_score_label(player_id: int) -> void:
 	if not _score_labels.has(player_id):

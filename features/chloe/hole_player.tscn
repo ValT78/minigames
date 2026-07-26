@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dhrbr4tds5abs" path="res://features/chloe/hole_player.gd" id="1_fifrr"]
 [ext_resource type="Texture2D" uid="uid://bt50r81y38wla" path="res://features/chloe/Hole.png" id="1_idgd0"]
 [ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="3_0kt3y"]
+[ext_resource type="AudioStream" uid="uid://dgtevlgffdxlv" path="res://Global assets/golf Ball Sounds/ballFalllsIn.wav" id="4_3ewgg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 28.0
@@ -43,5 +44,9 @@ text = "5 / 5"
 label_settings = SubResource("LabelSettings_fifrr")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1323858812]
+stream = ExtResource("4_3ewgg")
+volume_db = -20.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

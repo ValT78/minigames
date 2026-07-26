@@ -19,7 +19,7 @@ var time_slider: HSlider
 var time_label: Label
 var minigamesScene : Array[PackedScene]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
-var score_container: VBoxContainer
+var score_container: HBoxContainer
 var forceLoadScene : int = -1
 
 var lastMinigameIndex : Array[int]

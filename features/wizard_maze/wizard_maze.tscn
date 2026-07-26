@@ -38,6 +38,8 @@ shadow_size = 12
 
 [node name="WizardMaze" type="Node2D" unique_id=1432634398]
 script = ExtResource("1_game")
+maze_left_margin = 25.0
+maze_bottom_margin = 80.0
 
 [node name="Background" type="ColorRect" parent="." unique_id=1347282628]
 unique_name_in_owner = true
@@ -58,6 +60,7 @@ unique_name_in_owner = true
 layer = 24
 
 [node name="LocalTimeBadge" type="PanelContainer" parent="HUD" unique_id=1226184504]
+visible = false
 offset_left = 46.0
 offset_top = 38.0
 offset_right = 154.0
@@ -79,13 +82,15 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 301.0
+offset_left = 180.0
 offset_top = -134.0
-offset_right = -49.0
+offset_right = -170.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1)
 theme_override_styles/panel = SubResource("StyleBox_instruction")
+metadata/_edit_use_anchors_ = true
 
 [node name="InstructionLabel" type="Label" parent="HUD/InstructionPanel" unique_id=970931965]
 layout_mode = 2

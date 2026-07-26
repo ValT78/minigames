@@ -1,11 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://ddveh1nrkonq1"]
 
-[ext_resource type="Script" path="res://features/wizard_maze/maze_board.gd" id="1_board"]
+[ext_resource type="Script" uid="uid://c5afsi3vu2g4p" path="res://features/wizard_maze/maze_board.gd" id="1_board"]
 
-[node name="MazeBoard" type="Node2D"]
+[node name="MazeBoard" type="Node2D" unique_id=1132343988]
 script = ExtResource("1_board")
 
-[node name="WallBody" type="StaticBody2D" parent="."]
+[node name="WallBody" type="StaticBody2D" parent="." unique_id=726837153]
 unique_name_in_owner = true
-collision_layer = 1
 collision_mask = 0
