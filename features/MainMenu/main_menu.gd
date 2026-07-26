@@ -5,6 +5,7 @@ var players : Dictionary[int,Node2D]
 var startTimer : Timer = Timer.new()
 @onready var h_slider: HSlider = $TextureRect/HSlider
 const MAIN = preload("uid://hfn6j6o6a0d0")
+@onready var fuze_audio_player: AudioStreamPlayer2D = $FuzeAudioPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,8 +28,11 @@ func _process(delta: float) -> void:
 	
 	if not isAllPlayerReady : 
 		startTimer.stop()
+		fuze_audio_player.stop()
+		
 	elif startTimer.is_stopped():
 		startTimer.start(3)
+		fuze_audio_player.play()
 	
 	h_slider.value = 100 if not isAllPlayerReady else 100 * startTimer.time_left /3.0
 

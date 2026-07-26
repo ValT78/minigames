@@ -7,7 +7,8 @@ const MOUSE := &"mouse"
 
 # Positions physiques choisies pour un clavier français AZERTY.
 # Elles restent identiques même lorsque Maj modifie le caractère produit.
-const LEFT_ACTION_2_KEY: Key = KEY_LESS
+const LEFT_ACTION_1_KEY: Key = KEY_SHIFT
+const LEFT_ACTION_2_KEY: Key = KEY_SPACE
 const RIGHT_ACTION_1_KEY: Key = KEY_PERIOD
 const RIGHT_ACTION_2_KEY: Key = KEY_SLASH
 
@@ -126,21 +127,23 @@ func _route_key(event: InputEventKey) -> void:
 
 	# Le clavier gauche expose simplement Action 1 et Action 2.
 	if left_player != null:
-		if event.keycode == KEY_SHIFT and event.location != KEY_LOCATION_RIGHT:
+		if event.physical_keycode == LEFT_ACTION_1_KEY and event.location != KEY_LOCATION_RIGHT:
 			left_player.input._set_action_1_pressed(event.pressed)
-		elif event.pressed and not event.echo and _is_left_action_2_event(event):
-			# Mémorise le code réellement reçu pour rendre le relâchement fiable.
-			_left_action_2_physical_key = event.physical_keycode
-			left_player.input._set_action_2_pressed(true)
-		elif not event.pressed and (
-			(
-				_left_action_2_physical_key != KEY_NONE
-				and event.physical_keycode == _left_action_2_physical_key
-			)
-			or _is_left_action_2_event(event)
-		):
-			_left_action_2_physical_key = KEY_NONE
-			left_player.input._set_action_2_pressed(false)
+		elif event.physical_keycode == LEFT_ACTION_2_KEY :
+			left_player.input._set_action_2_pressed(event.pressed)
+		#elif event.pressed and not event.echo and _is_left_action_2_event(event):
+			## Mémorise le code réellement reçu pour rendre le relâchement fiable.
+			#_left_action_2_physical_key = event.physical_keycode
+			#left_player.input._set_action_2_pressed(true)
+		#elif not event.pressed and (
+			#(
+				#_left_action_2_physical_key != KEY_NONE
+				#and event.physical_keycode == _left_action_2_physical_key
+			#)
+			#or _is_left_action_2_event(event)
+		#):
+			#_left_action_2_physical_key = KEY_NONE
+			#left_player.input._set_action_2_pressed(false)
 
 	# Les positions physiques rendent les deux actions indépendantes de Maj.
 	if right_player != null:
