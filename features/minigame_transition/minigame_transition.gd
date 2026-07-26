@@ -7,6 +7,13 @@ extends CanvasLayer
 
 
 func play(objective_text: String) -> void:
+	# On joue le son de transition
+	var sfx := AudioStreamPlayer.new()
+	sfx.stream = load("res://features/minigame_transition/next_level.wav")
+	sfx.volume_db = linear_to_db(1.0 / 10.0)
+	get_tree().root.add_child(sfx)
+	sfx.finished.connect(sfx.queue_free)
+	sfx.play()
 	# Une entrée brève rend le texte lisible presque pendant toute la seconde disponible.
 	objective_label.text = objective_text
 	objective_panel.modulate.a = 0.0
