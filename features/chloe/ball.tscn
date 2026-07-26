@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b5mqeq28fsibi" path="res://features/chloe/ball.gd" id="1_r8xnp"]
 [ext_resource type="Texture2D" uid="uid://cv175p4yaekju" path="res://features/chloe/golfBall.png" id="2_vt2t6"]
+[ext_resource type="AudioStream" uid="uid://lomb34vhg5mr" path="res://Global assets/golf Ball Sounds/ballCollision-001.wav" id="3_iwvrr"]
+[ext_resource type="AudioStream" uid="uid://drtes8vismllo" path="res://Global assets/golf Ball Sounds/ball_Impact-001.wav" id="4_shfrf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vkuwr"]
 friction = 0.0
@@ -15,6 +17,8 @@ mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_vkuwr")
 gravity_scale = 0.0
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 2
 linear_velocity = Vector2(500, 500)
 linear_damp = -0.1
 script = ExtResource("1_r8xnp")
@@ -24,3 +28,13 @@ texture = ExtResource("2_vt2t6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1097954785]
 shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="AudioPlayerColision" type="AudioStreamPlayer2D" parent="." unique_id=169421050]
+stream = ExtResource("3_iwvrr")
+volume_db = -20.0
+
+[node name="AudioPlayerImpact" type="AudioStreamPlayer2D" parent="." unique_id=1896070758]
+stream = ExtResource("4_shfrf")
+volume_db = -20.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
