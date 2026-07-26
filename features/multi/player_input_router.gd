@@ -61,6 +61,7 @@ func _input(event: InputEvent) -> void:
 	# Échap réinitialise la session uniquement lorsque le lobby accepte les inscriptions.
 	if joining_enabled and event is InputEventKey:
 		if event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+			return
 			_registry.clear_players()
 			var viewport := get_viewport()
 			if viewport != null:

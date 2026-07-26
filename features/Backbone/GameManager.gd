@@ -17,7 +17,19 @@ var _isNumberChanging = false
 
 var time_slider: HSlider
 var time_label: Label
-var minigamesScene : Array[PackedScene]
+@export var minigamesScene : Array[PackedScene] = [
+	preload("uid://d0dljg52jpu5m"),
+	preload("uid://d0t6p2tknmlr1"),
+	preload("res://minigames/clock_jump.tscn"),
+	preload("uid://lnmfqie585b2"),
+	preload("uid://coecgw1xvop5c"),
+	preload("uid://cex5ichp627rf"),
+	preload("uid://lob2oxyktwuq"),
+	preload("uid://cw75of2el32bl"),
+	preload("uid://los4ac3yltwb"),
+	preload("res://minigames/wizard_maze.tscn")
+	
+]
 @onready var mainMenu : PackedScene = preload("uid://bjfhkvvyuqks4")
 var score_container: HBoxContainer
 var forceLoadScene : int = -1
@@ -36,9 +48,8 @@ func _ready() -> void:
 	_round_timer.timeout.connect(_on_round_timer_timeout)
 	add_child(_round_timer)
 	get_tree().scene_changed.connect(_on_scene_changed)
-	loadScenesFromFolder("res://minigames")
 	if not OS.has_feature("editor") : forceLoadScene = -1
-		
+	else : loadScenesFromFolder("res://minigames")
 	
 func _on_scene_changed() :
 	isDebug = not get_tree().current_scene.name == "Main"
