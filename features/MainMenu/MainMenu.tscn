@@ -13,7 +13,7 @@ font_size = 209
 
 [sub_resource type="LabelSettings" id="LabelSettings_58hl1"]
 font = ExtResource("2_elusd")
-font_size = 61
+font_size = 57
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qr7g0"]
 texture = ExtResource("4_drvas")
@@ -71,7 +71,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "use zqsd to move
 left shift for main action
-< for secondary action"
+space for secondary action"
 label_settings = SubResource("LabelSettings_58hl1")
 horizontal_alignment = 2
 vertical_alignment = 1
