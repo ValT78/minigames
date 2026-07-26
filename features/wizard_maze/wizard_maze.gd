@@ -114,6 +114,7 @@ func _get_available_maze_rect() -> Rect2:
 			maze_right_margin,
 			maze_bottom_margin,
 		)
+		
 	return _create_maze_rect_from_margins(
 		viewport_size,
 		direct_test_left_margin,
