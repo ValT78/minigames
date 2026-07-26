@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://5cm10smsfx3p"]
 
 [ext_resource type="Script" uid="uid://dr1fupbt5ry13" path="res://features/MainMenu/mainMenuPlayer.gd" id="1_mdmsq"]
-[ext_resource type="Texture2D" uid="uid://bvbwgns1dt5wv" path="res://icon.svg" id="2_j0cjq"]
+[ext_resource type="Texture2D" uid="uid://d3bxoijmavg10" path="res://features/MainMenu/capybara.png" id="2_ph5ae"]
 [ext_resource type="Texture2D" uid="uid://bfmre4305e6vi" path="res://features/MainMenu/heart.png" id="3_xsdrq"]
 [ext_resource type="Texture2D" uid="uid://beeyv7xx7vbbe" path="res://features/MainMenu/note.png" id="4_2p2qx"]
+[ext_resource type="Texture2D" uid="uid://di8mcdxexxtui" path="res://features/MainMenu/capybaraScarf.png" id="5_brs4w"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wgxnn"]
 particle_flag_disable_z = true
@@ -36,20 +37,26 @@ turbulence_noise_strength = 5.53
 [node name="Player" type="Node2D" unique_id=1384677058 node_paths=PackedStringArray("body")]
 z_index = 2
 script = ExtResource("1_mdmsq")
-body = NodePath("Sprite2D")
+body = NodePath("Body")
 _distanceToCenter = 200.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=803782160]
-texture = ExtResource("2_j0cjq")
+[node name="Body" type="Node2D" parent="." unique_id=1865560372]
 
-[node name="redParticle" type="GPUParticles2D" parent="Sprite2D" unique_id=747814829]
+[node name="Sprite2D" type="Sprite2D" parent="Body" unique_id=1486608558]
+scale = Vector2(0.31, 0.31)
+texture = ExtResource("2_ph5ae")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body/Sprite2D" unique_id=2034523111]
+texture = ExtResource("5_brs4w")
+
+[node name="redParticle" type="GPUParticles2D" parent="Body" unique_id=747814829]
 emitting = false
 texture = ExtResource("3_xsdrq")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_wgxnn")
 
-[node name="musiqueParticule" type="GPUParticles2D" parent="Sprite2D" unique_id=1715139729]
+[node name="musiqueParticule" type="GPUParticles2D" parent="Body" unique_id=1715139729]
 emitting = false
 texture = ExtResource("4_2p2qx")
 lifetime = 1.44

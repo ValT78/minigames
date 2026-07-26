@@ -1,15 +1,15 @@
 extends Node2D
 
 var player : LocalPlayer
-@export var body : Sprite2D
+@export var body : Node2D
 @export var _distanceToCenter : float = 1
-@onready var red_particle: GPUParticles2D = $Sprite2D/redParticle
-@onready var musique_particule: GPUParticles2D = $Sprite2D/musiqueParticule
+@onready var red_particle: GPUParticles2D = $Body/redParticle
+@onready var musique_particule: GPUParticles2D = $Body/musiqueParticule
 
 func setup(_player : LocalPlayer, postion : Vector2) :
 	# Le menu recrée uniquement l'avatar visuel du joueur déjà inscrit.
 	player = _player
-	body.self_modulate = player.color
+	body.get_child(0).get_child(0).self_modulate = player.color
 	global_position = postion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
