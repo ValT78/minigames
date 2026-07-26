@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bvbwgns1dt5wv" path="res://icon.svg" id="1_fbf8j"]
 [ext_resource type="Script" uid="uid://bsgag8utkmohj" path="res://features/Minigolf/golf_ball.gd" id="1_m71ay"]
+[ext_resource type="AudioStream" uid="uid://lomb34vhg5mr" path="res://Global assets/golf Ball Sounds/ballCollision-001.wav" id="3_dfuq7"]
+[ext_resource type="AudioStream" uid="uid://drtes8vismllo" path="res://Global assets/golf Ball Sounds/ball_Impact-001.wav" id="4_ftlli"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 64.0
@@ -23,7 +25,10 @@ color_ramp = SubResource("Gradient_g4v7s")
 [node name="GolfBall" type="RigidBody2D" unique_id=1095497937]
 mass = 0.001
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 2
 linear_damp = 1.0
+angular_damp = 10.0
 script = ExtResource("1_m71ay")
 _speed = 2.5
 
@@ -47,3 +52,13 @@ shape = SubResource("CircleShape2D_g4v7s")
 texture = SubResource("NoiseTexture2D_g4v7s")
 polygon = PackedVector2Array(29, -13.999998, 26.000002, -20, 20.000002, -26, 14.000002, -29.000004, 9, -31, 0, -32, -7.9999995, -31, -13.999999, -29.000002, -20.000002, -26.000004, -26.000002, -20.000002, -30.000004, -14.000002, -30.999998, -8, -31.999998, 0, -31, 8.000001, -30, 14, -26, 20, -20.000002, 26.000004, -13.999998, 28.999998, -7.999998, 30.999998, 0, 32, 7.999999, 30.999996, 14, 29, 20, 26.000004, 26, 20, 28.999996, 14, 31.000002, 8, 32, 0, 31, -8.000001)
 uv = PackedVector2Array(487.48663, 145.12732, 463.51392, 97.18187, 415.56848, 49.23642, 367.62305, 25.263685, 327.66852, 9.281889, 255.7503, 1.2909832, 191.82306, 9.281889, 143.87762, 25.263716, 95.93219, 49.23639, 47.98674, 97.181854, 24.013992, 145.12732, 8.032196, 193.07274, 0.041320324, 257, 8.032196, 320.92725, 24.014023, 368.87268, 47.98674, 416.81815, 95.93219, 464.7636, 143.87766, 488.73627, 191.82309, 504.71808, 255.7503, 512.70905, 319.67758, 504.71808, 367.623, 488.73627, 415.56842, 464.7636, 463.51392, 416.81815, 487.48657, 368.87268, 503.46844, 320.92725, 511.45935, 257, 503.46838, 193.07274)
+
+[node name="AudioPlayerColision" type="AudioStreamPlayer2D" parent="." unique_id=605258496]
+stream = ExtResource("3_dfuq7")
+volume_db = -20.0
+
+[node name="AudioPlayerImpact" type="AudioStreamPlayer2D" parent="." unique_id=1848679727]
+stream = ExtResource("4_ftlli")
+volume_db = -20.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
