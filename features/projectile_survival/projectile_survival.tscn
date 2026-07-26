@@ -116,7 +116,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 18
-text = "PREMIER À 4 FRAGMENTS     •     ACTION 1 : ÉCLIPSE     •     ACTION 2 : ONDE DE RÉPULSION"
+text = "FIRST TO 4 FRAGMENTS     •     ACTION 1 : DASH     •     ACTION 2 : SHOCK WAVE"
 horizontal_alignment = 1
 
 [node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=2101749373]
