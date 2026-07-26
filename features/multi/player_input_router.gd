@@ -112,18 +112,20 @@ func _route_key(event: InputEventKey) -> void:
 	# Les directions sont actualisées à l'appui comme au relâchement.
 	if event.physical_keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
 		_set_direction_key(KEYBOARD_LEFT, event.physical_keycode, event.pressed)
-		match event.physical_keycode :
-			KEY_W :left_player.input._set_action_up(event.pressed)
-			KEY_A :left_player.input._set_action_left(event.pressed)
-			KEY_S :left_player.input._set_action_down(event.pressed)
-			KEY_D :left_player.input._set_action_right(event.pressed)
+		if left_player :
+			match event.physical_keycode :
+				KEY_W :left_player.input._set_action_up(event.pressed)
+				KEY_A :left_player.input._set_action_left(event.pressed)
+				KEY_S :left_player.input._set_action_down(event.pressed)
+				KEY_D :left_player.input._set_action_right(event.pressed)
 	elif event.keycode in [KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT]:
 		_set_direction_key(KEYBOARD_RIGHT, event.keycode, event.pressed)
-		match event.physical_keycode :
-			KEY_UP :right_player.input._set_action_up(event.pressed)
-			KEY_LEFT :right_player.input._set_action_left(event.pressed)
-			KEY_DOWN :right_player.input._set_action_down(event.pressed)
-			KEY_RIGHT :right_player.input._set_action_right(event.pressed)
+		if right_player :
+			match event.physical_keycode :
+				KEY_UP :right_player.input._set_action_up(event.pressed)
+				KEY_LEFT :right_player.input._set_action_left(event.pressed)
+				KEY_DOWN :right_player.input._set_action_down(event.pressed)
+				KEY_RIGHT :right_player.input._set_action_right(event.pressed)
 
 	# Le clavier gauche expose simplement Action 1 et Action 2.
 	if left_player != null:

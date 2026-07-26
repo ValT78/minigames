@@ -15,6 +15,10 @@ font_size = 209
 font = ExtResource("2_elusd")
 font_size = 57
 
+[sub_resource type="LabelSettings" id="LabelSettings_drvas"]
+font = ExtResource("2_elusd")
+font_size = 34
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qr7g0"]
 texture = ExtResource("4_drvas")
 axis_stretch_horizontal = 1
@@ -97,6 +101,44 @@ label_settings = SubResource("LabelSettings_58hl1")
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Label5" type="Label" parent="." unique_id=420412240]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 601.0
+offset_top = 899.0
+offset_right = 800.0
+offset_bottom = 1099.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(1, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Stay here to leave :,("
+label_settings = SubResource("LabelSettings_drvas")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label6" type="Label" parent="." unique_id=1260429354]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 1101.0
+offset_top = 899.0
+offset_right = 1301.0
+offset_bottom = 1099.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(1, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Stay here to leave :,("
+label_settings = SubResource("LabelSettings_drvas")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1925537019]
 layer = 0
 
@@ -139,3 +181,17 @@ polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)
 
 [node name="FuzeAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=521085369]
 stream = ExtResource("6_drvas")
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1769106923]
+position = Vector2(700, 1000)
+scale = Vector2(2, 2)
+color = Color(0.23874447, 0.23874435, 0.23874435, 0.5372549)
+offset = Vector2(-50, -50)
+polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=1800630326]
+position = Vector2(1200, 1000)
+scale = Vector2(2, 2)
+color = Color(0.23874447, 0.23874435, 0.23874435, 0.5372549)
+offset = Vector2(-50, -50)
+polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)

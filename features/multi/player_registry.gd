@@ -67,6 +67,7 @@ func leave_profile(profile_id: StringName) -> bool:
 		if _players[index].profile_id == profile_id:
 			_players.remove_at(index)
 			players_changed.emit(get_players())
+			_next_player_id -= 1
 			return true
 	return false
 

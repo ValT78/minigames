@@ -54,6 +54,7 @@ func _on_scene_changed() :
 	assert(len(playersInput) <= 2)
 	for playerInput in playersInput:
 		var label : Label = score_container.get_child(playerInput.id)
+		print(playerInput.id)
 		label.visible = true
 		label.label_settings.font_color = playerInput.color
 		label.get_child(0).label_settings.font_color = playerInput.color
