@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bmxgb7tj3hgwt" path="res://Global assets/Fonts/Cheese Milky.otf" id="2_elusd"]
 [ext_resource type="Texture2D" uid="uid://dq4jtygsawuh3" path="res://features/Backbone/bombFlame.png" id="3_elusd"]
 [ext_resource type="Texture2D" uid="uid://dtjfsmspvdbq5" path="res://features/Backbone/bombFuze.png" id="4_drvas"]
+[ext_resource type="AudioStream" uid="uid://b84f0mefqv6l7" path="res://features/MainMenu/feu.wav" id="6_drvas"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font = ExtResource("2_elusd")
@@ -135,3 +136,6 @@ scale = Vector2(10, 3)
 color = Color(0.23874447, 0.23874435, 0.23874435, 0.5372549)
 offset = Vector2(-50, -50)
 polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)
+
+[node name="FuzeAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=521085369]
+stream = ExtResource("6_drvas")

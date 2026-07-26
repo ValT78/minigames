@@ -5,6 +5,8 @@ var players : Dictionary[int,Node2D]
 var startTimer : Timer = Timer.new()
 @onready var h_slider: HSlider = $TextureRect/HSlider
 const MAIN = preload("uid://hfn6j6o6a0d0")
+var audioTween : Tween
+@onready var fuze_audio_player: AudioStreamPlayer2D = $FuzeAudioPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +16,10 @@ func _ready() -> void:
 	_sync_player(PlayerRegistry.get_players())
 	startTimer.timeout.connect(_launchGame)
 	add_child(startTimer)
+	audioTween = create_tween()
+	audioTween.set_loops()
+	#audioTween.tween_property(fuze_audio_player,"pitch_scale",1.05,0.1).set_trans(Tween.TRANS_ELASTIC)
+	#audioTween.tween_property(fuze_audio_player,"pitch_scale",0.95,0.1).set_trans(Tween.TRANS_ELASTIC)
 	
 
 func _launchGame() :
@@ -27,8 +33,13 @@ func _process(delta: float) -> void:
 	
 	if not isAllPlayerReady : 
 		startTimer.stop()
+		audioTween.stop()
+		fuze_audio_player.stop()
+		
 	elif startTimer.is_stopped():
 		startTimer.start(3)
+		audioTween.play()
+		fuze_audio_player.play()
 	
 	h_slider.value = 100 if not isAllPlayerReady else 100 * startTimer.time_left /3.0
 
