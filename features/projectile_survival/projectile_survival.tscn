@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ctlr3kde52k0t"]
+[gd_scene format=3 uid="uid://hbhlgnpxq1nr"]
 
 [ext_resource type="Script" uid="uid://5r381oc5i3m3" path="res://features/projectile_survival/projectile_survival.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://bsq3f2bho4r4a" path="res://features/projectile_survival/galaxy_background.gd" id="2_background"]
@@ -52,7 +52,7 @@ default_color = Color(0.48, 0.58, 1, 0.42)
 [node name="AsteroidContainer" type="Node2D" parent="." unique_id=795030618]
 unique_name_in_owner = true
 
-[node name="FragmentContainer" type="Node2D" parent="."]
+[node name="FragmentContainer" type="Node2D" parent="." unique_id=1046671152]
 unique_name_in_owner = true
 
 [node name="PlayerContainer" type="Node2D" parent="." unique_id=47275495]
