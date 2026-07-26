@@ -36,6 +36,19 @@ func _physics_process(_delta: float) -> void:
 			return
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	# Échap active directement l'unique bouton de cet écran clavier.
+	if (
+		_can_quit
+		and event is InputEventKey
+		and event.pressed
+		and not event.echo
+		and event.keycode == KEY_ESCAPE
+	):
+		get_viewport().set_input_as_handled()
+		_on_quit_button_pressed()
+
+
 func _display_final_scores() -> void:
 	var final_scores: Array[int] = GameManager.get_final_scores()
 	var players: Array[LocalPlayer] = PlayerRegistry.get_players()
@@ -51,7 +64,7 @@ func _display_final_scores() -> void:
 			continue
 		var player := players[card_index]
 		var player_score := final_scores[player.id] if player.id < final_scores.size() else 0
-		player_labels[card_index].text = player.profile_name.to_upper()
+		player_labels[card_index].text = "PLAYER %d" % (card_index + 1)
 		score_labels[card_index].text = "%03d" % mini(player_score, 999)
 		score_labels[card_index].add_theme_color_override("font_color", player.color)
 
