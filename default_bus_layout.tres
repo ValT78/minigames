@@ -9,6 +9,7 @@ band_db/3200_hz = 5.0
 band_db/10000_hz = 10.0
 
 [resource]
+bus/0/volume_db = 17
 bus/1/name = &"Player0"
 bus/1/solo = false
 bus/1/mute = false
