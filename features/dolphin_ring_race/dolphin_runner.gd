@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal jellyfish_requested(dolphin: DolphinRunner, spawn_position: Vector2)
 
 # Réglages principaux du déplacement et du mode express.
-@export var movement_speed := 190.0
+@export var movement_speed := 190.0 * 5
 @export var movement_acceleration := 1250.0
 @export var boost_speed := 1500.0
 @export var boost_acceleration := 3500.0
@@ -29,6 +29,7 @@ var _last_direction := Vector2.RIGHT
 var _control_lock_left := 0.0
 var _jellyfish_cooldown_left := 0.0
 var _input_enabled := true
+var _requested_direction : Vector2
 
 
 func setup(assigned_player: LocalPlayer, spawn_position: Vector2, arena_rect: Rect2) -> void:
@@ -77,23 +78,23 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_controlled_movement(delta: float) -> void:
-	var requested_direction := player.input.direction
-	if requested_direction.length_squared() > 0.01:
-		requested_direction = requested_direction.normalized()
+	_requested_direction = player.input.direction
+	if _requested_direction.length_squared() > 0.01:
+		_requested_direction = _requested_direction.normalized()
 
 	# Le mode express accélère fort mais ne permet que des virages lents.
 	if player.input.action_1_pressed:
-		if requested_direction != Vector2.ZERO:
+		if _requested_direction != Vector2.ZERO:
 			var turn_weight := clampf(boost_turn_speed * delta, 0.0, 1.0)
-			_last_direction = _last_direction.lerp(requested_direction, turn_weight).normalized()
+			_last_direction = _last_direction.lerp(_requested_direction, turn_weight).normalized()
 		var target_velocity := _last_direction * boost_speed
 		_movement_velocity = _movement_velocity.move_toward(target_velocity, boost_acceleration * delta)
 		return
 
 	# Hors boost, le dauphin suit directement les quatre directions génériques.
-	if requested_direction != Vector2.ZERO:
-		_last_direction = requested_direction
-	var regular_target := requested_direction * movement_speed
+	if _requested_direction != Vector2.ZERO:
+		_last_direction = _requested_direction
+	var regular_target := _requested_direction * movement_speed
 	_movement_velocity = _movement_velocity.move_toward(
 		regular_target,
 		movement_acceleration * delta
@@ -135,6 +136,12 @@ func set_arena_rect(arena_rect: Rect2) -> void:
 
 func _keep_inside_arena() -> void:
 	# Le dauphin reste entièrement visible dans la zone de jeu.
+	if position.x > _arena_rect.end.x - body_radius or _arena_rect.position.x + body_radius > position.x:
+		_movement_velocity.x = 0
+		_last_direction = _requested_direction
+	if position.y > _arena_rect.end.y - body_radius or _arena_rect.position.y + body_radius > position.y:
+		_movement_velocity.y = 0
+		_last_direction = _requested_direction
 	position.x = clampf(position.x, _arena_rect.position.x + body_radius, _arena_rect.end.x - body_radius)
 	position.y = clampf(position.y, _arena_rect.position.y + body_radius, _arena_rect.end.y - body_radius)
 

@@ -1,54 +1,54 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://dcspfmh4d5ih7"]
 
-[ext_resource type="Script" path="res://features/dolphin_ring_race/dolphin_runner.gd" id="1_script"]
-[ext_resource type="AudioStream" path="res://features/dolphin_ring_race/ringThrough.wav" id="2_ring"]
+[ext_resource type="Script" uid="uid://b1uvfbukwvg4a" path="res://features/dolphin_ring_race/dolphin_runner.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://b337rr8fe6d7u" path="res://features/dolphin_ring_race/ringThrough.wav" id="2_ring"]
 
 [sub_resource type="CircleShape2D" id="DolphinCollisionShape"]
 radius = 22.0
 
-[node name="DolphinRunner" type="CharacterBody2D" groups=["dolphin_race_players"]]
+[node name="DolphinRunner" type="CharacterBody2D" unique_id=165224263 groups=["dolphin_race_players"]]
 z_index = 10
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_script")
 
-[node name="DolphinVisual" type="Node2D" parent="."]
+[node name="DolphinVisual" type="Node2D" parent="." unique_id=178954846]
 unique_name_in_owner = true
 
-[node name="TailTop" type="Polygon2D" parent="DolphinVisual"]
+[node name="TailTop" type="Polygon2D" parent="DolphinVisual" unique_id=1668311922]
+color = Color(0.36, 0.78, 1, 1)
 polygon = PackedVector2Array(-25, -2, -48, -24, -44, 1)
-color = Color(0.36, 0.78, 1, 1)
 
-[node name="TailBottom" type="Polygon2D" parent="DolphinVisual"]
+[node name="TailBottom" type="Polygon2D" parent="DolphinVisual" unique_id=8178860]
+color = Color(0.36, 0.78, 1, 1)
 polygon = PackedVector2Array(-25, 2, -48, 24, -44, -1)
-color = Color(0.36, 0.78, 1, 1)
 
-[node name="DorsalFin" type="Polygon2D" parent="DolphinVisual"]
+[node name="DorsalFin" type="Polygon2D" parent="DolphinVisual" unique_id=1869174793]
+color = Color(0.28, 0.62, 0.86, 1)
 polygon = PackedVector2Array(-7, -13, -18, -31, 10, -15)
-color = Color(0.28, 0.62, 0.86, 1)
 
-[node name="DolphinBody" type="Polygon2D" parent="DolphinVisual"]
+[node name="DolphinBody" type="Polygon2D" parent="DolphinVisual" unique_id=1970674940]
 unique_name_in_owner = true
-polygon = PackedVector2Array(-31, 0, -24, -12, -5, -18, 18, -14, 33, -7, 49, -5, 57, 0, 45, 4, 31, 5, 17, 14, -7, 17, -25, 11)
 color = Color(0.36, 0.78, 1, 1)
+polygon = PackedVector2Array(-31, 0, -24, -12, -5, -18, 18, -14, 33, -7, 49, -5, 57, 0, 45, 4, 31, 5, 17, 14, -7, 17, -25, 11)
 
-[node name="DolphinBelly" type="Polygon2D" parent="DolphinVisual"]
+[node name="DolphinBelly" type="Polygon2D" parent="DolphinVisual" unique_id=874023442]
 unique_name_in_owner = true
-polygon = PackedVector2Array(-22, 5, -5, 9, 18, 7, 31, 3, 45, 4, 30, 11, 13, 16, -8, 15)
 color = Color(0.68, 0.9, 1, 1)
+polygon = PackedVector2Array(-22, 5, -5, 9, 18, 7, 31, 3, 45, 4, 30, 11, 13, 16, -8, 15)
 
-[node name="LeftFin" type="Polygon2D" parent="DolphinVisual"]
-polygon = PackedVector2Array(5, 10, -3, 30, 19, 13)
+[node name="LeftFin" type="Polygon2D" parent="DolphinVisual" unique_id=564408490]
 color = Color(0.28, 0.62, 0.86, 1)
+polygon = PackedVector2Array(5, 10, -3, 30, 19, 13)
 
-[node name="Eye" type="Polygon2D" parent="DolphinVisual"]
-polygon = PackedVector2Array(27, -9, 31, -9, 31, -5, 27, -5)
+[node name="Eye" type="Polygon2D" parent="DolphinVisual" unique_id=323032379]
 color = Color(0.02, 0.08, 0.14, 1)
+polygon = PackedVector2Array(27, -9, 31, -9, 31, -5, 27, -5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1509312203]
 shape = SubResource("DolphinCollisionShape")
 
-[node name="PlayerLabel" type="Label" parent="."]
+[node name="PlayerLabel" type="Label" parent="." unique_id=1601594357]
 unique_name_in_owner = true
 offset_left = -22.0
 offset_top = -54.0
@@ -62,7 +62,7 @@ theme_override_font_sizes/font_size = 18
 text = "J1"
 horizontal_alignment = 1
 
-[node name="ProgressLabel" type="Label" parent="."]
+[node name="ProgressLabel" type="Label" parent="." unique_id=836606432]
 unique_name_in_owner = true
 offset_left = -26.0
 offset_top = 31.0
@@ -76,6 +76,7 @@ theme_override_font_sizes/font_size = 15
 text = "0/4"
 horizontal_alignment = 1
 
-[node name="RingSound" type="AudioStreamPlayer" parent="."]
+[node name="RingSound" type="AudioStreamPlayer" parent="." unique_id=9243924]
 unique_name_in_owner = true
 stream = ExtResource("2_ring")
+volume_db = -20.0
