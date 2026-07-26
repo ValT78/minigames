@@ -18,6 +18,7 @@ signal jellyfish_requested(dolphin: DolphinRunner, spawn_position: Vector2)
 @onready var dolphin_belly: Polygon2D = %DolphinBelly
 @onready var player_label: Label = %PlayerLabel
 @onready var progress_label: Label = %ProgressLabel
+@onready var ring_sound: AudioStreamPlayer = %RingSound
 
 # L'acteur conserve uniquement son joueur et ses états de mouvement locaux.
 var player: LocalPlayer
@@ -112,6 +113,11 @@ func apply_jellyfish_bump(origin: Vector2, strength: float, control_lock_duratio
 func update_progress(completed_ring_count: int, total_ring_count: int) -> void:
 	# Le petit compteur rend la progression individuelle visible sur un parcours commun.
 	progress_label.text = "%d/%d" % [completed_ring_count, total_ring_count]
+
+
+func play_ring_sound() -> void:
+	# Chaque dauphin joue son propre retour sonore après un passage valide.
+	ring_sound.play()
 
 
 func set_input_enabled(enabled: bool) -> void:

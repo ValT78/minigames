@@ -21,7 +21,8 @@ signal eliminated(player_star: SurvivalStar)
 @onready var player_label: Label = %PlayerLabel
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
 @onready var dash_trace: Line2D = %DashTrace
-@onready var dash_sound: AudioStreamPlayer2D = $DashSound
+@onready var dash_sound: AudioStreamPlayer = $DashSound
+@onready var collect_sound: AudioStreamPlayer = $CollectSound
 
 # Les états courts restent locaux à l'acteur et indépendants des touches physiques.
 var player: LocalPlayer
@@ -156,6 +157,11 @@ func apply_repulsion(repulsion_velocity: Vector2) -> void:
 	_external_velocity = (_external_velocity + repulsion_velocity).limit_length(
 		repulsion_strength * 1.5
 	)
+
+
+func play_collect_sound() -> void:
+	# Le son reste porté par le joueur lorsque le fragment collecté disparaît.
+	collect_sound.play()
 
 
 func try_eliminate() -> bool:
