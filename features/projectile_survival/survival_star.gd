@@ -21,6 +21,7 @@ signal eliminated(player_star: SurvivalStar)
 @onready var player_label: Label = %PlayerLabel
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
 @onready var dash_trace: Line2D = %DashTrace
+@onready var dash_sound: AudioStreamPlayer2D = $DashSound
 
 # Les états courts restent locaux à l'acteur et indépendants des touches physiques.
 var player: LocalPlayer
@@ -95,6 +96,7 @@ func _start_dash() -> void:
 	_external_velocity = Vector2.ZERO
 	star_visuals.visible = false
 	dash_trace.visible = true
+	dash_sound.play()
 
 
 func _update_dash(delta: float) -> void:

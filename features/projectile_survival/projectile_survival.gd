@@ -24,6 +24,7 @@ const ENERGY_FRAGMENT_SCENE := preload("res://features/projectile_survival/energ
 @onready var remaining_label: Label = %RemainingLabel
 @onready var result_panel: PanelContainer = %ResultPanel
 @onready var result_label: Label = %ResultLabel
+@onready var collect_sound: AudioStreamPlayer2D = $CollectSound
 
 # La scène conserve ses acteurs afin de compter les survivants sans interroger le registre.
 var _player_stars: Dictionary[int, SurvivalStar] = {}

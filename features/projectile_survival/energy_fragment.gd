@@ -3,6 +3,8 @@ extends Area2D
 
 signal collected(energy_fragment: EnergyFragment, player_star: SurvivalStar)
 
+@onready var dash_sound: AudioStreamPlayer2D = $DashSound
+
 # L'objet se désactive dès le premier contact pour éviter deux collectes simultanées.
 var _is_collected := false
 
@@ -19,6 +21,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if _is_collected or not body is SurvivalStar or not body.is_alive():
 		return
+	dash_sound.play()
 	_is_collected = true
 	set_deferred("monitoring", false)
 	collected.emit(self, body)
