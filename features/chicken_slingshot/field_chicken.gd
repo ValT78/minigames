@@ -10,6 +10,7 @@ signal killed(player_id: int)
 
 @onready var chicken_visual: Node2D = %ChickenVisual
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
+@onready var death_sound: AudioStreamPlayer = %DeathSound
 
 # La poule choisit une dérive unique puis rebondit dans le champ.
 var _field_rect := Rect2()
@@ -59,6 +60,7 @@ func try_kill(player_id: int) -> bool:
 	_alive = false
 	_movement_velocity = Vector2.ZERO
 	collision_shape.set_deferred("disabled", true)
+	_play_death_sound()
 	killed.emit(player_id)
 
 	# Une courte disparition rend l'impact lisible avant de libérer la cible.
@@ -69,6 +71,13 @@ func try_kill(player_id: int) -> bool:
 	death_tween.tween_property(chicken_visual, "modulate:a", 0.0, 0.2)
 	death_tween.chain().tween_callback(queue_free)
 	return true
+
+
+func _play_death_sound() -> void:
+	# Le son survit au poulet et au changement immédiat de minijeu après le dernier kill.
+	death_sound.reparent(get_tree().root)
+	death_sound.finished.connect(death_sound.queue_free, CONNECT_ONE_SHOT)
+	death_sound.play()
 
 
 func set_field_rect(field_rect: Rect2) -> void:

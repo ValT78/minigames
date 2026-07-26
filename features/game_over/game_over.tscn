@@ -291,7 +291,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.75, 0.64, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_fonts/font = ExtResource("4_title_font")
-text = "JOUEUR 1"
+text = "PLAYER 1"
 horizontal_alignment = 1
 
 [node name="FirstScoreLabel" type="Label" parent="ResultContent/Scores/FirstScoreCard/Margin/Values"]
@@ -329,7 +329,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.75, 0.64, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_fonts/font = ExtResource("4_title_font")
-text = "JOUEUR 2"
+text = "PLAYER 2"
 horizontal_alignment = 1
 
 [node name="SecondScoreLabel" type="Label" parent="ResultContent/Scores/SecondScoreCard/Margin/Values"]
@@ -366,4 +366,4 @@ theme_override_styles/normal = SubResource("StyleBox_button_normal")
 theme_override_styles/hover = SubResource("StyleBox_button_hover")
 theme_override_styles/focus = SubResource("StyleBox_button_hover")
 theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
-text = "QUIT"
+text = "ESC - QUIT"
